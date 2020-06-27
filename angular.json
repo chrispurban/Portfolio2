@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Worksplat"
+    }
+  },
+  "defaultProject": "Worksplat",
+  "cli": {
+    "analytics": "40d1c336-ccd0-4c0b-b691-8b92193cd028"
+  }
 }
