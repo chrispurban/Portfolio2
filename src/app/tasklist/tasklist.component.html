@@ -1,0 +1,27 @@
+<div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px">
+
+  <div fxFlex *ngIf="tasks">
+    <mat-grid-list cols="2" rowHeight="200px">
+      <mat-grid-tile *ngFor="let localTask of tasks" [routerLink]="['/taskdetail', localTask._id]">
+        <mat-grid-tile-footer>
+          <h1 matLine>{{localTask.name | uppercase}}</h1>
+        </mat-grid-tile-footer>
+        <br/><i>{{localTask.description}}</i>
+        <ul>
+          <li>Owner: {{localTask.owner}}
+          <li>Status: {{localTask.status}}
+          <li>Priority: {{localTask.priority}}
+        </ul>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div [hidden]="tasks || errMess">
+      <mat-spinner color="accent"></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+</div>
