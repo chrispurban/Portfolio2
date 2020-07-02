@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let messageSchema = new Schema({
+/** let messageSchema = new Schema({
   content:{
     type:String,
     required:true
@@ -11,7 +11,7 @@ let messageSchema = new Schema({
     ref:'User'
   },
   timestamps:true
-});
+}); **/
 
 let taskSchema = new Schema({
   name:{
@@ -23,14 +23,14 @@ let taskSchema = new Schema({
     required:true
   },
   priority:{
-    type:Double,
+    type:Number,//double
     required:true
   },
   status:{
-    type:Integer,
+    type:Number,//int
     default:0
   },
-  messages:[messageSchema],
+  //messages:[messageSchema],
   owner:{
     type: mongoose.Schema.Types.ObjectID,
     ref: 'User'

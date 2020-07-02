@@ -4,7 +4,7 @@
 
   <div fxFlex *ngIf="tasks">
     <mat-grid-list cols="2" rowHeight="200px">
-      <mat-grid-tile *ngFor="let localTask of tasks" [routerLink]="['/taskdetail', localTask._id]">
+      <mat-grid-tile *ngFor="let localTask of tasks" [routerLink]="['/tasks', localTask._id]">
         <mat-grid-tile-footer>
           <h1 matLine>{{localTask.name | uppercase}}</h1>
         </mat-grid-tile-footer>
