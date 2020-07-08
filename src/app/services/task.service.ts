@@ -23,7 +23,7 @@ export class TaskService {
     }
     else {
       console.log("fetching all tasks");
-      return this.http.get<Task[]>('http://localhost:8080/tasks');
+      return this.http.get<Task[]>('https://worksplat.herokuapp.com/tasks');
     }
   }
 
