@@ -1,29 +1,42 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Task } from '../classes/task';
+
+import { baseURL } from '../../assets/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
+  constructor(
+    private http: HttpClient
+  ) { }
 
+  getTask(taskID?:string): Observable<Task[]> {
+    if (taskID){
+      console.log("fetching task " + taskID);
+      //return this.http.get<Task[]>('http://worksplat.herokuapps.com/tasks/' + taskID);
+    }
+    else {
+      console.log("fetching all tasks");
+      return this.http.get<Task[]>('http://localhost:8080/tasks');
+    }
+  }
 
-  constructor() { }
+  newTask(data?:any){
+    console.log("task has been created");
+  }
+
+  setTask(taskID?:any, data?:any){
+    console.log("task has been modified");
+  }
+
+  delTask(taskID?:any) {
+    if (taskID){console.log("deleting task " + taskID)}
+    else {console.log("deleting all tasks")}
+  }
 }
-
-// new creations
-
-// collapse getTasks() and getTask(var) to getTask(var) that just grabs all when passed empty
-// something about passing in an object with properties, then does "if property" similar to ngif
-/*
-
-  newTask(stuff){return true;}
-  setTask(id, stuff){return true;}
-  getTask(id?:any){
-    if(id){return true;}//grab with id;
-    else{return true;}//grab everything
-  }
-  delTask(id?:any){
-    if(id){return true;}//kill with id
-    else{return true;}//kill everything
-  }
-  */

@@ -1,4 +1,4 @@
-const config = require('./config')
+const config = require('./config');
 const express = require('express');
 const parser = require('body-parser');
 const path = require('path');
@@ -8,21 +8,26 @@ const http = require('http');
 const mongoose = require('mongoose');
 const app = express();
 
+console.log('╔═══════════════════╗\n║ HELLO we are LIVE ║\n╚═══════════════════╝');
+
 mongoose
   .set('useNewUrlParser', true)
   .set('useUnifiedTopology', true)
-  .connect(config.dba)
+  .connect(config.address)
   .then(
-    (db) => {console.log('Connected correctly to '+config.dbn);},
+    (db) => {console.log('Connected correctly to MongoDB');},
     (err) => {console.log(err);}
   )
 ;
 
 //app.use(enforce.HTTPS({trustProtoHeader: true}));
-app.use(express.static(path.join(__dirname, '/dist')));
+app
+  .use(express.static(path.join(__dirname, '../dist')))
+  .use('/tasks', require('./routes/taskrouter'))
+;
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/dist/index.html'), (err) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'), (err) => {
     if (err) {res.status(500).send(err)}
   })
 });

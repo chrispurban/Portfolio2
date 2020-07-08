@@ -2,20 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let userSchema = new Schema({
-  firstname:{
+  name:{
     type:String,
-    default:''
-  },
-  lastname:{
-    type:String,
-    default:''
+    required:true,
+    unique:true
   },
   admin:{
     type:Boolean,
     default:false
   }
 });
-
-userSchema.plugin(passport);
 
 module.exports = mongoose.model('User', userSchema);
