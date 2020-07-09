@@ -4,15 +4,15 @@
 
   <div fxFlex *ngIf="tasks">
     <mat-grid-list cols="2" rowHeight="200px">
-      <mat-grid-tile *ngFor="let localTask of tasks" [routerLink]="['/tasks', localTask._id]">
+      <mat-grid-tile *ngFor="let clientTask of tasks" [routerLink]="['/tasks', clientTask._id]">
         <mat-grid-tile-footer>
-          <h1 matLine>{{localTask.name | uppercase}}</h1>
+          <h1 matLine>{{clientTask.name | uppercase}}</h1>
         </mat-grid-tile-footer>
-        <br/><i>{{localTask.description}}</i>
+        <br/><i>{{clientTask.description}}</i>
         <ul>
-          <li>Owner: {{localTask.owner}}
-          <li>Status: {{localTask.status}}
-          <li>Priority: {{localTask.priority}}
+          <li>Owner: {{clientTask.owner}}
+          <li>Status: {{clientTask.status}}
+          <li>Priority: {{clientTask.priority}}
         </ul>
       </mat-grid-tile>
     </mat-grid-list>

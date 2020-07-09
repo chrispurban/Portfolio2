@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from '../../classes/task';
+import { TaskService } from '../../services/task.service';
+
+import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-taskdetail',
@@ -7,9 +12,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskdetailComponent implements OnInit {
 
-  constructor() { }
+    task: Task;
+    errMess: string;
+
+  constructor(
+    private taskService:TaskService,
+    private route:ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.taskService
+      .getTaksz(this.route.snapshot.params.id)
+      .subscribe(
+        value => this.task = value,
+        error => this.errMess = <any>error
+      );
   }
 
 }

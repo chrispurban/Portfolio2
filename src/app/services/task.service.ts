@@ -16,16 +16,23 @@ export class TaskService {
     private http: HttpClient
   ) { }
 
-  getTask(taskID?:string): Observable<Task[]> {
+  getTask(taskID?:any): Observable<Task[]> {
     if (taskID){
       console.log("fetching task " + taskID);
       //return this.http.get<Task[]>('http://worksplat.herokuapps.com/tasks/' + taskID);
     }
     else {
       console.log("fetching all tasks");
-      return this.http.get<Task[]>('https://worksplat.herokuapp.com/tasks');
+      return this.http.get<Task[]>('http://localhost:8080/tasks');
+//      return this.http.get<Task[]>('https://worksplat.herokuapp.com/tasks');
     }
   }
+
+  getTaksz(taskID?:any): Observable<Task> {
+    console.log("fetching task " + taskID);
+    return this.http.get<Task>('http://localhost:8080/tasks/' + taskID);
+  }
+
 
   newTask(data?:any){
     console.log("task has been created");

@@ -1,1 +1,30 @@
-hello
+hello this is task detail
+
+
+<div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px">
+
+  <div fxFlex *ngIf="task">
+    <mat-grid-list cols="2" rowHeight="200px">
+      <mat-grid-tile>
+        <mat-grid-tile-footer>
+          <h1 matLine>{{task.name | uppercase}}</h1>
+        </mat-grid-tile-footer>
+        <br/><i>{{task.description}}</i>
+        <ul>
+          <li>Owner: {{task.owner}}
+          <li>Status: {{task.status}}
+          <li>Priority: {{task.priority}}
+        </ul>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div [hidden]="task || errMess">
+      <mat-spinner color="accent"></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+</div>

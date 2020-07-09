@@ -8,7 +8,9 @@ const http = require('http');
 const mongoose = require('mongoose');
 const app = express();
 
-console.log('╔═══════════════════╗\n║ HELLO we are LIVE ║\n╚═══════════════════╝');
+console.log(
+  '╔═══════════════════╗\n║ HELLO we are LIVE ║ ' + new Date().toLocaleTimeString() + '\n╚═══════════════════╝'
+);
 
 mongoose
   .set('useNewUrlParser', true)
