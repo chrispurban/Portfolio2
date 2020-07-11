@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Task } from '../../classes/task';
 import { TaskService } from '../../services/task.service';
 
-import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -22,7 +21,7 @@ export class TaskdetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskService
-      .getTaksz(this.route.snapshot.params.id)
+      .getTask(this.route.snapshot.params.id)
       .subscribe(
         value => this.task = value,
         error => this.errMess = <any>error

@@ -58,7 +58,6 @@ router
   .get((req,res,next) => {
     TaskModel
     .findById(req.params.taskId)
-    .populate('messages.author')
     .then(
       (task) => {
           res.statusCode = 200;

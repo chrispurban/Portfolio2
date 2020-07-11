@@ -1,8 +1,7 @@
 export class Task {
     _id:string;
-    name:string;
-    description:string;
-    priority:number;
-    status:number;
+    subject:string;
+    details:string;
+    maturity:number;
     //messages:Message[];
 }

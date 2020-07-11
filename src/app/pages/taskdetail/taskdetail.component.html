@@ -5,17 +5,16 @@ hello this is task detail
      fxLayout="column"
      fxLayoutGap="10px">
 
-  <div fxFlex *ngIf="task">
+  <div fxFlex *ngIf="task" style="background-color:blue;">
     <mat-grid-list cols="2" rowHeight="200px">
       <mat-grid-tile>
         <mat-grid-tile-footer>
-          <h1 matLine>{{task.name | uppercase}}</h1>
+          <h1 matLine>{{task.subject | uppercase}}</h1>
         </mat-grid-tile-footer>
-        <br/><i>{{task.description}}</i>
         <ul>
-          <li>Owner: {{task.owner}}
-          <li>Status: {{task.status}}
-          <li>Priority: {{task.priority}}
+          <li>{{task.maturity}}
+          <li>Created {{task.createdAt | date}} || Modified {{task.updatedAt | date}}
+          <li>{{task.details}}
         </ul>
       </mat-grid-tile>
     </mat-grid-list>

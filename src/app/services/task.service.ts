@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Task } from '../classes/task';
 
-import { baseURL } from '../../assets/config';
+import { baseurl } from '../../assets/config';
 
 @Injectable({
   providedIn: 'root'
@@ -16,24 +16,16 @@ export class TaskService {
     private http: HttpClient
   ) { }
 
-  getTask(taskID?:any): Observable<Task[]> {
+  getTask(taskID?:any): Observable<any> {
     if (taskID){
       console.log("fetching task " + taskID);
-      //return this.http.get<Task[]>('http://worksplat.herokuapps.com/tasks/' + taskID);
+      return this.http.get<Task>(baseurl + 'tasks/' + taskID);
     }
     else {
       console.log("fetching all tasks");
-//      return this.http.get<Task[]>('http://localhost:8080/tasks');
-      return this.http.get<Task[]>('https://worksplat.herokuapp.com/tasks');
+      return this.http.get<Task[]>(baseurl + 'tasks');
     }
   }
-
-  getTaksz(taskID?:any): Observable<Task> {
-    console.log("fetching task " + taskID);
-//    return this.http.get<Task>('http://localhost:8080/tasks/' + taskID);
-    return this.http.get<Task>('https://worksplat.herokuapp.com/tasks/' + taskID);
-  }
-
 
   newTask(data?:any){
     console.log("task has been created");

@@ -15,21 +15,17 @@ const Schema = mongoose.Schema;
 
 let taskSchema = new Schema(
   {
-    name:{
+    subject:{
       type:String,
       required:true,
     },
-    description:{
+    details:{
       type:String,
       required:true
     },
-    priority:{
-      type:Number,//double
-      required:true
-    },
-    status:{
+    maturity:{
       type:Number,//int
-      default:0
+      default:1
     },
     //messages:[messageSchema],
     owner:{
