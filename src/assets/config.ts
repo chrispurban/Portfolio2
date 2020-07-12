@@ -1,5 +1,5 @@
 //export const baseurl = 'http://localhost:8080/';
-export const baseurl = 'https://worksplat.herokuapps.com/'
+export const baseurl = 'https://worksplat.herokuapp.com/'
 
 export const maturity = {
   0:"Deferred",

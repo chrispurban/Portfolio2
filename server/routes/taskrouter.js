@@ -1,12 +1,18 @@
+const config = require('../config');
 const parser = require('body-parser');
 const express = require('express');
 const router = express.Router().use(parser.json());
+const cors = require('cors');
+
+//.get(cors(), (req,res,next)=>{})
+//.get(cors(config.whitelist), (req,res,next)=>{})
 
 const TaskModel = require('../models/task');
 
 router
   .route('/') // this is to get all tasks
-  .get((req,res,next) => {
+  .options(cors(config.whitelist), (req,res,next)=>{res.sendStatus(200);})
+  .get(cors(), (req,res,next) => {
     TaskModel
       .find(req.query)
       .then(
@@ -19,7 +25,7 @@ router
       )
       .catch((err) => next(err));
   })
-  .post((req, res, next) => {
+  .post(cors(config.whitelist), (req, res, next) => {
     TaskModel
       .create(req.body)
       .then(
@@ -33,7 +39,7 @@ router
       )
       .catch((err) => next(err));
   })
-  .delete((req, res, next) => {
+  .delete(cors(config.whitelist), (req, res, next) => {
     TaskModel
       .remove({})
       .then(
@@ -54,8 +60,8 @@ router
 
 router
   .route('/:taskId')
-  .options((req, res) => { res.sendStatus(200);})
-  .get((req,res,next) => {
+  .options(cors(config.whitelist), (req,res,next)=>{res.sendStatus(200);})
+  .get(cors(), (req,res,next) => {
     TaskModel
     .findById(req.params.taskId)
     .then(
@@ -68,7 +74,7 @@ router
     )
     .catch((err) => next(err));
   })
-  .put((req, res, next) => {
+  .put(cors(config.whitelist), (req, res, next) => {
     TaskModel
     .findByIdAndUpdate(req.params.taskId, {$set: req.body}, {new: true})
     .then(
@@ -81,7 +87,7 @@ router
     )
     .catch((err) => next(err));
   })
-  .delete((req, res, next) => {
+  .delete(cors(config.whitelist), (req, res, next) => {
     TaskModel
       .findByIdAndRemove(req.params.taskId)
       .then(

@@ -15,7 +15,7 @@ console.log(
 mongoose
   .set('useNewUrlParser', true)
   .set('useUnifiedTopology', true)
-  .connect(config.address)
+  .connect(config.dbaddress)
   .then(
     (db) => {console.log('Connected correctly to MongoDB');},
     (err) => {console.log(err);}
