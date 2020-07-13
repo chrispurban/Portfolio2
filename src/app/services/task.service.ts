@@ -27,7 +27,8 @@ export class TaskService {
     }
   }
 
-  newTask(data?:any){
+  newTask(data?:any): Observable<any> {
+    return this.http.post<Task>(baseurl + 'tasks', data);
     console.log("task has been created");
   }
 

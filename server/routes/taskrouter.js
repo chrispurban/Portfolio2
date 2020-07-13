@@ -4,9 +4,6 @@ const express = require('express');
 const router = express.Router().use(parser.json());
 const cors = require('cors');
 
-//.get(cors(), (req,res,next)=>{})
-//.get(cors(config.whitelist), (req,res,next)=>{})
-
 const TaskModel = require('../models/task');
 
 router

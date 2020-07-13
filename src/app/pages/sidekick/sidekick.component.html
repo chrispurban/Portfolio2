@@ -1,6 +1,28 @@
 <div>
 <ul>
-  <li><a mat-button routerLink='/home' routerLinkActive="active">Home</a>
-  <li><a mat-button routerLink='/tasks' routerLinkActive="active">Tasks</a>
+  <li><a mat-raised-button routerLink='/home' routerLinkActive="active">Home</a>
+  <li><a mat-raised-button routerLink='/tasks' routerLinkActive="active">Tasks</a>
 </ul>
 </div>
+
+<form novalidate #newtask="ngForm" (ngSubmit)="onSubmit()">
+
+  <mat-dialog-content>
+    <i>New Task</i>
+    <p>
+      <mat-form-field>
+        <input matInput placeholder="Subject" type="text" [(ngModel)]="task.subject" name="subject"  #subject="ngModel" required>
+        <mat-error *ngIf="subject.errors?.required">Subject is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Details" type="text" [(ngModel)]="task.details" name="details"  #details="ngModel" required>
+        <mat-error *ngIf="details.errors?.required">Details are required</mat-error>
+      </mat-form-field>
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="newtask.form.invalid">Create</button>
+  </mat-dialog-actions>
+
+
+</form>

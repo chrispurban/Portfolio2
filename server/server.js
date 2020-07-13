@@ -24,11 +24,14 @@ mongoose
 
 //app.use(enforce.HTTPS({trustProtoHeader: true}));
 app
-  .use(express.static(path.join(__dirname, '../dist')))
   .use('/tasks', require('./routes/taskrouter'))
 ;
 
-app.get('/*', (req, res) => {
+app
+  .use(express.static(path.join(__dirname, '../dist')))
+;
+
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'), (err) => {
     if (err) {res.status(500).send(err)}
   })

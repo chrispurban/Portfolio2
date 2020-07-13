@@ -7,8 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 //UI modules
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MaterialModule } from './app-material.module';
+import { FormsModule } from '@angular/forms';
 
 //components
 import { AppComponent } from './app.component';
@@ -35,8 +35,8 @@ import { TaskService } from './services/task.service';
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
+    MaterialModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [
