@@ -20,6 +20,8 @@ import { SidekickComponent } from './pages/sidekick/sidekick.component';
 
 //services
 import { TaskService } from './services/task.service';
+import { AuthService } from './services/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { TaskService } from './services/task.service';
     HttpClientModule
   ],
   providers: [
-    TaskService
+    TaskService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
