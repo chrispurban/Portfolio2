@@ -5,10 +5,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { TasklistComponent } from './pages/tasklist/tasklist.component';
 import { TaskdetailComponent } from './pages/taskdetail/taskdetail.component';
 
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
   {path: 'home', component: HomeComponent},
-  {path: 'tasks', component: TasklistComponent},
+  {path: 'tasks', component: TasklistComponent, canActivate: [AuthGuard]},
   {path: 'tasks/:id', component: TaskdetailComponent}
 ];
 

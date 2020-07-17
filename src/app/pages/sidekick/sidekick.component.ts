@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../classes/task';
 import { TaskService } from '../../services/task.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sidekick',
@@ -13,7 +14,8 @@ export class SidekickComponent implements OnInit {
   errMess:string;
 
   constructor(
-    private taskService:TaskService
+    private taskService:TaskService,
+    public auth: AuthService
   ) { }
 
   ngOnInit(): void {
