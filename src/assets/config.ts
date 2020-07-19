@@ -7,5 +7,5 @@ export const maturity = {
   3:"Queued",
   5:"Processing",
   7:"Testing",
-  9:"Closed"
+  9:"Resolved"
 }

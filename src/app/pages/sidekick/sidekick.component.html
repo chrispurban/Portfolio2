@@ -22,12 +22,12 @@
     <i>New Task</i>
     <p>
       <mat-form-field>
-        <input matInput placeholder="Subject" type="text" [(ngModel)]="task.subject" name="subject"  #subject="ngModel" required>
+        <input matInput placeholder="Subject" type="text" [(ngModel)]="task.subject" name="subject" #subject="ngModel" required>
         <mat-error *ngIf="subject.errors?.required">Subject is required</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Details" type="text" [(ngModel)]="task.details" name="details"  #details="ngModel" required>
-        <mat-error *ngIf="details.errors?.required">Details are required</mat-error>
+        <input matInput placeholder="Details" type="text" [(ngModel)]="task.issue" name="issue" #issue="ngModel" required>
+        <mat-error *ngIf="issue.errors?.required">Issue is required</mat-error>
       </mat-form-field>
     </p>
   </mat-dialog-content>

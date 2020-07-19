@@ -19,7 +19,7 @@ let taskSchema = new Schema(
       type:String,
       required:true,
     },
-    details:{
+    issue:{
       type:String,
       required:true
     },

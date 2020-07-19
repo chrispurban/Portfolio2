@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SidekickComponent implements OnInit {
 
-  task = {subject:'', details:''};
+  task = {subject:'', issue:''};
   errMess:string;
 
   constructor(

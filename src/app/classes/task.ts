@@ -1,7 +1,7 @@
 export class Task {
     _id:string;
     subject:string;
-    details:string;
+    issue:string;
     maturity:number;
     //messages:Message[];
 }
