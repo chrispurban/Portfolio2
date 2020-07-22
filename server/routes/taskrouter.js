@@ -26,7 +26,8 @@ router
       )
       .catch((err) => next(err));
   })
-  .post(cors(config.whitelist), (req, res, next) => {
+  .post(cors(config.whitelist), auth.user, (req, res, next) => {
+    req.body.owner = req.user.sub;
     TaskModel
       .create(req.body)
       .then(
@@ -39,6 +40,7 @@ router
         (err) => next(err)
       )
       .catch((err) => next(err));
+
   })
   .delete(cors(config.whitelist), (req, res, next) => {
     TaskModel

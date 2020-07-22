@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SidekickComponent implements OnInit {
 
+  submission: {};
   task = {subject:'', issue:''};
   errMess:string;
 
@@ -23,10 +24,15 @@ export class SidekickComponent implements OnInit {
 
   onSubmit(){
     console.log(this.task);
+    this.submission = this.task;
     this.taskService
-      .newTask(this.task)
+      .newTask(this.submission)
       .subscribe(
-        value => this.task = value,
+        value => {
+          this.submission = value,
+          this.task.subject = '';
+          this.task.issue = '';
+        },
         error => this.errMess = <any>error
       );
   }
