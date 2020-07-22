@@ -5,6 +5,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { TasklistComponent } from './pages/tasklist/tasklist.component';
 import { TaskdetailComponent } from './pages/taskdetail/taskdetail.component';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptService } from './services/intercept.service';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -16,6 +18,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptService,
+    multi: true
+  }]
 })
+
 export class AppRoutingModule { }

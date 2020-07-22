@@ -1,17 +1,21 @@
 const config = require('../config');
-const parser = require('body-parser');
-const express = require('express');
-const router = express.Router().use(parser.json());
+const router = require('express').Router();
 const cors = require('cors');
+const auth = require('../auth');
 
 const TaskModel = require('../models/task');
 
 router
+  .use(require('body-parser').json())
+;
+
+router
   .route('/') // this is to get all tasks
   .options(cors(config.whitelist), (req,res,next)=>{res.sendStatus(200);})
-  .get(cors(), (req,res,next) => {
+  .get(cors(), auth.user, (req,res,next) => {
+    console.log(req.user.sub);
     TaskModel
-      .find(req.query)
+      .find({owner:req.user.sub})
       .then(
         (task) => {
           res.statusCode = 200;

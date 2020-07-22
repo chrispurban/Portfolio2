@@ -29,8 +29,8 @@ let taskSchema = new Schema(
     },
     //messages:[messageSchema],
     owner:{
-      type: mongoose.Schema.Types.ObjectID,
-      ref: 'User'
+      type:String,
+      required: true
     }
   },{
     timestamps: true

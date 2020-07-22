@@ -21,6 +21,7 @@ import { SidekickComponent } from './pages/sidekick/sidekick.component';
 //services
 import { TaskService } from './services/task.service';
 import { AuthService } from './services/auth.service';
+import { InterceptService } from './services/intercept.service';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AuthService } from './services/auth.service';
   ],
   providers: [
     TaskService,
-    AuthService
+    AuthService,
+    InterceptService
   ],
   bootstrap: [AppComponent]
 })

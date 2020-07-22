@@ -32,7 +32,7 @@ export class TaskService {
     console.log("task has been created");
   }
 
-  setTask(taskID?:any, data?:any){
+  modTask(taskID?:any, data?:any){
     console.log("task has been modified");
   }
 

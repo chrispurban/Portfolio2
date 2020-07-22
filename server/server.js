@@ -1,6 +1,5 @@
 const config = require('./config');
 const express = require('express');
-const parser = require('body-parser');
 const path = require('path');
 const http = require('http');
 //const enforce = require('express-sslify');
@@ -22,13 +21,22 @@ mongoose
   )
 ;
 
-//app.use(enforce.HTTPS({trustProtoHeader: true}));
-app
-  .use('/tasks', require('./routes/taskrouter'))
-;
+/*app
+  .all('*', (req, res, next) => {
+    if (req.secure){
+      return next();
+    }
+    else {
+      res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+    }
+  })
+;*/
 
 app
+  //.use(enforce.HTTPS({trustProtoHeader: true}));
   .use(express.static(path.join(__dirname, '../dist')))
+
+  .use('/tasks', require('./routes/taskrouter'))
 ;
 
 app.get('*', (req, res) => {
@@ -37,4 +45,6 @@ app.get('*', (req, res) => {
   })
 });
 
-app.listen(process.env.PORT || 8080); // Heroku default
+app.listen(
+  process.env.PORT || 8080 // Heroku default
+);
