@@ -16,7 +16,7 @@
 </ul>
 </div>
 
-<form novalidate #newtask="ngForm" *ngIf="auth.loggedIn" (ngSubmit)="onSubmit()">
+<form novalidate #newtask="ngForm" *ngIf="auth.loggedIn" (ngSubmit)="create()">
 
   <mat-dialog-content>
     <i>New Task</i>

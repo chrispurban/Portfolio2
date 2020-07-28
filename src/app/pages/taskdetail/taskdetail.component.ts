@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '../../classes/task';
+import { Task, workflow } from '../../classes/task';
 import { TaskService } from '../../services/task.service';
 
 import { ActivatedRoute } from '@angular/router';
@@ -9,10 +9,12 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './taskdetail.component.html',
   styleUrls: ['./taskdetail.component.scss']
 })
+
 export class TaskdetailComponent implements OnInit {
 
-    task: Task;
-    errMess: string;
+    task:Task;
+    errMess:string;
+    wf = workflow;
 
   constructor(
     private taskService:TaskService,
@@ -23,9 +25,14 @@ export class TaskdetailComponent implements OnInit {
     this.taskService
       .getTask(this.route.snapshot.params.id)
       .subscribe(
-        value => this.task = value,
+        value => {this.task = value, workflow(this.task)},
         error => this.errMess = <any>error
       );
+  }
+
+  snap() {
+    console.log("gottem");
+    this.wf(this.task);
   }
 
 }

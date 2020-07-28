@@ -13,7 +13,6 @@ router
   .route('/') // this is to get all tasks
   .options(cors(config.whitelist), (req,res,next)=>{res.sendStatus(200);})
   .get(cors(), auth.user, (req,res,next) => {
-    console.log(req.user.sub);
     TaskModel
       .find({owner:req.user.sub})
       .then(
@@ -42,9 +41,9 @@ router
       .catch((err) => next(err));
 
   })
-  .delete(cors(config.whitelist), (req, res, next) => {
+  .delete(cors(config.whitelist), auth.user, (req, res, next) => {
     TaskModel
-      .remove({})
+      .remove({owner:req.user.sub})
       .then(
         (task) => {
           res.statusCode = 200;
@@ -63,7 +62,7 @@ router
 
 router
   .route('/:taskId')
-  .options(cors(config.whitelist), (req,res,next)=>{res.sendStatus(200);})
+  .options(cors(config.whitelist), auth.user, (req,res,next)=>{res.sendStatus(200);})
   .get(cors(), (req,res,next) => {
     TaskModel
     .findById(req.params.taskId)
@@ -77,7 +76,7 @@ router
     )
     .catch((err) => next(err));
   })
-  .put(cors(config.whitelist), (req, res, next) => {
+  .put(cors(config.whitelist), auth.user, (req, res, next) => {
     TaskModel
     .findByIdAndUpdate(req.params.taskId, {$set: req.body}, {new: true})
     .then(
@@ -90,7 +89,7 @@ router
     )
     .catch((err) => next(err));
   })
-  .delete(cors(config.whitelist), (req, res, next) => {
+  .delete(cors(config.whitelist), auth.user, (req, res, next) => {
     TaskModel
       .findByIdAndRemove(req.params.taskId)
       .then(

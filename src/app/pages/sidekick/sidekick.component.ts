@@ -22,7 +22,7 @@ export class SidekickComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(){
+  create(){
     console.log(this.task);
     this.submission = this.task;
     this.taskService

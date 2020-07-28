@@ -27,6 +27,13 @@ let taskSchema = new Schema(
       type:Number,//int
       default:1
     },
+    state:{
+      type:Object,
+      default:{
+        "time":["the time that it was"],
+        "kind":[1]
+      }
+    },
     //messages:[messageSchema],
     owner:{
       type:String,
