@@ -77,13 +77,16 @@ router
     .catch((err) => next(err));
   })
   .put(cors(config.whitelist), auth.user, (req, res, next) => {
-    TaskModel
-    .findByIdAndUpdate(req.params.taskId, {$set: req.body}, {new: true})
+    let b = new Date();
+    req.body.time = b.toISOString();
+  TaskModel
+    .updateOne({"_id":req.params.taskId}, {$push:{history: req.body}})
     .then(
       (task) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(task);
+        console.log(task);
       },
       (err) => next(err)
     )

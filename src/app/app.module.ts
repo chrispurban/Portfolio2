@@ -9,6 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './app-material.module';
 import { FormsModule } from '@angular/forms';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 //components
 import { AppComponent } from './app.component';

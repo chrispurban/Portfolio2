@@ -9,11 +9,13 @@
           <h1 matLine>{{task.subject | uppercase}}</h1>
           <ul style="list-style:none">
             <li>Issue: {{task.issue}}
-            <li>Created a couple days ago on {{task.createdAt | date}}
+            <li>Created {{task.createdAt}} on {{task.createdAt | date}}
             <li>Modified {{task.updatedAt | date}}
-            <li><i>{{wf(task.state.phase).name}} as of {{task.state.time}}</i>
+            <li><i>{{wf(task.state.phase).name}} as of {{task.state.time | date:'medium'}}</i>
           </ul>
         </mat-grid-tile-footer>
+        <button *ngIf="task.state.phase != 0" (click)="transition(-1)">Return to {{wf(task.state.phase - 1).name}}</button>
+        <button *ngIf="task.state.phase != 4" (click)="transition(1)">Advance to {{wf(task.state.phase + 1).name}}</button>
       </mat-grid-tile>
     </mat-grid-list>
   </div>

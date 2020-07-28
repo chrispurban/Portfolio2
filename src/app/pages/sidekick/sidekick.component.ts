@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '../../classes/task';
+import { Task, workflow } from '../../classes/task';
 import { TaskService } from '../../services/task.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 export class SidekickComponent implements OnInit {
 
   submission: {};
-  task = {subject:'', issue:''};
+  task = {subject:'', issue:'', history:[]};
   errMess:string;
 
   constructor(
@@ -19,11 +19,10 @@ export class SidekickComponent implements OnInit {
     public auth: AuthService
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit():void{}
 
   create(){
-    console.log(this.task);
+    this.task.history.push({code:workflow(0).code, time:new Date().toISOString()});
     this.submission = this.task;
     this.taskService
       .newTask(this.submission)
@@ -35,6 +34,8 @@ export class SidekickComponent implements OnInit {
         },
         error => this.errMess = <any>error
       );
+/*
+*/
   }
 
 }

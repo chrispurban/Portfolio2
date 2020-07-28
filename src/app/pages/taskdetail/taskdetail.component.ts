@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 
 export class TaskdetailComponent implements OnInit {
 
-    task:Task;
+    task:any;
     errMess:string;
     wf = workflow;
 
@@ -22,6 +22,10 @@ export class TaskdetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.reload();
+  }
+
+  reload(){
     this.taskService
       .getTask(this.route.snapshot.params.id)
       .subscribe(
@@ -30,9 +34,10 @@ export class TaskdetailComponent implements OnInit {
       );
   }
 
-  snap() {
-    console.log("gottem");
-    this.wf(this.task);
+  transition(x){
+    this.taskService
+    .modTask(this.task._id, {code:workflow(this.task.state.phase + x).code})
+    .subscribe(value => value);
   }
 
 }

@@ -34,6 +34,7 @@ export class TaskService {
 
   modTask(taskID?:any, data?:any){
     console.log("task has been modified");
+    return this.http.put(baseurl + 'tasks/' + taskID, data);
   }
 
   delTask(taskID?:any) {

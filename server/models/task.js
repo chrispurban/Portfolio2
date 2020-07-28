@@ -23,17 +23,9 @@ let taskSchema = new Schema(
       type:String,
       required:true
     },
-    maturity:{
-      type:Number,//int
-      default:1
-    },
-    state:{
-      type:Object,
-      default:{
-        "time":["the time that it was"],
-        "kind":[1]
-      }
-    },
+    history:[{
+      type:Object
+    }],
     //messages:[messageSchema],
     owner:{
       type:String,
