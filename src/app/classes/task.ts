@@ -7,23 +7,26 @@ export class Task {
     //messages:Message[];
 }
 
-export function workflow(x){
+export function workflow(x?){
   console.log("Workflow executed.");
   if(typeof x == "object"){
-    x.state = x.history[x.history.length - 1]; // append current state time and its code
-    x.state.phase = model.findIndex((state)=>state.code==x.state.code); // where in workflow
-  }
-  if(typeof x == "number"){
-    return model[x]; // chain with .name or .code, or adjust the number to obtain neighbors
+    let y = x
+    y.state = y.history[y.history.length - 1]; // append current state time and its code
+    y.state.phase = model.findIndex((state)=>state.code==y.state.code); // where in workflow
+    return y;
+  }else if(typeof x == "number"){
+    return model[x];
+  }else{
+    return model;
   }
 }
 
 const model = [
-  {code:"A",name:"Draft"},
-  {code:"B",name:"Queued"},
-  {code:"C",name:"Processing"},
-  {code:"D",name:"Testing"},
-  {code:"E",name:"Resolved"}
+  {code:"A",name:"Draft",icon:"📜"},
+  {code:"B",name:"Queued",icon:"🗃️"},
+  {code:"C",name:"Processing",icon:"⚙️"},
+  {code:"D",name:"Testing",icon:"🧪"},
+  {code:"E",name:"Resolved",icon:"🎉"}
 ]
 
 /*

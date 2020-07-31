@@ -11,6 +11,7 @@ export class TasklistComponent implements OnInit {
 
     tasks: Task[];
     errMess: string;
+    wf = workflow;
 
   constructor(private taskService: TaskService) { }
 
@@ -18,7 +19,7 @@ export class TasklistComponent implements OnInit {
     this.taskService
       .getTask()
       .subscribe(
-        value => this.tasks = value,
+        value => {this.tasks = value.map(workflow)},
         error => this.errMess = <any>error
       );
   }

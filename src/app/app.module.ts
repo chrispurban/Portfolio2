@@ -9,7 +9,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './app-material.module';
 import { FormsModule } from '@angular/forms';
-import { TimeAgoPipe } from 'time-ago-pipe';
+import { NgPipesModule } from 'ngx-pipes';
+import { AutosizeModule } from 'ngx-autosize';
 
 //components
 import { AppComponent } from './app.component';
@@ -41,7 +42,9 @@ import { InterceptService } from './services/intercept.service';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgPipesModule,
+    AutosizeModule
   ],
   providers: [
     TaskService,

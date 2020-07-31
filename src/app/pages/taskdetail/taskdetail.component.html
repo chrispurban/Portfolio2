@@ -3,22 +3,27 @@
      fxLayoutGap="10px">
 
   <div fxFlex *ngIf="task" style="background-color:blue;">
-    <mat-grid-list cols="2" rowHeight="200px">
-      <mat-grid-tile>
-        <mat-grid-tile-footer>
-          <h1 matLine>{{task.subject | uppercase}}</h1>
-          <ul style="list-style:none">
-            <li>Issue: {{task.issue}}
-            <li>Created {{task.createdAt}} on {{task.createdAt | date}}
-            <li>Modified {{task.updatedAt | date}}
-            <li><i>{{wf(task.state.phase).name}} as of {{task.state.time | date:'medium'}}</i>
-          </ul>
-        </mat-grid-tile-footer>
-        <button *ngIf="task.state.phase != 0" (click)="transition(-1)">Return to {{wf(task.state.phase - 1).name}}</button>
-        <button *ngIf="task.state.phase != 4" (click)="transition(1)">Advance to {{wf(task.state.phase + 1).name}}</button>
-      </mat-grid-tile>
-    </mat-grid-list>
+      <h1><input matInput type="text" #subject="ngModel" [style.width.ch]="task.subject.length" [(ngModel)]="task.subject">
+      </h1>
+      <ul style="list-style:none">
+        <li>Issue:
+          <br><textarea matInput autosize rows="1" type="text" #issue="ngModel" [(ngModel)]="task.issue"></textarea>
+        <br><br>
+        <li><i>Created on {{task.createdAt | date}}, Modified on {{task.updatedAt | date}}</i>
+        <li>{{wf(task.state.phase).icon}}<i>{{wf(task.state.phase).name}} as of {{task.state.time | date:'medium'}}</i>
+      </ul>
+
+      <button *ngIf="task.state.phase != 0" (click)="transition(-1)" mat-raised-button color="primary">Return to {{wf(task.state.phase - 1).name}}
+      </button>
+      <button *ngIf="task.state.phase != 4" (click)="transition(1)" mat-raised-button color="accent">Advance to {{wf(task.state.phase + 1).name}}
+      </button>
+      <button (click)="update()" mat-raised-button>Save
+      </button>
+      <button (click)="reload()" mat-stroked-button>Reload
+      </button>
+
   </div>
+
   <div [hidden]="task || errMess">
       <mat-spinner color="accent"></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
