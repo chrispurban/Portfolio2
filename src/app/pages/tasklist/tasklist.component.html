@@ -1,25 +1,21 @@
-<div class="container"
-     fxLayout="column"
-     fxLayoutGap="10px">
+<div
+  class="container"
+  fxLayout="row"
+  fxLayoutAlign="start start"
+>
 
-  <div fxFlex *ngIf="tasks">
-    <div *ngFor="let group of wf()">
+  <div *ngIf="tasks">
+    <div fxFlex *ngFor="let group of wf()">
+      <br>
       <h1>{{group.name}} {{group.icon}}</h1>
-      <mat-grid-list cols="2" rowHeight="200px">
-        <div *ngFor="let task of tasks">
+        <div fxLayout="column" *ngFor="let task of tasks">
 
-                      <mat-grid-tile *ngIf="task.state.code == group.code">
-                        <div [routerLink]="['/tasks', task._id]" style="background-color:blue;">
-                          <h2>{{task.subject | uppercase}}</h2>
-                          <mat-grid-tile-footer>
-                            {{task.issue}}
-                          </mat-grid-tile-footer>
-                        </div>
-                        <br>
-                      </mat-grid-tile>
+          <div *ngIf="task.state.code == group.code" [routerLink]="['/tasks', task._id]" style="background-color:blue;">
+            <h2>{{task.subject | uppercase}}</h2>
+            {{task.issue}}
+          </div>
 
         </div>
-      </mat-grid-list>
     </div>
   </div>
   <div [hidden]="tasks || errMess">
