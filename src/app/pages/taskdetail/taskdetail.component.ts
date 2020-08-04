@@ -16,9 +16,10 @@ export class TaskdetailComponent implements OnInit {
   @ViewChild('issue') issue;
   @ViewChild('subject') subject;
 
-  wf = workflow;
-  task:any;
   thinking;
+  task:any;
+  wf = workflow;
+  delPrompt = false;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) private input:any,
@@ -38,7 +39,7 @@ export class TaskdetailComponent implements OnInit {
         time:new Date().toISOString()
       }
       Object.assign(changes.toSend, {$push:{history:changes.toKeep}})
-    } // basic addition of whatever was passed
+    }
     if(this.issue.dirty){Object.assign(changes.toSend, {issue:this.task.issue})};
     if(this.subject.dirty){Object.assign(changes.toSend, {subject:this.task.subject})};
       // look into a foreach from form to eliminate viewchild
@@ -48,13 +49,22 @@ export class TaskdetailComponent implements OnInit {
       .modTask(this.task._id, changes.toSend)
       .subscribe(value => {
         if(transition){
-          this.task.history.push(changes.toKeep);
+          this.task.history.push(changes.toKeep); // modifying history to change group column
           this.task = workflow(this.task);
         }
-        this.popup.dismiss(this.task);
-      }); // pass back to main list
+        this.popup.dismiss({value:this.task}); // pass back to main list
+      });
     }
     else{this.popup.dismiss();} // no changes were made
+  }
+
+  delete(){
+    if(this.delPrompt){
+      this.taskService
+        .delTask(this.task._id)
+        .subscribe(value => this.popup.dismiss({value:this.task, delete:true}));
+    }
+    else{this.delPrompt = true;}
   }
 
 }

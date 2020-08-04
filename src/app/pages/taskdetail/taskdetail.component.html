@@ -19,4 +19,7 @@
       </button>
   </div>
 
-<!--<a mat-button color="primary" (click)="delete()">Delete</a>-->
+<a mat-raised-button (click)="delete()">
+  <span *ngIf="!delPrompt">Delete</span>
+  <span *ngIf="delPrompt">Are you sure?</span>
+</a>

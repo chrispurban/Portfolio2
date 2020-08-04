@@ -32,18 +32,22 @@ export class TasklistComponent implements OnInit {
       );
   }
 
-  taskDetail(x){
-    let sheet = this.bottomSheet.open(TaskdetailComponent, {data:x});
-    sheet.afterDismissed().subscribe((hot)=>{
-      if(hot){this.tasks[this.tasks.findIndex((icy)=>icy._id==hot._id)] = hot;}
+  taskDetail(task){
+    let sheet = this.bottomSheet.open(TaskdetailComponent, {data:task});
+    sheet.afterDismissed().subscribe((result)=>{
+      if(result){
+        result.target = this.tasks.findIndex((x)=>x._id==result.value._id); // what we're relisting
+        if(result.delete){delete this.tasks[result.target];}
+        else{this.tasks[result.target] = result.value;}
+      };
     });
   }
 
   taskEntry(){
     let sheet = this.bottomSheet.open(TaskentryComponent);
     sheet.afterDismissed().subscribe(
-      (hot)=>{
-        if(hot){this.tasks.push(workflow(hot))};
+      (result)=>{
+        if(result){this.tasks.push(workflow(result))};
       }
     );
   }

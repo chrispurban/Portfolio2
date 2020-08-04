@@ -11,8 +11,7 @@
       <br>
       <h1>{{group.name}} {{group.icon}}</h1>
         <div fxLayout="column" *ngFor="let task of tasks">
-
-          <div *ngIf="task.state.code == group.code" (click)="taskDetail(task)" style="background-color:blue;">
+          <div *ngIf="task && task.state.code == group.code" (click)="taskDetail(task)" style="background-color:blue;"><!-- simple check for task is to handle deletion -->
             <h2>{{task.subject | uppercase}}</h2>
             {{task.issue}}
           </div>

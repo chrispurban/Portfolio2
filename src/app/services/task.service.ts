@@ -28,8 +28,8 @@ export class TaskService {
   }
 
   newTask(data?:any): Observable<any> {
-    return this.http.post<Task>(baseurl + 'tasks', data);
     console.log("task has been created");
+    return this.http.post<Task>(baseurl + 'tasks', data);
   }
 
   modTask(taskID?:any, data?:any){
@@ -38,7 +38,9 @@ export class TaskService {
   }
 
   delTask(taskID?:any) {
-    if (taskID){console.log("deleting task " + taskID)}
-    else {console.log("deleting all tasks")}
+    if (taskID){
+      console.log("deleting task " + taskID)
+      return this.http.delete(baseurl + 'tasks/' + taskID)
+    }
   }
 }
