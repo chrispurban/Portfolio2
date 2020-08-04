@@ -1,13 +1,10 @@
 <button mat-raised-button (click)="auth.login()" *ngIf="!auth.loggedIn">Log In</button>
 <button mat-raised-button (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
 
-
 <pre *ngIf="auth.userProfile$ | async as profile">
   <img src="{{ profile.picture }}" style="max-width:64px">
   {{profile.name}}
 </pre>
-
-
 
 <div>
 <ul>
@@ -15,25 +12,3 @@
   <li><a mat-raised-button routerLink='/tasks' routerLinkActive="active">Tasks</a>
 </ul>
 </div>
-
-<form novalidate #newtask="ngForm" *ngIf="auth.loggedIn" (ngSubmit)="create()">
-
-  <mat-dialog-content>
-    <i>New Task</i>
-    <p>
-      <mat-form-field>
-        <input matInput placeholder="Subject" type="text" [(ngModel)]="task.subject" name="subject" #subject="ngModel" required>
-        <mat-error *ngIf="subject.errors?.required">Subject is required</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Details" type="text" [(ngModel)]="task.issue" name="issue" #issue="ngModel" required>
-        <mat-error *ngIf="issue.errors?.required">Issue is required</mat-error>
-      </mat-form-field>
-    </p>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="newtask.form.invalid">Create</button>
-  </mat-dialog-actions>
-
-
-</form>

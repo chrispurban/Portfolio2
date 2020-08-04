@@ -1,9 +1,7 @@
-<div class="container"
-     fxLayout="column"
-     fxLayoutGap="10px">
+<mat-progress-bar *ngIf="thinking" mode="indeterminate" color="accent"></mat-progress-bar>
 
-  <div fxFlex *ngIf="task" style="background-color:blue;">
-      <h1><input matInput type="text" #subject="ngModel" [style.width.ch]="task.subject.length" [(ngModel)]="task.subject">
+  <div>
+      <h1><input matInput type="text" #subject="ngModel" [style.width.ch]="task.subject.length + 1" [(ngModel)]="task.subject">
       </h1>
       <ul style="list-style:none">
         <li>Issue:
@@ -13,24 +11,12 @@
         <li>{{wf(task.state.phase).icon}}<i>{{wf(task.state.phase).name}} as of {{task.state.time | date:'medium'}}</i>
       </ul>
 
-      <button *ngIf="task.state.phase != 0" (click)="transition(-1)" mat-raised-button color="primary">Return to {{wf(task.state.phase - 1).name}}
+      <button *ngIf="task.state.phase != 0" (click)="update(-1)" mat-raised-button color="primary">Return to {{wf(task.state.phase - 1).name}}
       </button>
-      <button *ngIf="task.state.phase != 4" (click)="transition(1)" mat-raised-button color="accent">Advance to {{wf(task.state.phase + 1).name}}
+      <button *ngIf="task.state.phase != 4" (click)="update(1)" mat-raised-button color="accent">Advance to {{wf(task.state.phase + 1).name}}
       </button>
       <button (click)="update()" mat-raised-button>Save
       </button>
-      <button (click)="reload()" mat-stroked-button>Reload
-      </button>
-
   </div>
-
-  <div [hidden]="task || errMess">
-      <mat-spinner color="accent"></mat-spinner><h4>Loading . . . Please Wait</h4>
-  </div>
-  <div *ngIf="errMess">
-    <h2>Error</h2>
-    <h4>{{errMess}}</h4>
-  </div>
-</div>
 
 <!--<a mat-button color="primary" (click)="delete()">Delete</a>-->

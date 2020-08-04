@@ -1,3 +1,5 @@
+<button mat-raised-button color="accent" (click)="taskEntry()">Create New Task</button>
+
 <div
   class="container"
   fxLayout="row"
@@ -10,7 +12,7 @@
       <h1>{{group.name}} {{group.icon}}</h1>
         <div fxLayout="column" *ngFor="let task of tasks">
 
-          <div *ngIf="task.state.code == group.code" [routerLink]="['/tasks', task._id]" style="background-color:blue;">
+          <div *ngIf="task.state.code == group.code" (click)="taskDetail(task)" style="background-color:blue;">
             <h2>{{task.subject | uppercase}}</h2>
             {{task.issue}}
           </div>
@@ -18,7 +20,7 @@
         </div>
     </div>
   </div>
-  <div [hidden]="tasks || errMess">
+  <div *ngIf="!(tasks || errMess)">
       <mat-spinner color="accent"></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
   <div *ngIf="errMess">

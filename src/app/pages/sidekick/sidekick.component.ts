@@ -1,41 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { Task, workflow } from '../../classes/task';
-import { TaskService } from '../../services/task.service';
+import { Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Params, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sidekick',
   templateUrl: './sidekick.component.html',
   styleUrls: ['./sidekick.component.scss']
 })
+
 export class SidekickComponent implements OnInit {
 
-  submission: {};
-  task = {subject:'', issue:'', history:[]};
-  errMess:string;
-
   constructor(
-    private taskService:TaskService,
-    public auth: AuthService
-  ) { }
+    public auth:AuthService,
+    private route:ActivatedRoute
+  ){}
 
-  ngOnInit():void{}
-
-  create(){
-    this.task.history.push({code:workflow(0).code, time:new Date().toISOString()});
-    this.submission = this.task;
-    this.taskService
-      .newTask(this.submission)
-      .subscribe(
-        value => {
-          this.submission = value,
-          this.task.subject = '';
-          this.task.issue = '';
-        },
-        error => this.errMess = <any>error
-      );
-/*
-*/
+  ngOnInit():void{
+    // console.log(this.route.params); // can you get the button to do a refresh if already there?
   }
 
 }

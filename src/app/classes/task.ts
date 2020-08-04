@@ -22,11 +22,11 @@ export function workflow(x?){
 }
 
 const model = [
-  {code:"A",name:"Draft",icon:"📜"},
-  {code:"B",name:"Queued",icon:"🗃️"},
-  {code:"C",name:"Processing",icon:"⚙️"},
-  {code:"D",name:"Testing",icon:"🧪"},
-  {code:"E",name:"Resolved",icon:"🎉"}
+  {code:"A",name:"Draft",icon:"💡"},
+  {code:"B",name:"Queued",icon:"🛎️️"},
+  {code:"C",name:"Building",icon:"🏗️"},
+  {code:"D",name:"Refactoring",icon:"🧹"},
+  {code:"E",name:"Complete",icon:"🎉"}
 ]
 
 /*

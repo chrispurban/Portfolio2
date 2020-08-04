@@ -1,0 +1,17 @@
+<mat-progress-bar *ngIf="thinking" mode="indeterminate" color="accent"></mat-progress-bar>
+
+<form novalidate #newtask="ngForm" (ngSubmit)="create()">
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Subject" type="text" [(ngModel)]="task.subject" name="subject" #subject="ngModel" required>
+      <mat-error *ngIf="subject.errors?.required">Subject is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Issue" type="text" [(ngModel)]="task.issue" name="issue" #issue="ngModel" required>
+      <mat-error *ngIf="issue.errors?.required">Issue is required</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button type="submit" mat-button [disabled]="newtask.form.invalid">Create</button>
+  </mat-dialog-actions>
+</form>
