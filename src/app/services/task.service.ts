@@ -19,28 +19,28 @@ export class TaskService {
   getTask(taskID?:any): Observable<any> {
     if (taskID){
       console.log("fetching task " + taskID);
-      return this.http.get<Task>(baseurl + 'tasks/' + taskID);
+      return this.http.get<Task>(baseurl + 'api/tasks/' + taskID);
     }
     else {
       console.log("fetching all tasks");
-      return this.http.get<Task[]>(baseurl + 'tasks');
+      return this.http.get<Task[]>(baseurl + 'api/tasks');
     }
   }
 
   newTask(data?:any): Observable<any> {
     console.log("task has been created");
-    return this.http.post<Task>(baseurl + 'tasks', data);
+    return this.http.post<Task>(baseurl + 'api/tasks', data);
   }
 
   modTask(taskID?:any, data?:any){
     console.log("task has been modified");
-    return this.http.put(baseurl + 'tasks/' + taskID, data);
+    return this.http.put(baseurl + 'api/tasks/' + taskID, data);
   }
 
   delTask(taskID?:any) {
     if (taskID){
       console.log("deleting task " + taskID)
-      return this.http.delete(baseurl + 'tasks/' + taskID)
+      return this.http.delete(baseurl + 'api/tasks/' + taskID)
     }
   }
 }

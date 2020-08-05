@@ -36,7 +36,7 @@ app
   //.use(enforce.HTTPS({trustProtoHeader: true}));
   .use(express.static(path.join(__dirname, '../dist')))
 
-  .use('/tasks', require('./routes/taskrouter'))
+  .use('/api/tasks', require('./routes/taskrouter'))
 ;
 
 app.get('*', (req, res) => {
