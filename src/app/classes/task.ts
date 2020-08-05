@@ -8,16 +8,15 @@ export class Task {
 }
 
 export function workflow(x?){
-  console.log("Workflow executed.");
   if(typeof x == "object"){
     let y = x
     y.state = y.history[y.history.length - 1]; // append current state time and its code
-    y.state.phase = model.findIndex((state)=>state.code==y.state.code); // where in workflow
+    y.state.phase = model.findIndex((state)=>state.code==y.state.code); // where in the workflow
     return y;
   }else if(typeof x == "number"){
-    return model[x];
+    return model[x]; // only looking for information on one state
   }else{
-    return model;
+    return model; // looking for the entire workflow, say, to generate groups
   }
 }
 
@@ -29,29 +28,23 @@ const model = [
   {code:"E",name:"Complete",icon:"🎉"}
 ]
 
+
 /*
-workflow(task) load with properties, run as the task called from the server
+workflow(task) run as called from the server to load with current state properties
 task.state.time // entered the state
 workflow(task.state.phase).name // describe the state it occupies
-workflow(task.state.phase + 1).code // what gets saved next in the history as it's advanced
-*/
-
-
-
-/*
-issues:
-- can't call workflow directly from the frontend without redeclaring
-- frontend executes repeatedly on screen update
+workflow(task.state.phase + 1).code // what to save next in the history as it's advanced
 */
 
 /*
 export class Task {
   constructor(
+    public _id?: string,
     public subject: string,
     public issue: string,
-    public maturity: number,
-    //public messages: Message[],
-    public _id?: string
+    public history: object,
+    public owner: string
+    //public messages: Message[]
   ){}
 }
 */

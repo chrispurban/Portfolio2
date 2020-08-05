@@ -23,7 +23,7 @@ export class TaskentryComponent implements OnInit {
 
   ngOnInit():void{}
 
-  create(){
+  onSubmit(){
     this.thinking = true;
 
     this.task.history.push({
@@ -31,9 +31,9 @@ export class TaskentryComponent implements OnInit {
       time:new Date().toISOString() // current time
     });
     this.taskService
-      .newTask(this.task)
+      .create(this.task)
       .subscribe(
-        value => {this.popup.dismiss(value);},
+        value => {this.popup.dismiss(value)},
         error => this.errMess = <any>error
       );
     }

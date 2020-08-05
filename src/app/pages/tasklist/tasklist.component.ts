@@ -16,7 +16,6 @@ export class TasklistComponent implements OnInit {
 
     tasks: Task[];
     errMess: string;
-    wf = workflow;
 
   constructor(
     private taskService:TaskService,
@@ -33,18 +32,18 @@ export class TasklistComponent implements OnInit {
   }
 
   taskDetail(task){
-    let sheet = this.bottomSheet.open(TaskdetailComponent, {data:task});
+    let sheet = this.bottomSheet.open(TaskdetailComponent, {data:task}); // open in popup
     sheet.afterDismissed().subscribe((result)=>{
       if(result){
         result.target = this.tasks.findIndex((x)=>x._id==result.value._id); // what we're relisting
-        if(result.delete){delete this.tasks[result.target];}
-        else{this.tasks[result.target] = result.value;}
+        if(result.delete){delete this.tasks[result.target]}
+        else{this.tasks[result.target] = result.value}
       };
     });
   }
 
   taskEntry(){
-    let sheet = this.bottomSheet.open(TaskentryComponent);
+    let sheet = this.bottomSheet.open(TaskentryComponent); // open in popup
     sheet.afterDismissed().subscribe(
       (result)=>{
         if(result){this.tasks.push(workflow(result))};

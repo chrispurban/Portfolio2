@@ -1,6 +1,8 @@
 <mat-progress-bar *ngIf="thinking" mode="indeterminate" color="accent"></mat-progress-bar>
 
-<form novalidate #newtask="ngForm" (ngSubmit)="create()">
+{{('null' | workflow)[0].icon}}
+
+<form novalidate #newtask="ngForm" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
     <mat-form-field>
       <input matInput placeholder="Subject" type="text" [(ngModel)]="task.subject" name="subject" #subject="ngModel" required>

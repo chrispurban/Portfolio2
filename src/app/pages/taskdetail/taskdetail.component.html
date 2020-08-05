@@ -8,18 +8,18 @@
           <br><textarea matInput autosize rows="1" type="text" #issue="ngModel" [(ngModel)]="task.issue"></textarea>
         <br><br>
         <li><i>Created on {{task.createdAt | date}}, Modified on {{task.updatedAt | date}}</i>
-        <li>{{wf(task.state.phase).icon}}<i>{{wf(task.state.phase).name}} as of {{task.state.time | date:'medium'}}</i>
+        <li>{{(task.state.phase | workflow).icon}}<i>{{(task.state.phase | workflow).name}} as of {{task.state.time | date:'medium'}}</i>
       </ul>
 
-      <button *ngIf="task.state.phase != 0" (click)="update(-1)" mat-raised-button color="primary">Return to {{wf(task.state.phase - 1).name}}
+      <button *ngIf="task.state.phase > 0" (click)="update(-1)" mat-raised-button color="primary">Return to {{(task.state.phase - 1 | workflow).name}}
       </button>
-      <button *ngIf="task.state.phase != 4" (click)="update(1)" mat-raised-button color="accent">Advance to {{wf(task.state.phase + 1).name}}
+      <button *ngIf="task.state.phase + 1 | workflow" (click)="update(+1)" mat-raised-button color="accent">Advance to {{(task.state.phase + 1 | workflow).name}}
       </button>
       <button (click)="update()" mat-raised-button>Save
       </button>
   </div>
 
 <a mat-raised-button (click)="delete()">
-  <span *ngIf="!delPrompt">Delete</span>
-  <span *ngIf="delPrompt">Are you sure?</span>
+  <span *ngIf="!deletionPrompt">Delete</span>
+  <span *ngIf="deletionPrompt">Are you sure?</span>
 </a>

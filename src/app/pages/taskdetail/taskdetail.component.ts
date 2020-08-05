@@ -18,8 +18,7 @@ export class TaskdetailComponent implements OnInit {
 
   thinking;
   task:any;
-  wf = workflow;
-  delPrompt = false;
+  deletionPrompt = false;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) private input:any,
@@ -27,7 +26,9 @@ export class TaskdetailComponent implements OnInit {
     private popup:MatBottomSheetRef<TaskdetailComponent>
   ){}
 
-  ngOnInit():void{this.task = Object.assign([], workflow(this.input))}
+  ngOnInit():void{
+    this.task = Object.assign([], workflow(this.input));
+  }
 
   update(transition?){
     this.thinking = true;
@@ -44,9 +45,9 @@ export class TaskdetailComponent implements OnInit {
     if(this.subject.dirty){Object.assign(changes.toSend, {subject:this.task.subject})};
       // look into a foreach from form to eliminate viewchild
 
-    if(Object.keys(changes.toSend).length > 0){ // any number of changes were made
+    if(Object.keys(changes.toSend).length > 0){ // one of the above changes were made
       this.taskService
-      .modTask(this.task._id, changes.toSend)
+      .modify(this.task._id, changes.toSend)
       .subscribe(value => {
         if(transition){
           this.task.history.push(changes.toKeep); // modifying history to change group column
@@ -59,12 +60,12 @@ export class TaskdetailComponent implements OnInit {
   }
 
   delete(){
-    if(this.delPrompt){
+    if(this.deletionPrompt){
       this.taskService
-        .delTask(this.task._id)
+        .delete(this.task._id)
         .subscribe(value => this.popup.dismiss({value:this.task, delete:true}));
     }
-    else{this.delPrompt = true;}
+    else{this.deletionPrompt = true;}
   }
 
 }

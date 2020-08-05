@@ -9,7 +9,7 @@ import { MaterialModule } from './app-material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { NgPipesModule } from 'ngx-pipes';
+//import { NgPipesModule } from 'ngx-pipes';
 import { AutosizeModule } from 'ngx-autosize';
 
 //components
@@ -25,6 +25,7 @@ import { TaskentryComponent } from './pages/taskentry/taskentry.component';
 import { TaskService } from './services/task.service';
 import { AuthService } from './services/auth.service';
 import { InterceptService } from './services/intercept.service';
+import { WorkflowPipe } from './pipes/workflow.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { InterceptService } from './services/intercept.service';
     TasklistComponent,
     TaskdetailComponent,
     SidekickComponent,
-    TaskentryComponent
+    TaskentryComponent,
+    WorkflowPipe
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ import { InterceptService } from './services/intercept.service';
     MaterialModule,
     FormsModule,
     HttpClientModule,
-    NgPipesModule,
+//    NgPipesModule,
     AutosizeModule
   ],
   providers: [

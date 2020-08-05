@@ -7,7 +7,7 @@
 >
 
   <div *ngIf="tasks">
-    <div fxFlex *ngFor="let group of wf()">
+    <div fxFlex *ngFor="let group of 'null' | workflow">
       <br>
       <h1>{{group.name}} {{group.icon}}</h1>
         <div fxLayout="column" *ngFor="let task of tasks">
@@ -15,7 +15,6 @@
             <h2>{{task.subject | uppercase}}</h2>
             {{task.issue}}
           </div>
-
         </div>
     </div>
   </div>
