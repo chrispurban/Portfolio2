@@ -4,6 +4,7 @@ export class Task {
     issue:string;
     history:object;
     owner:string;
+    notes:string;
     //messages:Message[];
 }
 
@@ -11,7 +12,7 @@ export function workflow(x?){
   if(typeof x == "object"){
     let y = x
     y.state = y.history[y.history.length - 1]; // append current state time and its code
-    y.state.phase = model.findIndex((state)=>state.code==y.state.code); // where in the workflow
+    y.state.phase = model.findIndex((state)=>state.code==y.state.code); // numeric position in workflow
     return y;
   }else if(typeof x == "number"){
     return model[x]; // only looking for information on one state

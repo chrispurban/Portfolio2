@@ -30,6 +30,9 @@ let taskSchema = new Schema(
     owner:{
       type:String,
       required: true
+    },
+    notes:{
+      type:String
     }
   },{
     timestamps: true

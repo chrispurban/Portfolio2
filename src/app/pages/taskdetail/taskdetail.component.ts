@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Renderer2 } from '@angular/core';
 import { Task, workflow } from '../../classes/task';
 import { TaskService } from '../../services/task.service';
 import { ViewChild, ElementRef } from '@angular/core';
-
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 
 @Component({
@@ -15,20 +14,29 @@ export class TaskdetailComponent implements OnInit {
 
   @ViewChild('issue') issue;
   @ViewChild('subject') subject;
+  @ViewChild('notes') notes;
 
   thinking;
-  task:any;
+  task;
   deletionPrompt = false;
+  editingNotes = false;
+  onLink = false;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) private input:any,
+    private popup:MatBottomSheetRef<TaskdetailComponent>,
     private taskService:TaskService,
-    private popup:MatBottomSheetRef<TaskdetailComponent>
+    private renderer:Renderer2,
+    private element:ElementRef
   ){}
 
   ngOnInit():void{
-    this.task = Object.assign([], workflow(this.input));
+    this.task = Object.assign([], workflow(this.input))
+    if(!this.task.notes){this.editingNotes = true}
   }
+
+
+// database mechanisms /////////////////////////////////////////////////////////////////////
 
   update(transition?){
     this.thinking = true;
@@ -39,11 +47,15 @@ export class TaskdetailComponent implements OnInit {
         code:workflow(this.task.state.phase + transition).code,
         time:new Date().toISOString()
       }
-      Object.assign(changes.toSend, {$push:{history:changes.toKeep}})
+      Object.assign(changes.toSend,{$push:{history:changes.toKeep}})
     }
-    if(this.issue.dirty){Object.assign(changes.toSend, {issue:this.task.issue})};
-    if(this.subject.dirty){Object.assign(changes.toSend, {subject:this.task.subject})};
-      // look into a foreach from form to eliminate viewchild
+    if(this.issue.dirty){Object.assign(changes.toSend,{issue:this.task.issue})};
+    if(this.subject.dirty){Object.assign(changes.toSend,{subject:this.task.subject})};
+    if(this.notes.dirty){Object.assign(changes.toSend,{notes:this.task.notes})};
+    /*
+    look into a foreach from form to eliminate repeat viewchild
+    formItems.forEach(formItem=>{if(formItem.dirty){Object.assign(changes.toSend,{type:taskItem})}})
+    */
 
     if(Object.keys(changes.toSend).length > 0){ // one of the above changes were made
       this.taskService
@@ -67,5 +79,21 @@ export class TaskdetailComponent implements OnInit {
     }
     else{this.deletionPrompt = true;}
   }
+
+
+// UI mechanisms /////////////////////////////////////////////////////////////
+
+  listener(){};
+
+  ngAfterViewInit(){ // protect notes from switching to edit mode while clicking hyperlinks
+    this.element.nativeElement.querySelectorAll('.linkified').forEach(link => {
+      this.listener = this.renderer.listen(link, "mouseenter", event => this.onLink = true);
+      this.listener = this.renderer.listen(link, "mouseleave", event => this.onLink = false);
+    });
+  }
+
+  toggleNotes(){if(!this.onLink){this.editingNotes = true}}
+
+  ngOnDestroy(){this.listener()}
 
 }

@@ -7,6 +7,12 @@
         <li>Issue:
           <br><textarea matInput autosize rows="1" type="text" #issue="ngModel" [(ngModel)]="task.issue"></textarea>
         <br><br>
+        <li>Notes:<br>
+        <textarea [hidden]="task.notes && !editingNotes" matInput autosize rows="1" type="text" #notes="ngModel" [(ngModel)]="task.notes"></textarea>
+        <div *ngIf="task.notes && !editingNotes" (click)="toggleNotes()" style="white-space:pre-wrap;">
+          <div [innerHtml]="task.notes | linkify"></div>
+        </div>
+        <li><br>
         <li><i>Created on {{task.createdAt | date}}, Modified on {{task.updatedAt | date}}</i>
         <li>{{(task.state.phase | workflow).icon}}<i>{{(task.state.phase | workflow).name}} as of {{task.state.time | date:'medium'}}</i>
       </ul>

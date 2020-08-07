@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 //import { NgPipesModule } from 'ngx-pipes';
 import { AutosizeModule } from 'ngx-autosize';
+// import { LinkifiyModule } from 'linkifyjs'
 
 //components
 import { AppComponent } from './app.component';
@@ -25,7 +26,10 @@ import { TaskentryComponent } from './pages/taskentry/taskentry.component';
 import { TaskService } from './services/task.service';
 import { AuthService } from './services/auth.service';
 import { InterceptService } from './services/intercept.service';
+
+//pipes
 import { WorkflowPipe } from './pipes/workflow.pipe';
+import { LinkifyPipe } from './pipes/linkify.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,8 @@ import { WorkflowPipe } from './pipes/workflow.pipe';
     TaskdetailComponent,
     SidekickComponent,
     TaskentryComponent,
-    WorkflowPipe
+    WorkflowPipe,
+    LinkifyPipe
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,7 @@ import { WorkflowPipe } from './pipes/workflow.pipe';
     HttpClientModule,
 //    NgPipesModule,
     AutosizeModule
+//    LinkifiyModule
   ],
   providers: [
     TaskService,

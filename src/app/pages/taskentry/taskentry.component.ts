@@ -12,7 +12,7 @@ import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bott
 export class TaskentryComponent implements OnInit {
 
   thinking;
-  task = {subject:'', issue:'', history:[]};
+  task = {subject:'', issue:'', notes:'', history:[]};
   errMess:string;
 
   constructor(
