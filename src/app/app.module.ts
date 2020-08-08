@@ -30,6 +30,7 @@ import { InterceptService } from './services/intercept.service';
 //pipes
 import { WorkflowPipe } from './pipes/workflow.pipe';
 import { LinkifyPipe } from './pipes/linkify.pipe';
+import { FocusDirective } from './directives/focus.directive';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { LinkifyPipe } from './pipes/linkify.pipe';
     SidekickComponent,
     TaskentryComponent,
     WorkflowPipe,
-    LinkifyPipe
+    LinkifyPipe,
+    FocusDirective
   ],
   imports: [
     BrowserModule,

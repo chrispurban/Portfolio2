@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { Task, workflow } from '../../classes/task';
 import { TaskService } from '../../services/task.service';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
@@ -17,8 +17,8 @@ export class TaskentryComponent implements OnInit {
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data:any,
-    private taskService:TaskService,
-    private popup:MatBottomSheetRef<TaskentryComponent>
+    private popup:MatBottomSheetRef<TaskentryComponent>,
+    private taskService:TaskService
   ){}
 
   ngOnInit():void{}

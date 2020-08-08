@@ -6,13 +6,18 @@
   fxLayoutAlign="start start"
 >
 
-  <div *ngIf="tasks">
+  <div fxFlex="100%" *ngIf="tasks">
     <div fxFlex *ngFor="let group of 'null' | workflow">
       <br>
-      <h1>{{group.name}}<br>{{group.icon}}</h1>
+      <div style="text-align:center;">
+        <span style="font-size:250%;">{{group.icon}}</span><br>
+        <span style="line-height:30px;">{{group.name | uppercase}}</span>
+      </div>
         <div fxLayout="column" *ngFor="let task of tasks">
-          <div *ngIf="task && task.state.code == group.code" (click)="taskDetail(task)" style="background-color:blue; white-space:pre-wrap"><!-- simple check for task is to handle deletion -->
-            <h2>{{task.subject | uppercase}}</h2>{{task.issue}}
+          <div *ngIf="task && task.state.code == group.code" (click)="taskDetail(task)" class="column"><!-- simple check for task is to handle deletion -->
+            <div class="tile">
+              <h2>{{task.subject | uppercase}}</h2>{{task.issue}}
+            </div>
           </div>
         </div>
     </div>

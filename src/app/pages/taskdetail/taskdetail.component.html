@@ -14,7 +14,7 @@
         </div>
         <li><br>
         <li><i>Created on {{task.createdAt | date}}, Modified on {{task.updatedAt | date}}</i>
-        <li>{{(task.state.phase | workflow).icon}}<i>{{(task.state.phase | workflow).name}} as of {{task.state.time | date:'medium'}}</i>
+        <li>{{task.state.phase.icon}}<i>{{task.state.phase.name}}<span *ngIf="task.state.time"> as of {{task.state.time | date:'medium'}}</span></i>
       </ul>
 
       <button *ngIf="task.state.phase > 0" (click)="update(-1)" mat-raised-button color="primary">Return to {{(task.state.phase - 1 | workflow).name}}

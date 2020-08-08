@@ -1,11 +1,11 @@
 <mat-progress-bar *ngIf="thinking" mode="indeterminate" color="accent"></mat-progress-bar>
 
-{{('null' | workflow)[0].icon}}
+<h1>NEW TASK {{('null' | workflow)[0].icon}}</h1>
 
 <form novalidate #newtask="ngForm" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
     <mat-form-field>
-      <input matInput placeholder="Subject" type="text" [(ngModel)]="task.subject" name="subject" #subject="ngModel" required>
+      <input matInput appFocus id="initial" placeholder="Subject" type="text" [(ngModel)]="task.subject" name="subject" #subject="ngModel" required>
       <mat-error *ngIf="subject.errors?.required">Subject is required</mat-error>
     </mat-form-field>
     <mat-form-field>

@@ -1,14 +1,22 @@
-<button mat-raised-button (click)="auth.login()" *ngIf="!auth.loggedIn">Log In</button>
-<button mat-raised-button (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
+<div fxFlex="20%" style="background-color:#161616; color:white;">
+  <button mat-raised-button (click)="auth.login()" *ngIf="!auth.loggedIn">Log In</button>
+  <button mat-raised-button (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
 
-<pre *ngIf="auth.userProfile$ | async as profile">
-  <img src="{{ profile.picture }}" style="max-width:64px">
-  {{profile.name}}
-</pre>
+  <pre *ngIf="auth.userProfile$ | async as profile">
+    <img src="{{ profile.picture }}" style="max-width:64px">
+    {{profile.name}}
+  </pre>
 
-<div>
-<ul>
-  <li><a mat-raised-button routerLink='/home' routerLinkActive="active">Home</a>
-  <li><a mat-raised-button routerLink='/tasks' routerLinkActive="active">Tasks</a>
-</ul>
+  <div>
+  <ul>
+    <li><a mat-raised-button routerLink='/home' routerLinkActive="active">Home</a>
+    <li><a mat-raised-button routerLink='/tasks' routerLinkActive="active">Tasks</a>
+  </ul>
+  </div>
+</div>
+
+<!---------------------------------------------------------------------->
+
+<div fxFlex="80%" style="background-color:#1c1c1c; color:white;">
+  <router-outlet></router-outlet>
 </div>
