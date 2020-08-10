@@ -10,3 +10,5 @@ export class WorkflowPipe implements PipeTransform {
     return workflow(value);
   }
 }
+
+// investigate whether a hybrid pipe class is possible to allow the same set of functions to be executed on both sides

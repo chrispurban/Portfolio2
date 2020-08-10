@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Task, workflow } from '../../classes/task';
 import { TaskService } from '../../services/task.service';
 
