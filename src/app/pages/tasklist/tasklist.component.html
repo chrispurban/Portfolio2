@@ -1,21 +1,28 @@
-<div  class="container" fxLayout="row" fxLayoutAlign="start start">
+<div fxLayout="row" fxLayoutAlign="start start">
 
-  <div fxFlex="100%" *ngIf="tasks">
-    <div fxFlex *ngFor="let group of 'null' | workflow">
+  <div fxFlex="100%" *ngIf="tasks" style="padding-left:4px;padding-right:4px;">
+    <div class="group" fxFlex *ngFor="let group of 'null' | workflow">
       <br>
       <div style="text-align:center;">
         <span style="font-size:250%;">{{group.icon}}</span><br>
         <span style="line-height:30px;">{{group.name | uppercase}}</span>
       </div>
-        <div fxLayout="column" *ngFor="let task of tasks">
-          <div *ngIf="task && task.state.code == group.code" (click)="taskDetail(task)" class="column"><!-- simple check for task is to handle deletion -->
+      <div fxLayout="column" *ngFor="let task of tasks">
+        <div class="postfiltered" *ngIf="task && task.state.code == group.code" (click)="taskDetail(task)"><!-- simple check for task is to handle deletion -->
+          <div class="anchor">
             <div class="tile">
-              <h2>{{task.subject | uppercase}}</h2>{{task.issue}}
+              <div class="content">
+                <span style="font-size:120%;">{{task.subject | uppercase}}</span><br><br>
+                <span style="font-size:90%;">{{task.issue}}</span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
+  <!--
+  -->
 
   <div fxFlex *ngIf="!(tasks || errMess)" style="text-align:center">
       <br><mat-spinner style="margin:0 auto" color="accent"></mat-spinner>

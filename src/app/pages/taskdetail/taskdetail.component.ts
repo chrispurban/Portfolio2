@@ -24,9 +24,9 @@ export class TaskdetailComponent implements OnInit {
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) private input:any,
     private popup:MatBottomSheetRef<TaskdetailComponent>,
-    private taskService:TaskService,
     private renderer:Renderer2,
-    private element:ElementRef
+    private element:ElementRef,
+    private taskService:TaskService
   ){}
 
   ngOnInit():void{
@@ -84,7 +84,7 @@ export class TaskdetailComponent implements OnInit {
 
   listener(){};
 
-  ngAfterViewInit(){ // protect notes from switching to edit mode while clicking hyperlinks
+  ngAfterViewInit(){ // protect the notes from switching to edit mode while clicking hyperlinks
     this.element.nativeElement.querySelectorAll('.linkified').forEach(link => {
       this.listener = this.renderer.listen(link, "mouseenter", event => this.onLink = true);
       this.listener = this.renderer.listen(link, "mouseleave", event => this.onLink = false);

@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Task } from '../classes/task';
 
-import { baseurl } from '../../assets/config';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,28 +19,28 @@ export class TaskService {
   getTask(taskID?:any): Observable<any> {
     if (taskID){
       console.log("Fetching task " + taskID + "...");
-      return this.http.get<Task>(baseurl + 'api/tasks/' + taskID);
+      return this.http.get<Task>(environment.baseurl + 'api/tasks/' + taskID);
     }
     else {
       console.log("Fetching all tasks...");
-      return this.http.get<Task[]>(baseurl + 'api/tasks');
+      return this.http.get<Task[]>(environment.baseurl + 'api/tasks');
     }
   }
 
   create(data?:any): Observable<any> {
     console.warn("Creating task...");
-    return this.http.post<Task>(baseurl + 'api/tasks', data);
+    return this.http.post<Task>(environment.baseurl + 'api/tasks', data);
   }
 
   modify(taskID?:any, data?:any){
     console.warn("Modifying task " + taskID + "...");
-    return this.http.put(baseurl + 'api/tasks/' + taskID, data);
+    return this.http.put(environment.baseurl + 'api/tasks/' + taskID, data);
   }
 
   delete(taskID?:any) {
     if (taskID){
       console.warn("Deleting task " + taskID + "...")
-      return this.http.delete(baseurl + 'api/tasks/' + taskID)
+      return this.http.delete(environment.baseurl + 'api/tasks/' + taskID)
     }
   }
 
