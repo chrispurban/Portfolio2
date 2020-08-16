@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Task } from '../classes/task';
-
 import { environment } from '../../environments/environment';
 
 @Injectable({

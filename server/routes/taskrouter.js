@@ -27,6 +27,7 @@ router
   })
   .post(cors(config.whitelist), auth.user, (req, res, next) => {
     req.body.owner = req.user.sub;
+  //  req.body.deadline = new Date(req.body.deadline).toISOString();
     TaskModel
       .create(req.body)
       .then(

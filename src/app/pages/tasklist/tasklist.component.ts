@@ -12,10 +12,12 @@ import { TaskdetailComponent } from '../taskdetail/taskdetail.component';
   templateUrl: './tasklist.component.html',
   styleUrls: ['./tasklist.component.scss']
 })
+
 export class TasklistComponent implements OnInit {
 
     tasks: Task[];
     errMess: string;
+    now = new Date();
 
   constructor(
     private taskService:TaskService,

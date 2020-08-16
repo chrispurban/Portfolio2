@@ -5,6 +5,7 @@ export class Task {
     history:object;
     owner:string;
     notes:string;
+    deadline:string;
     //messages:Message[];
 }
 

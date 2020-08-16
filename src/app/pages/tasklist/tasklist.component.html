@@ -16,6 +16,10 @@
                 <span style="font-size:90%;">{{task.issue}}</span>
               </div>
             </div>
+            <div *ngIf="task.deadline" style="position:absolute; top:0;right:0; background-color:#161616; line-height:80%; font-size:80%; border-radius:0px 6px; padding:3px 9px;">
+              <span *ngIf="(task.deadline | date) > (now | date)"><i>DUE IN {{task.deadline | timer | uppercase}}</i></span>
+              <i *ngIf="(task.deadline | date) <= (now | date)">OVERDUE!</i>
+            </div>
           </div>
         </div>
       </div>

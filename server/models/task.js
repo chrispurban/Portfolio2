@@ -33,8 +33,12 @@ let taskSchema = new Schema(
     },
     notes:{
       type:String
+    },
+    deadline:{
+      type:String
     }
-  },{
+  },
+  {
     timestamps: true
   }
 );

@@ -1,31 +1,41 @@
 <mat-progress-bar *ngIf="thinking" mode="indeterminate" color="accent"></mat-progress-bar>
 
   <div>
-      <h1><input matInput type="text" #subject="ngModel" [style.width.ch]="task.subject.length + 1" [(ngModel)]="task.subject">
+      <h1><input #subject="ngModel" [(ngModel)]="task.subject" [style.width.ch]="task.subject.length + 1" type="text" matInput>
       </h1>
+
       <ul style="list-style:none">
-        <li>Issue:
-          <br><textarea matInput autosize rows="1" type="text" #issue="ngModel" [(ngModel)]="task.issue"></textarea>
-        <br><br>
+        <li>Issue:<br>
+          <textarea #issue="ngModel" [(ngModel)]="task.issue" autosize rows="1" type="text" matInput></textarea>
+              <li><br>
         <li>Notes:<br>
-        <textarea [hidden]="task.notes && !editingNotes" matInput autosize rows="1" type="text" #notes="ngModel" [(ngModel)]="task.notes"></textarea>
-        <div *ngIf="task.notes && !editingNotes" (click)="toggleNotes()" style="white-space:pre-wrap;">
+        <textarea #notes="ngModel" [(ngModel)]="task.notes" [hidden]="task.notes && !editingNotes" autosize rows="1" type="text" matInput></textarea>
+        <li *ngIf="task.notes && !editingNotes" (click)="toggleNotes()" style="white-space:pre-wrap;">
           <div [innerHtml]="task.notes | linkify"></div>
-        </div>
-        <li><br>
+        </li>
+              <li><br>
+        <li>Deadline:<br>
+          <input #deadline="ngModel" [(ngModel)]="task.deadline" [matDatepicker]="lifeline" [min]="task.createdAt" name="deadline" matInput>
+          <mat-datepicker-toggle matSuffix [for]="lifeline"></mat-datepicker-toggle>
+          <mat-datepicker #lifeline></mat-datepicker>
+              <li><br>
         <li><i>Created on {{task.createdAt | date}}, Modified on {{task.updatedAt | date}}</i>
-        <li>{{task.state.phase.icon}}<i>{{task.state.phase.name}}<span *ngIf="task.state.time"> as of {{task.state.time | date:'medium'}}</span></i>
+
+        <li>{{(task.state.phase | workflow).icon}}<i>{{(task.state.phase | workflow).name}}<span *ngIf="task.state.time"> as of {{task.state.time | date:'medium'}}</span></i>
       </ul>
 
-      <button *ngIf="task.state.phase > 0" (click)="update(-1)" mat-raised-button color="primary">Return to {{(task.state.phase - 1 | workflow).name}}
+      <button *ngIf="task.state.phase > 0" (click)="update(-1)" mat-raised-button color="primary">
+        Return to {{(task.state.phase - 1 | workflow).name}}
       </button>
-      <button *ngIf="task.state.phase + 1 | workflow" (click)="update(+1)" mat-raised-button color="accent">Advance to {{(task.state.phase + 1 | workflow).name}}
+      <button *ngIf="task.state.phase + 1 | workflow" (click)="update(+1)" mat-raised-button color="accent">
+        Advance to {{(task.state.phase + 1 | workflow).name}}
       </button>
-      <button (click)="update()" mat-raised-button>Save
+      <button (click)="update()" mat-raised-button>
+        Save
       </button>
-  </div>
+      <button (click)="delete()" mat-raised-button>
+        <span *ngIf="!deletionPrompt">Delete</span>
+        <span *ngIf="deletionPrompt">Are you sure?</span>
+      </button>
 
-<a mat-raised-button (click)="delete()">
-  <span *ngIf="!deletionPrompt">Delete</span>
-  <span *ngIf="deletionPrompt">Are you sure?</span>
-</a>
+</div>

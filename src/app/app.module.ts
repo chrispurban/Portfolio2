@@ -5,12 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 //UI modules
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './app-material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-//import { NgPipesModule } from 'ngx-pipes';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AutosizeModule } from 'ngx-autosize';
+//import { NgPipesModule } from 'ngx-pipes';
 // import { LinkifiyModule } from 'linkifyjs'
 
 //components
@@ -30,6 +30,9 @@ import { InterceptService } from './services/intercept.service';
 //pipes
 import { WorkflowPipe } from './pipes/workflow.pipe';
 import { LinkifyPipe } from './pipes/linkify.pipe';
+import { TimerPipe } from './pipes/timer.pipe';
+
+//directives
 import { FocusDirective } from './directives/focus.directive';
 
 @NgModule({
@@ -43,15 +46,17 @@ import { FocusDirective } from './directives/focus.directive';
     TaskentryComponent,
     WorkflowPipe,
     LinkifyPipe,
-    FocusDirective
+    FocusDirective,
+    TimerPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FlexLayoutModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FlexLayoutModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
 //    NgPipesModule,
     AutosizeModule

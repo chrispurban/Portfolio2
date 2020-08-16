@@ -14,6 +14,7 @@ export class TaskdetailComponent implements OnInit {
   @ViewChild('issue') issue;
   @ViewChild('subject') subject;
   @ViewChild('notes') notes;
+  @ViewChild('deadline') deadline;
 
   thinking;
   task;
@@ -51,6 +52,7 @@ export class TaskdetailComponent implements OnInit {
     if(this.issue.dirty){Object.assign(changes.toSend,{issue:this.task.issue})};
     if(this.subject.dirty){Object.assign(changes.toSend,{subject:this.task.subject})};
     if(this.notes.dirty){Object.assign(changes.toSend,{notes:this.task.notes})};
+    if(this.deadline.dirty){Object.assign(changes.toSend,{deadline:this.task.deadline})};
     /*
     look into a foreach from form to eliminate repeat viewchild
     formItems.forEach(formItem=>{if(formItem.dirty){Object.assign(changes.toSend,{type:taskItem})}})
@@ -76,7 +78,7 @@ export class TaskdetailComponent implements OnInit {
         .delete(this.task._id)
         .subscribe(value => this.popup.dismiss({value:this.task, delete:true}));
     }
-    else{this.deletionPrompt = true;}
+    else{this.deletionPrompt = true;} // minor error if you try to delete multiple w/o refreshing
   }
 
 

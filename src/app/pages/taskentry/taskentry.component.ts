@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import { Task, workflow } from '../../classes/task';
 import { TaskService } from '../../services/task.service';
+//import { FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 
 @Component({
@@ -12,8 +13,9 @@ import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bott
 export class TaskentryComponent implements OnInit {
 
   thinking;
-  task = {subject:'', issue:'', notes:'', history:[]};
+  task = {subject:'', issue:'', notes:'', deadline:'', history:[]};
   errMess:string;
+  today = new Date();
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data:any,
@@ -25,7 +27,6 @@ export class TaskentryComponent implements OnInit {
 
   onSubmit(){
     this.thinking = true;
-
     this.task.history.push({
       code:workflow(0).code, // send to first stage
       time:new Date().toISOString() // current time
