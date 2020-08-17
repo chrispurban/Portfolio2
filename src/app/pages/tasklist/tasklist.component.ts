@@ -39,7 +39,10 @@ export class TasklistComponent implements OnInit {
       .afterDismissed().subscribe((result)=>{
         if(result){
           result.target = this.tasks.findIndex((x)=>x._id==result.value._id); // what's relisted
-          if(result.delete){delete this.tasks[result.target]}
+          if(result.delete){
+//            delete this.tasks[result.target]
+            this.tasks.splice(result.target, 1);
+          }
           else{this.tasks[result.target] = result.value}
         };
       });

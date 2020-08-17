@@ -1,39 +1,52 @@
+<i>DUE SOON</i>
+<div fxLayout="row">
+  <div *ngFor="let due of tasks">
+    <div *ngIf="due.deadline" (click)="taskDetail(due)" class="small tile"><div>
+      <div>
+        {{due.deadline | timer}} {{(due.state.phase | workflow).icon}} {{due.subject}}
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<hr>
+
 <div fxLayout="row" fxLayoutAlign="start start">
 
-  <div fxFlex="100%" *ngIf="tasks" style="padding-left:4px;padding-right:4px;">
-    <div class="group" fxFlex *ngFor="let group of 'null' | workflow">
-      <br>
+  <div fxFlex="100%" *ngIf="tasks" style="padding:12px 4px;">
+    <div fxFlex *ngFor="let group of 'null' | workflow">
+
       <div style="text-align:center;">
         <span style="font-size:250%;">{{group.icon}}</span><br>
         <span style="line-height:30px;">{{group.name | uppercase}}</span>
       </div>
+
       <div fxLayout="column" *ngFor="let task of tasks">
-        <div class="postfiltered" *ngIf="task && task.state.code == group.code" (click)="taskDetail(task)"><!-- simple check for task is to handle deletion -->
-          <div class="anchor">
-            <div class="tile">
-              <div class="content">
-                <span style="font-size:120%;">{{task.subject | uppercase}}</span><br><br>
-                <span style="font-size:90%;">{{task.issue}}</span>
-              </div>
-            </div>
-            <div *ngIf="task.deadline" style="position:absolute; top:0;right:0; background-color:#161616; line-height:80%; font-size:80%; border-radius:0px 6px; padding:3px 9px;">
-              <span *ngIf="(task.deadline | date) > (now | date)"><i>DUE IN {{task.deadline | timer | uppercase}}</i></span>
-              <i *ngIf="(task.deadline | date) <= (now | date)">OVERDUE!</i>
-            </div>
-          </div>
-        </div>
+        <div *ngIf="task.state.code == group.code" (click)="taskDetail(task)" class="large tile"><div>
+
+          <div><div>
+            <span style="font-size:120%;">{{task.subject | uppercase}}</span>
+            <br><br>
+            <span style="font-size:90%;">{{task.issue}}</span>
+          </div></div>
+
+          <header *ngIf="task.deadline">
+            <i *ngIf="(task.deadline | date) > (now | date)">DUE IN {{task.deadline | timer | uppercase}}</i>
+            <i *ngIf="(task.deadline | date) <= (now | date)">OVERDUE!</i>
+          </header>
+
+        </div></div>
       </div>
+
     </div>
   </div>
-  <!--
-  -->
 
   <div fxFlex *ngIf="!(tasks || errMess)" style="text-align:center">
       <br><mat-spinner style="margin:0 auto" color="accent"></mat-spinner>
       <br><h4>Loading . . . Please Wait</h4>
   </div>
 
-  <div *ngIf="errMess" style="text-align:center">
+  <div fxFlex *ngIf="errMess" style="text-align:center">
     <h2>Error</h2>
     <h4>{{errMess}}</h4>
   </div>
