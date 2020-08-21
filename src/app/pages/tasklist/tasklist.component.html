@@ -1,7 +1,7 @@
 <i>DUE SOON</i>
 <div fxLayout="row">
   <div *ngFor="let due of tasks">
-    <div *ngIf="due.deadline" (click)="taskDetail(due)" class="small tile"><div>
+    <div *ngIf="due.deadline" class="small tile"><div (click)="taskDetail(due)">
       <div>
         {{due.deadline | timer}} {{(due.state.phase | workflow).icon}} {{due.subject}}
       </div>
@@ -22,7 +22,7 @@
       </div>
 
       <div fxLayout="column" *ngFor="let task of tasks">
-        <div *ngIf="task.state.code == group.code" (click)="taskDetail(task)" class="large tile"><div>
+        <div *ngIf="task.state.code == group.code" class="large tile"><div (click)="taskDetail(task)">
 
           <div><div>
             <span style="font-size:120%;">{{task.subject | uppercase}}</span>
