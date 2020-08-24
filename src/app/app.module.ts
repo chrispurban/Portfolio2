@@ -16,11 +16,12 @@ import { AutosizeModule } from 'ngx-autosize';
 //components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { SidekickComponent } from './pages/sidekick/sidekick.component';
-import { LoginComponent } from './pages/login/login.component';
-import { TasklistComponent } from './pages/tasklist/tasklist.component';
-import { TaskdetailComponent } from './pages/taskdetail/taskdetail.component';
-import { TaskentryComponent } from './pages/taskentry/taskentry.component';
+import { SideComponent } from './pages/side/side.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
+
+  import { TasklistComponent } from './pages/projects/first/tasklist/tasklist.component';
+  import { TaskdetailComponent } from './pages/projects/first/taskdetail/taskdetail.component';
+  import { TaskentryComponent } from './pages/projects/first/taskentry/taskentry.component';
 
 //services
 import { TaskService } from './services/task.service';
@@ -39,15 +40,15 @@ import { FocusDirective } from './directives/focus.directive';
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
     TasklistComponent,
     TaskdetailComponent,
-    SidekickComponent,
+    SideComponent,
     TaskentryComponent,
     WorkflowPipe,
     LinkifyPipe,
     FocusDirective,
-    TimerPipe
+    TimerPipe,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,

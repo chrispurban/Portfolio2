@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject} from '@angular/core';
-import { Task, workflow } from '../../classes/task';
-import { TaskService } from '../../services/task.service';
+import { Task, workflow } from '../../../../classes/task';
+import { TaskService } from '../../../../services/task.service';
 //import { FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 

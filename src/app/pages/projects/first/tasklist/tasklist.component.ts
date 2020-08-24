@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { Task, workflow } from '../../classes/task';
-import { TaskService } from '../../services/task.service';
+import { Task, workflow } from '../../../../classes/task';
+import { TaskService } from '../../../../services/task.service';
 
 import { MatBottomSheetModule, MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
