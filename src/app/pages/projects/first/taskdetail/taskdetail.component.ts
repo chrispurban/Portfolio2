@@ -16,69 +16,63 @@ export class TaskdetailComponent implements OnInit {
   @ViewChild('notes') notes;
   @ViewChild('deadline') deadline;
 
-  thinking;
   task;
+  thinkingUI;
   deletionPrompt = false;
   editingNotes = false;
-  onLink = false;
+  hoveringLink = false;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) private input:any,
     private popup:MatBottomSheetRef<TaskdetailComponent>,
-    private renderer:Renderer2,
-    private element:ElementRef,
+    private element:ElementRef, private renderer:Renderer2,
     private taskService:TaskService
   ){}
 
   ngOnInit():void{
-    this.task = Object.assign([], workflow(this.input))
-    if(!this.task.notes){this.editingNotes = true}
+    this.task = Object.assign([], workflow(this.input));
+    if(!this.task.notes){this.editingNotes = true};
   }
 
 
 // database mechanisms /////////////////////////////////////////////////////////////////////
 
   update(transition?){
-    this.thinking = true;
-    let changes = {toKeep:{}, toSend:{}} // queue of what to save
+    let changes = {}; // queue of what to save
+
+    ["issue", "subject", "notes", "deadline"]
+      .forEach(i => {if(this[i].dirty){changes[i] = this.task[i]};});
 
     if(transition){
-      changes.toKeep = {
-        code:workflow(this.task.state.phase + transition).code,
+      changes['history'] = {
+        id:workflow(this.task.state.phase + transition).id,
         time:new Date().toISOString()
       }
-      Object.assign(changes.toSend,{$push:{history:changes.toKeep}})
     }
-    if(this.issue.dirty){Object.assign(changes.toSend,{issue:this.task.issue})};
-    if(this.subject.dirty){Object.assign(changes.toSend,{subject:this.task.subject})};
-    if(this.notes.dirty){Object.assign(changes.toSend,{notes:this.task.notes})};
-    if(this.deadline.dirty){Object.assign(changes.toSend,{deadline:this.task.deadline})};
-    /*
-    look into a foreach from form to eliminate repeat viewchild
-    formItems.forEach(formItem=>{if(formItem.dirty){Object.assign(changes.toSend,{type:taskItem})}})
-    */
 
-    if(Object.keys(changes.toSend).length > 0){ // one of the above changes were made
+    if(Object.keys(changes).length > 0){ // one of the above changes were made
+      this.thinkingUI = true;
       this.taskService
-      .modify(this.task._id, changes.toSend)
-      .subscribe(value => {
-        if(transition){
-          this.task.history.push(changes.toKeep); // modifying history to change group column
-          this.task = workflow(this.task);
-        }
-        this.popup.dismiss({value:this.task}); // pass back to main list
-      });
+        .update(this.task._id, changes).subscribe(value => {
+          if(transition){
+            this.task.history.push(changes['history']); // change what group it's in
+            this.task = workflow(this.task);
+          }
+          this.popup.dismiss({value:this.task}); // pass back to main list
+        });
     }
-    else{this.popup.dismiss();} // no changes were made
+    else{this.popup.dismiss();}
   }
 
   delete(){
     if(this.deletionPrompt){
+      this.thinkingUI = true;
       this.taskService
-        .delete(this.task._id)
-        .subscribe(value => this.popup.dismiss({value:this.task, delete:true}));
+        .delete(this.task._id).subscribe(
+          value => this.popup.dismiss({value:this.task, delete:true})
+        );
     }
-    else{this.deletionPrompt = true;} // minor error if you try to delete multiple w/o refreshing
+    else{this.deletionPrompt = true;}
   }
 
 
@@ -88,12 +82,12 @@ export class TaskdetailComponent implements OnInit {
 
   ngAfterViewInit(){ // protect the notes from switching to edit mode while clicking hyperlinks
     this.element.nativeElement.querySelectorAll('.linkified').forEach(link => {
-      this.listener = this.renderer.listen(link, "mouseenter", event => this.onLink = true);
-      this.listener = this.renderer.listen(link, "mouseleave", event => this.onLink = false);
+      this.listener = this.renderer.listen(link, "mouseenter", event => this.hoveringLink = true);
+      this.listener = this.renderer.listen(link, "mouseleave", event => this.hoveringLink = false);
     });
   }
 
-  toggleNotes(){if(!this.onLink){this.editingNotes = true}}
+  toggleNotes(){if(!this.hoveringLink){this.editingNotes = true}}
 
   ngOnDestroy(){this.listener()}
 

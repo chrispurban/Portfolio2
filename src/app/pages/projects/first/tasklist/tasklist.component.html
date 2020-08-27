@@ -22,7 +22,7 @@
       </div>
 
       <div fxLayout="column" *ngFor="let task of tasks">
-        <div *ngIf="task.state.code == group.code" class="large tile"><div (click)="taskDetail(task)">
+        <div *ngIf="task.state.id == group.id" class="large tile"><div (click)="taskDetail(task)">
 
           <div><div>
             <span style="font-size:120%;">{{task.subject | uppercase}}</span>

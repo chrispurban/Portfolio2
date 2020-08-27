@@ -12,7 +12,7 @@ import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bott
 
 export class TaskentryComponent implements OnInit {
 
-  thinking;
+  thinkingUI = false;
   task = {subject:'', issue:'', notes:'', deadline:'', history:[]};
   errMess:string;
   today = new Date();
@@ -26,14 +26,13 @@ export class TaskentryComponent implements OnInit {
   ngOnInit():void{}
 
   onSubmit(){
-    this.thinking = true;
+    this.thinkingUI = true;
     this.task.history.push({
-      code:workflow(0).code, // send to first stage
+      id:workflow(0).id, // send to first stage
       time:new Date().toISOString() // current time
     });
     this.taskService
-      .create(this.task)
-      .subscribe(
+      .create(this.task).subscribe(
         value => {this.popup.dismiss(value)},
         error => this.errMess = <any>error
       );

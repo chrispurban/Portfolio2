@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
+import * as store from 'store2';
 
 @Component({
   selector: 'app-side',
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 
 export class SideComponent implements OnInit {
 
-tasks;
+  tasks;
 
   constructor(public auth:AuthService){}
 

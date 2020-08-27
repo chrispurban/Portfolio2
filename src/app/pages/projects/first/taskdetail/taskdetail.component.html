@@ -1,4 +1,4 @@
-<mat-progress-bar *ngIf="thinking" mode="indeterminate" color="accent"></mat-progress-bar>
+<mat-progress-bar *ngIf="thinkingUI" mode="indeterminate" color="accent"></mat-progress-bar>
 
   <div>
       <h1><input #subject="ngModel" [(ngModel)]="task.subject" [style.width.ch]="task.subject.length + 1" type="text" matInput>
@@ -35,7 +35,7 @@
       </button>
       <button (click)="delete()" mat-raised-button>
         <span *ngIf="!deletionPrompt">Delete</span>
-        <span *ngIf="deletionPrompt">Are you sure?</span>
+        <span *ngIf="deletionPrompt" color="accent">Are you sure?</span>
       </button>
 
 </div>

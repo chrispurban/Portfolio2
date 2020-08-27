@@ -78,7 +78,11 @@ router
     .catch((err) => next(err));
   })
   .put(cors(config.whitelist), auth.user, (req, res, next) => {
-    console.log(req.body);
+    if(req.body.history){
+      req.body['$push'] = {history:req.body.history};
+      delete req.body.history;
+      console.log(req.body);
+    }
   TaskModel
     .updateOne({"_id":req.params.taskId}, req.body)
     .then(
