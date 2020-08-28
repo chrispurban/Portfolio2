@@ -1,4 +1,4 @@
-<mat-progress-bar *ngIf="thinkingUI" mode="indeterminate" color="accent"></mat-progress-bar>
+<mat-progress-bar *ngIf="UI_thinking" mode="indeterminate" color="accent"></mat-progress-bar>
 
   <div>
       <h1><input #subject="ngModel" [(ngModel)]="task.subject" [style.width.ch]="task.subject.length + 1" type="text" matInput>
@@ -9,8 +9,8 @@
           <textarea #issue="ngModel" [(ngModel)]="task.issue" autosize rows="1" type="text" matInput></textarea>
               <li><br>
         <li>Notes:<br>
-        <textarea #notes="ngModel" [(ngModel)]="task.notes" [hidden]="task.notes && !editingNotes" autosize rows="1" type="text" matInput></textarea>
-        <li *ngIf="task.notes && !editingNotes" (click)="toggleNotes()" style="white-space:pre-wrap;">
+        <textarea #notes="ngModel" [(ngModel)]="task.notes" [hidden]="task.notes && !UI_editingNotes" autosize rows="1" type="text" matInput></textarea>
+        <li *ngIf="task.notes && !UI_editingNotes" (click)="toggleNotes()" style="white-space:pre-wrap;">
           <div [innerHtml]="task.notes | linkify"></div>
         </li>
               <li><br>
@@ -34,8 +34,8 @@
         Save
       </button>
       <button (click)="delete()" mat-raised-button>
-        <span *ngIf="!deletionPrompt">Delete</span>
-        <span *ngIf="deletionPrompt" color="accent">Are you sure?</span>
+        <span *ngIf="UI_deletionProtection">Delete</span>
+        <span *ngIf="!UI_deletionProtection" color="accent">Are you sure?</span>
       </button>
 
 </div>

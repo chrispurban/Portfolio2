@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 
 import { AuthService } from './auth.service';
 
-import * as store from 'store2';
+import * as localStorage from 'store2';
 
 @Injectable({
   providedIn: 'root'
@@ -30,24 +30,24 @@ export class TaskService {
     }
     else{
       data._id = new Date().toISOString();
-      store.add('tasks', data);
+      localStorage.add('tasks', data);
       return of(data);
     }
   }
 
   read():Observable<any>{
     console.log("Reading tasks...");
-    if(this.auth.loggedIn){
-      if(store.has('tasks')){ // there is local data which needs to be uploaded
-        store('tasks').forEach(i => {
-          this.create(i).subscribe(value => {store(false)});
+    if(this.auth.loggedIn){ console.log("you're in!");
+      if(localStorage.has('tasks')){ // there is local data which needs to be uploaded
+        localStorage('tasks').forEach(task => {
+          this.create(task).subscribe(value => {localStorage(false)});
         });
       }
       return this.http.get<Task[]>(environment.baseurl + 'api/tasks');
     }
-    else{
-      if(!store.has('tasks')){store('tasks', [])}
-      return of(store('tasks'));
+    else{ console.log("you're out!");
+      if(!localStorage.has('tasks')){localStorage('tasks', [])}
+      return of(localStorage('tasks'));
     }
   }
 
@@ -57,8 +57,8 @@ export class TaskService {
       return this.http.put(environment.baseurl + 'api/tasks/' + taskID, data);
     }
     else{
-      store.transact('tasks', (content) => {
-        let target = content[store('tasks').findIndex((i)=>i._id==taskID)];
+      localStorage.transact('tasks', (content) => {
+        let target = content[localStorage('tasks').findIndex((i)=>i._id==taskID)];
         for(let property in data){
           if(data[property].constructor === Object){target[property].push(data[property]);}
           else{target[property] = data[property];}
@@ -74,8 +74,8 @@ export class TaskService {
       return this.http.delete(environment.baseurl + 'api/tasks/' + taskID)
     }
     else{
-      store.transact('tasks', (content) => {
-        let target = content[store('tasks').findIndex((i)=>i._id==taskID)];
+      localStorage.transact('tasks', (content) => {
+        let target = content[localStorage('tasks').findIndex((i)=>i._id==taskID)];
         content.splice(target, 1);
       });
       return of(true);

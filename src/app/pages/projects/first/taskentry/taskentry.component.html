@@ -1,4 +1,4 @@
-<mat-progress-bar *ngIf="thinkingUI" mode="indeterminate" color="accent"></mat-progress-bar>
+<mat-progress-bar *ngIf="UI_thinking" mode="indeterminate" color="accent"></mat-progress-bar>
 
 <h1>NEW TASK {{('null' | workflow)[0].icon}}</h1> {{task.deadline}}
 
@@ -21,7 +21,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input [(ngModel)]="task.deadline" #deadline="ngModel" name="deadline" placeholder="Deadline" [matDatepicker]="lifeline" [min]="today" matInput>
+      <input [(ngModel)]="task.deadline" #deadline="ngModel" name="deadline" placeholder="Deadline" [matDatepicker]="lifeline" [min]="UI_now" matInput>
       <mat-datepicker-toggle matSuffix [for]="lifeline"></mat-datepicker-toggle>
       <mat-datepicker #lifeline></mat-datepicker>
     </mat-form-field>
@@ -34,4 +34,4 @@
 
 </form>
 
-{{errMess}}
+{{errorMessage}}

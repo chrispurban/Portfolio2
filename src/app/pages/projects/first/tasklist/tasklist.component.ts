@@ -1,8 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Task, workflow } from '../../../../classes/task';
 import { TaskService } from '../../../../services/task.service';
-
-import { MatBottomSheetModule, MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MatBottomSheetRef, MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 import { TaskentryComponent } from '../taskentry/taskentry.component';
 import { TaskdetailComponent } from '../taskdetail/taskdetail.component';
@@ -15,20 +14,20 @@ import { TaskdetailComponent } from '../taskdetail/taskdetail.component';
 
 export class TasklistComponent implements OnInit {
 
+    UI_now = new Date();
     tasks:Task[];
-    errMess: string;
-    now = new Date();
+    errorMessage: string;
 
   constructor(
     private taskService:TaskService,
-    private bottomSheet:MatBottomSheet
+    private bottomSheet:MatBottomSheet,
   ) { }
 
   ngOnInit(): void {
     this.taskService
       .read().subscribe(
         value => {this.tasks = value.map(workflow)},
-        error => this.errMess = <any>error
+        error => this.errorMessage = <any>error
       );
   }
 

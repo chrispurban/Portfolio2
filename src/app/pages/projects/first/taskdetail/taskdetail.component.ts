@@ -16,24 +16,23 @@ export class TaskdetailComponent implements OnInit {
   @ViewChild('notes') notes;
   @ViewChild('deadline') deadline;
 
+  UI_thinking = false;
+  UI_deletionProtection = true;
+  UI_editingNotes = false;
+  UI_hoveringLink = false;
   task;
-  thinkingUI;
-  deletionPrompt = false;
-  editingNotes = false;
-  hoveringLink = false;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) private input:any,
     private popup:MatBottomSheetRef<TaskdetailComponent>,
     private element:ElementRef, private renderer:Renderer2,
-    private taskService:TaskService
+    public taskService:TaskService
   ){}
 
   ngOnInit():void{
     this.task = Object.assign([], workflow(this.input));
-    if(!this.task.notes){this.editingNotes = true};
+    if(!this.task.notes){this.UI_editingNotes = true};
   }
-
 
 // database mechanisms /////////////////////////////////////////////////////////////////////
 
@@ -51,7 +50,7 @@ export class TaskdetailComponent implements OnInit {
     }
 
     if(Object.keys(changes).length > 0){ // one of the above changes were made
-      this.thinkingUI = true;
+      this.UI_thinking = true;
       this.taskService
         .update(this.task._id, changes).subscribe(value => {
           if(transition){
@@ -65,16 +64,15 @@ export class TaskdetailComponent implements OnInit {
   }
 
   delete(){
-    if(this.deletionPrompt){
-      this.thinkingUI = true;
+    if(this.UI_deletionProtection){this.UI_deletionProtection = false;}
+    else{
+      this.UI_thinking = true;
       this.taskService
         .delete(this.task._id).subscribe(
           value => this.popup.dismiss({value:this.task, delete:true})
         );
     }
-    else{this.deletionPrompt = true;}
   }
-
 
 // UI mechanisms /////////////////////////////////////////////////////////////
 
@@ -82,12 +80,12 @@ export class TaskdetailComponent implements OnInit {
 
   ngAfterViewInit(){ // protect the notes from switching to edit mode while clicking hyperlinks
     this.element.nativeElement.querySelectorAll('.linkified').forEach(link => {
-      this.listener = this.renderer.listen(link, "mouseenter", event => this.hoveringLink = true);
-      this.listener = this.renderer.listen(link, "mouseleave", event => this.hoveringLink = false);
+      this.listener = this.renderer.listen(link, "mouseenter", event => this.UI_hoveringLink = true);
+      this.listener = this.renderer.listen(link, "mouseleave", event => this.UI_hoveringLink = false);
     });
   }
 
-  toggleNotes(){if(!this.hoveringLink){this.editingNotes = true}}
+  toggleNotes(){if(!this.UI_hoveringLink){this.UI_editingNotes = true}}
 
   ngOnDestroy(){this.listener()}
 

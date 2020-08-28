@@ -31,8 +31,8 @@
           </div></div>
 
           <header *ngIf="task.deadline">
-            <i *ngIf="(task.deadline | date) > (now | date)">DUE IN {{task.deadline | timer | uppercase}}</i>
-            <i *ngIf="(task.deadline | date) <= (now | date)">OVERDUE!</i>
+            <i *ngIf="(task.deadline | date) > (UI_now | date)">DUE IN {{task.deadline | timer | uppercase}}</i>
+            <i *ngIf="(task.deadline | date) <= (UI_now | date)">OVERDUE!</i>
           </header>
 
         </div></div>
@@ -41,14 +41,14 @@
     </div>
   </div>
 
-  <div fxFlex *ngIf="!(tasks || errMess)" style="text-align:center">
+  <div fxFlex *ngIf="!(tasks || errorMessage)" style="text-align:center">
       <br><mat-spinner style="margin:0 auto" color="accent"></mat-spinner>
       <br><h4>Loading . . . Please Wait</h4>
   </div>
 
-  <div fxFlex *ngIf="errMess" style="text-align:center">
+  <div fxFlex *ngIf="errorMessage" style="text-align:center">
     <h2>Error</h2>
-    <h4>{{errMess}}</h4>
+    <h4>{{errorMessage}}</h4>
   </div>
 
 </div>

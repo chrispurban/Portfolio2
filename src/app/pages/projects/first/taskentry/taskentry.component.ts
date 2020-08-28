@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import { Task, workflow } from '../../../../classes/task';
 import { TaskService } from '../../../../services/task.service';
-//import { FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+//import { FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-taskentry',
@@ -12,10 +12,10 @@ import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bott
 
 export class TaskentryComponent implements OnInit {
 
-  thinkingUI = false;
+  UI_thinking = false;
+  UI_now = new Date();
   task = {subject:'', issue:'', notes:'', deadline:'', history:[]};
-  errMess:string;
-  today = new Date();
+  errorMessage:string;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data:any,
@@ -26,7 +26,7 @@ export class TaskentryComponent implements OnInit {
   ngOnInit():void{}
 
   onSubmit(){
-    this.thinkingUI = true;
+    this.UI_thinking = true;
     this.task.history.push({
       id:workflow(0).id, // send to first stage
       time:new Date().toISOString() // current time
@@ -34,7 +34,7 @@ export class TaskentryComponent implements OnInit {
     this.taskService
       .create(this.task).subscribe(
         value => {this.popup.dismiss(value)},
-        error => this.errMess = <any>error
+        error => this.errorMessage = <any>error
       );
     }
 
