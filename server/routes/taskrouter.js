@@ -27,6 +27,8 @@ router
   })
   .post(cors(config.whitelist), auth.user, (req, res, next) => {
     req.body.owner = req.user.sub;
+    console.log(req.body._id)
+    if(req.body._id){delete req.body._id;} // purge any local ID it may have had
   //  req.body.deadline = new Date(req.body.deadline).toISOString();
     TaskModel
       .create(req.body)
