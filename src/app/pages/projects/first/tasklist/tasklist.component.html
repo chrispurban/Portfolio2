@@ -31,8 +31,8 @@
           </div></div>
 
           <header *ngIf="task.deadline">
-            <i *ngIf="(task.deadline | date) > (UI_now | date)">DUE IN {{task.deadline | timer | uppercase}}</i>
-            <i *ngIf="(task.deadline | date) <= (UI_now | date)">OVERDUE!</i>
+            <i *ngIf="(UI_now | date:'yyyyMMdd') < (task.deadline | date:'yyyyMMdd')">DUE IN {{task.deadline | timer | uppercase}}</i>
+            <i *ngIf="(UI_now | date:'yyyyMMdd') >= (task.deadline | date:'yyyyMMdd')">OVERDUE!</i>
           </header>
 
         </div></div>

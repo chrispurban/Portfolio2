@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   hmr: false,
-  baseurl: 'http://localhost:8080/'
+  baseurl: 'http://localhost:8080/',
+  AUTH0_DOMAIN: 'steep-sunset-1760.us.auth0.com',
+  AUTH0_CLIENT_ID: 'AE7aAmS1oRNQ1EL3ooXISYLQVvZ7OSKh'
 };
 
 /*

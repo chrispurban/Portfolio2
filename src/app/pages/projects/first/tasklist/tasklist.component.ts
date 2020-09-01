@@ -14,7 +14,7 @@ import { TaskdetailComponent } from '../taskdetail/taskdetail.component';
 
 export class TasklistComponent implements OnInit {
 
-    UI_now = new Date();
+    UI_now = new Date().toISOString();
     tasks:Task[];
     errorMessage: string;
 
