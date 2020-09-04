@@ -17,6 +17,7 @@ export class TasklistComponent implements OnInit {
     UI_now = new Date().toISOString();
     tasks:Task[];
     errorMessage: string;
+    content="";
 
   constructor(
     private taskService:TaskService,
@@ -29,6 +30,9 @@ export class TasklistComponent implements OnInit {
         value => {this.tasks = value.map(workflow)},
         error => this.errorMessage = <any>error
       );
+    for(let i=0; i<30; i++){
+      this.content = this.content.concat("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque blandit tortor et tristique sagittis. Maecenas consequat nunc vel augue tincidunt, vel blandit neque maximus. Curabitur tristique ipsum et mollis tincidunt. Praesent ut risus sit amet nulla sodales auctor. In hendrerit enim nec ex interdum, nec tincidunt eros varius. Vestibulum convallis laoreet felis quis gravida. Vivamus eu mattis tortor, quis dignissim tortor. Vivamus non vestibulum lorem. Donec diam turpis, sagittis nec tincidunt quis, congue in est. Quisque malesuada tellus at sem malesuada, interdum consectetur orci posuere. Proin sodales bibendum ligula, at varius dui semper nec. Nullam venenatis dui eget turpis sollicitudin, at malesuada tortor tempus. Proin facilisis sed dui quis ultrices. Curabitur placerat venenatis mi quis consectetur. Nunc pharetra euismod vehicula. ")
+    }
   }
 
   taskDetail(task){

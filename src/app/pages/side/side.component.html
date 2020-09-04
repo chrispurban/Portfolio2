@@ -1,25 +1,37 @@
-<div fxFlex="20%" style="background-color:#161616; color:white;">
-  <button *ngIf="!auth.loggedIn" (click)="auth.login()" mat-raised-button>Log In</button>
-  <button *ngIf="auth.loggedIn" (click)="auth.logout()" mat-raised-button>Log Out</button>
+<div fxLayout.lt-md="column" fxLayout.gt-sm="row" style="color:white;" style="height:100vh">
 
-  <pre *ngIf="auth.userProfile$ | async as profile">
-    <img src="{{ profile.picture }}" style="max-width:64px">
-    {{profile.name}}
-  </pre>
+  <div fxLayout.lt-md="row wrap" fxLayout.gt-sm="column wrap" fxFlex.lt-md="64px" fxFlex.gt-sm="20%" style="background-color:#111111;">
 
-  <div>
-  <ul>
-    <li><a mat-raised-button routerLink='/home' routerLinkActive="active">Home</a>
-    <li><a mat-raised-button routerLink='/projects/' routerLinkActive="active">Projects</a>
-  </ul>
+    <div fxFlex.lt-md="64px" fxFlex.gt-sm="64px" style="background-color:magenta;">
+      <div fxFlex style="width:64px; height:64px; position:relative; padding:0px;">
+        <img *ngIf="!auth.loggedIn" src="../../assets/chris.jpg" style="padding:0px; max-height:64px; max-width:64px; position:absolute; top:0; left:0; bottom:0; right:0;">
+        <pre *ngIf="auth.userProfile$ | async as profile">
+          <img src="{{profile.picture}}"style="padding:0px; max-height:64px; max-width:64px; position:absolute; top:0; left:0; bottom:0; right:0;">
+        </pre>
+      </div>
+    </div>
+    <div fxFlex>
+      <a *ngIf="!auth.loggedIn" (click)="auth.login()" mat-raised-button>Log In</a>
+      <a *ngIf="auth.loggedIn" (click)="auth.logout()" mat-raised-button>Log Out</a>
+    </div>
+    <div fxFlex="25%" style="background-color:cyan;">
+      <a mat-raised-button routerLink='/home' routerLinkActive="active">Home</a>
+      <a mat-raised-button routerLink='/projects/' routerLinkActive="active">Projects</a>
+    </div>
+    <div fxFlex="25%" style="background-color:teal;">
+      <a *ngIf="outlet && outlet.taskEntry" (click)="outlet.taskEntry()" mat-raised-button color="accent">Create New Task</a>
+    </div>
+    <div fxFlex>
+    </div>
+    <div fxFlex style="background-color:purple;">
+    </div>
+
   </div>
 
-  <button *ngIf="outlet && outlet.taskEntry" (click)="outlet.taskEntry()" mat-raised-button color="accent">Create New Task</button>
+  <!---------------------------------------------------------------------->
 
-</div>
+  <div fxFlex="grow" style="color:white; background-color:silver; position:relative;">
+    <router-outlet (activate)="loaded($event)"></router-outlet>
+  </div>
 
-<!---------------------------------------------------------------------->
-
-<div fxFlex="80%" style="background-color:#1c1c1c; color:white;">
-  <router-outlet (activate)="loaded($event)"></router-outlet>
 </div>

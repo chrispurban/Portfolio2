@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Worksplat": {
+    "Chris_Urban": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -75,22 +75,22 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Worksplat:build"
+            "browserTarget": "Chris_Urban:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Worksplat:build:production"
+              "browserTarget": "Chris_Urban:build:production"
             },
             "hmr": {
               "hmr": true,
-              "browserTarget": "Worksplat:build:hmr"
+              "browserTarget": "Chris_Urban:build:hmr"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Worksplat:build"
+            "browserTarget": "Chris_Urban:build"
           }
         },
         "test": {
@@ -128,18 +128,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Worksplat:serve"
+            "devServerTarget": "Chris_Urban:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Worksplat:serve:production"
+              "devServerTarget": "Chris_Urban:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "Worksplat",
+  "defaultProject": "Chris_Urban",
   "cli": {
     "analytics": "40d1c336-ccd0-4c0b-b691-8b92193cd028"
   }

@@ -1,54 +1,60 @@
-<i>DUE SOON</i>
-<div fxLayout="row">
-  <div *ngFor="let due of tasks">
-    <div *ngIf="due.deadline" class="small tile"><div (click)="taskDetail(due)">
-      <div>
-        {{due.deadline | timer}} {{(due.state.phase | workflow).icon}} {{due.subject}}
-      </div>
-    </div></div>
-  </div>
-</div>
-
-<hr>
-
-<div fxLayout="row" fxLayoutAlign="start start">
-
-  <div fxFlex="100%" *ngIf="tasks" style="padding:12px 4px;">
-    <div fxFlex *ngFor="let group of 'null' | workflow">
-
-      <div style="text-align:center;">
-        <span style="font-size:250%;">{{group.icon}}</span><br>
-        <span style="line-height:30px;">{{group.name | uppercase}}</span>
-      </div>
-
-      <div fxLayout="column" *ngFor="let task of tasks">
-        <div *ngIf="task.state.id == group.id" class="large tile"><div (click)="taskDetail(task)">
-
-          <div><div>
-            <span style="font-size:120%;">{{task.subject | uppercase}}</span>
-            <br><br>
-            <span style="font-size:90%;">{{task.issue}}</span>
-          </div></div>
-
-          <header *ngIf="task.deadline">
-            <i *ngIf="(UI_now | date:'yyyyMMdd') < (task.deadline | date:'yyyyMMdd')">DUE IN {{task.deadline | timer | uppercase}}</i>
-            <i *ngIf="(UI_now | date:'yyyyMMdd') >= (task.deadline | date:'yyyyMMdd')">OVERDUE!</i>
-          </header>
-
-        </div></div>
-      </div>
-
+<!--
+  <div fxLayout="row">
+    <i>DUE SOON</i>
+    <div *ngFor="let due of tasks">
+      <div *ngIf="due.deadline" class="small tile"><div (click)="taskDetail(due)">
+        <div>
+          {{due.deadline | timer}} {{(due.state.phase | workflow).icon}} {{due.subject}}
+        </div>
+      </div></div>
     </div>
   </div>
 
-  <div fxFlex *ngIf="!(tasks || errorMessage)" style="text-align:center">
-      <br><mat-spinner style="margin:0 auto" color="accent"></mat-spinner>
-      <br><h4>Loading . . . Please Wait</h4>
-  </div>
+  <hr>
+-->
 
-  <div fxFlex *ngIf="errorMessage" style="text-align:center">
-    <h2>Error</h2>
-    <h4>{{errorMessage}}</h4>
-  </div>
+<div fxFlex fxLayout="column" style="position:absolute; top:0px; bottom:0px; left:0px; right:0px;">
 
+  <div fxFlex="12%" fxLayout="row" style="width:100%; padding:4px;">
+        <div fxFlex *ngFor="let header of 'null' | workflow" style="background-color:black;">
+          <div fxFlex style="text-align:center;">
+              <br><span style="font-size:250%;">{{header.icon}}</span><br>
+              <span style="line-height:30px;">{{header.name | uppercase}}</span>
+          </div>
+        </div>
+  </div>
+  <div fxFlex="grow" fxLayout="row" style="overflow-x:hidden; overflow-y:scroll; padding:4px;">
+    <div fxFlex *ngFor="let group of 'null' | workflow">
+
+              <div *ngFor="let task of tasks">
+                <div *ngIf="task.state.id == group.id" class="large tile"><div (click)="taskDetail(task)">
+
+                  <div><div>
+                    <span style="font-size:120%;">{{task.subject | uppercase}}</span>
+                    <br><br>
+                    <span style="font-size:90%;">{{task.issue}}</span>
+                  </div></div>
+
+                  <header *ngIf="task.deadline">
+                    <i *ngIf="(UI_now | date:'yyyyMMdd') < (task.deadline | date:'yyyyMMdd')">DUE IN {{task.deadline | timer | uppercase}}</i>
+                    <i *ngIf="(UI_now | date:'yyyyMMdd') >= (task.deadline | date:'yyyyMMdd')">OVERDUE!</i>
+                  </header>
+
+                </div></div>
+              </div>
+
+    </div>
+  </div>
 </div>
+
+    <!--
+    <div fxFlex *ngIf="!(tasks || errorMessage)" style="text-align:center">
+        <br><mat-spinner style="margin:0 auto" color="accent"></mat-spinner>
+        <br><h4>Loading . . . Please Wait</h4>
+    </div>
+
+    <div fxFlex *ngIf="errorMessage" style="text-align:center">
+      <h2>Error</h2>
+      <h4>{{errorMessage}}</h4>
+    </div>
+    -->

@@ -1,5 +1,20 @@
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+html, body { height: 100%; height:auto; margin:0; overflow:auto; background-color:#222222;}
+body {font-family: Roboto, "Helvetica Neue", sans-serif;}
+
+///////////////////// toolbar
+/*
+.photo{
+  position:relative;
+  *{
+    padding:0px;
+  }
+  img{
+    max-height:64px; max-width:64px;
+    position:absolute;top:0;left:0;bottom:0;right:0;
+  }
+}
+*/
+//////////////////// tasks project
 
 .tile{
   padding:4px;
@@ -8,12 +23,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
     cursor:pointer;
     > div{
       position:absolute;top:0;left:0;bottom:0;right:0;
-      background-color:#333333;
+      background-color:#444444;
       border-radius:6px;
     }
     > header{
       position:absolute;top:0;right:0;
-      background-color:#161616;
+      background-color:#111111;
       border-radius:0px 6px;
       line-height:80%;
       font-size:80%;
