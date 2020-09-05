@@ -14,6 +14,15 @@ body {font-family: Roboto, "Helvetica Neue", sans-serif;}
   }
 }
 */
+
+@import url('https://fonts.googleapis.com/css?family=Expletus+Sans&display=swap');
+#name{
+  font-family:'Expletus Sans','Ubuntu',sans-serif;
+  font-size:2.75em;
+  margin-top:10px;
+  line-height:90%;
+}
+
 //////////////////// tasks project
 
 .tile{
@@ -39,7 +48,7 @@ body {font-family: Roboto, "Helvetica Neue", sans-serif;}
 
 .small{
   > div{
-    width:200px; padding-top:32px;
+    width:200px; padding-top:32px; padding-bottom:4px;
     > div{
       padding:8px 8px;
     }

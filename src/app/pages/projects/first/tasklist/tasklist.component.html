@@ -15,28 +15,26 @@
     <div fxFlex fxLayout.lt-sm="column" fxLayout.gt-xs="row">
       <div fxFlex *ngFor="let group of 'null' | workflow">
 
-        <div style="width:100; text-align:center; position:sticky; top:0; z-index:10; background-color:black; padding-bottom:4px;">
+        <div style="width:100; text-align:center; position:sticky; top:0; z-index:10; background-color:#111111; padding-bottom:4px;">
           <br><span style="font-size:250%;">{{group.icon}}</span><br>
           <span style="line-height:30px;">{{group.name | uppercase}}</span>
         </div>
 
-        <div style="padding:4px">
-          <div *ngFor="let task of tasks">
-            <div *ngIf="task.state.id == group.id" class="large tile"><div (click)="taskDetail(task)">
+        <div *ngFor="let task of tasks">
+          <div *ngIf="task.state.id == group.id" class="large tile"><div (click)="taskDetail(task)">
 
-              <div><div>
-                <span style="font-size:120%;">{{task.subject | uppercase}}</span>
-                <br><br>
-                <span style="font-size:90%;">{{task.issue}}</span>
-              </div></div>
-
-              <header *ngIf="task.deadline">
-                <i *ngIf="(UI_now | date:'yyyyMMdd') < (task.deadline | date:'yyyyMMdd')">DUE IN {{task.deadline | timer | uppercase}}</i>
-                <i *ngIf="(UI_now | date:'yyyyMMdd') >= (task.deadline | date:'yyyyMMdd')">OVERDUE!</i>
-              </header>
-
+            <div><div>
+              <span style="font-size:120%;">{{task.subject | uppercase}}</span>
+              <br><br>
+              <span style="font-size:90%;">{{task.issue}}</span>
             </div></div>
-          </div>
+
+            <header *ngIf="task.deadline">
+              <i *ngIf="(UI_now | date:'yyyyMMdd') < (task.deadline | date:'yyyyMMdd')">DUE IN {{task.deadline | timer | uppercase}}</i>
+              <i *ngIf="(UI_now | date:'yyyyMMdd') >= (task.deadline | date:'yyyyMMdd')">OVERDUE!</i>
+            </header>
+
+          </div></div>
         </div>
 
       </div>

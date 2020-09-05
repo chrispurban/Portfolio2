@@ -1,36 +1,56 @@
 <div fxLayout.lt-md="column" fxLayout.gt-sm="row" style="color:white;" style="height:100vh">
 
-  <div fxLayout.lt-md="row wrap" fxLayout.gt-sm="column wrap" fxFlex.lt-md="64px" fxFlex.gt-sm="20%" style="background-color:#111111;">
+  <div fxHide fxShow.gt-sm="true" fxFlex="2%" style="background-color:#111111;"></div>
 
-    <div fxFlex.lt-md="64px" fxFlex.gt-sm="64px" style="background-color:magenta;">
-      <div fxFlex style="width:64px; height:64px; position:relative; padding:0px;">
-        <img *ngIf="!auth.loggedIn" src="../../assets/chris.jpg" style="padding:0px; max-height:64px; max-width:64px; position:absolute; top:0; left:0; bottom:0; right:0;">
-        <pre *ngIf="auth.userProfile$ | async as profile">
-          <img src="{{profile.picture}}"style="padding:0px; max-height:64px; max-width:64px; position:absolute; top:0; left:0; bottom:0; right:0;">
-        </pre>
-      </div>
+  <div fxLayout.lt-md="row wrap" fxLayout.gt-sm="column wrap" fxFlex.lt-md="64px" fxFlex.gt-sm="20%" style="background-color:#111111; color:white;">
+
+    <div fxHide fxShow.gt-sm="true" fxFlex="10%"></div>
+
+    <div fxFlex.lt-md="64px" fxFlex.gt-sm="32%">
+
+      <img src="../../assets/chris.jpg" style="padding:0px; max-width:100%; max-height:100% object-fit:contain;">
+<!--
+      <pre *ngIf="auth.userProfile$ | async as profile">
+        <img src="{{profile.picture}}" style="padding:0px; max-height:100%; max-width:100%;">
+      </pre>
+-->
     </div>
+
+    <div fxHide fxShow.gt-sm="true" id="name" style="text-align:center;">
+      Chris Urban
+    </div>
+
+    <div fxHide fxShow.gt-sm="true" fxFlex>
+    </div>
+
     <div fxFlex>
+      <a mat-raised-button routerLink='/home' routerLinkActive="active">Home</a>
       <a *ngIf="!auth.loggedIn" (click)="auth.login()" mat-raised-button>Log In</a>
       <a *ngIf="auth.loggedIn" (click)="auth.logout()" mat-raised-button>Log Out</a>
-    </div>
-    <div fxFlex="25%" style="background-color:cyan;">
-      <a mat-raised-button routerLink='/home' routerLinkActive="active">Home</a>
-      <a mat-raised-button routerLink='/projects/' routerLinkActive="active">Projects</a>
-    </div>
-    <div fxFlex="25%" style="background-color:teal;">
+
       <a *ngIf="outlet && outlet.taskEntry" (click)="outlet.taskEntry()" mat-raised-button color="accent">Create New Task</a>
     </div>
-    <div fxFlex>
+
+    <div fxFlex.lt-md="120px" fxFlex.gt-sm="10%" style="white-space:nowrap;">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <ul class="icons">
+        <li><a href="https://www.linkedin.com/in/christopher-urban-82807841/" target="_blank" class="fa fa-linkedin-square fa-2x"></a></li>
+        <li><a href="mailto:chrispurban@gmail.com" class="fa fa-envelope fa-2x"></a></li>
+        <li><a href="https://docs.google.com/document/d/1Dctt4vkE0D47R1SV478eTyQYgJjsg1XJiw3fYa-CE9w" download="Chris Urban Resume" class="fa fa-download fa-2x"></a></li>
+      </ul>
     </div>
-    <div fxFlex style="background-color:purple;">
+
+    <div fxHide fxShow.gt-sm="true" fxFlex="10%">
+
     </div>
 
   </div>
 
+  <div fxHide fxShow.gt-sm="true" fxFlex="2%" style="background-color:#111111;"></div>
+
   <!---------------------------------------------------------------------->
 
-  <div fxFlex="grow" style="color:white; background-color:silver; position:relative;">
+  <div fxFlex="grow" style="color:white; position:relative;">
     <router-outlet (activate)="loaded($event)"></router-outlet>
   </div>
 

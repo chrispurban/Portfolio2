@@ -17,7 +17,6 @@ import { AutosizeModule } from 'ngx-autosize';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SideComponent } from './pages/side/side.component';
-import { ProjectsComponent } from './pages/projects/projects.component';
 
   import { TasklistComponent } from './pages/projects/first/tasklist/tasklist.component';
   import { TaskdetailComponent } from './pages/projects/first/taskdetail/taskdetail.component';
@@ -39,16 +38,15 @@ import { FocusDirective } from './directives/focus.directive';
 @NgModule({
   declarations: [
     AppComponent,
+    SideComponent,
     HomeComponent,
     TasklistComponent,
     TaskdetailComponent,
-    SideComponent,
     TaskentryComponent,
     WorkflowPipe,
     LinkifyPipe,
     FocusDirective,
-    TimerPipe,
-    ProjectsComponent
+    TimerPipe
   ],
   imports: [
     BrowserModule,

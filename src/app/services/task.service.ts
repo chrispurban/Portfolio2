@@ -19,8 +19,7 @@ export class TaskService {
     private http:HttpClient
   ){}
 
-
-  create(data:any):Observable<any> { console.warn("Creating task..." + data.subject);
+  create(data:any):Observable<any> { console.warn("Creating task...");
     if(this.auth.loggedIn){
       return this.http.post<Task>(environment.baseurl + 'api/tasks', data);
     }
@@ -35,12 +34,12 @@ export class TaskService {
     if(!localStorage('tasks')){localStorage('tasks', [])}
     return new Observable((obs)=>{
       obs.next([])
-      this.auth.getUser$().toPromise().then((profile)=>{ console.log("checking if there is a profile...")
-        if(profile){ console.log("profile located: " + profile.nickname);
+      this.auth.getUser$().toPromise().then((profile)=>{
+        if(profile){ console.log("Signed in as: " + profile.nickname);
           (async()=>{
-            await(async()=>{ console.log("looking into the local storage...");
-              if(localStorage('tasks').length > 0){ console.log("found local data:");console.warn(localStorage('tasks'));
-                for (let task of localStorage('tasks')){ console.log("uploading task:");console.log(task.subject);
+            await(async()=>{
+              if(localStorage('tasks').length > 0){ console.log("Local task detected, uploading...")
+                for (let task of localStorage('tasks')){
                   await this.create(task).toPromise().then(()=>{
                     this.delete(task._id).toPromise();
                   })
@@ -51,7 +50,8 @@ export class TaskService {
             .toPromise().then((result)=>{obs.next(result)})
           })()
         }
-        else{obs.next(localStorage('tasks'))}
+        else{ console.log("You are not signed in!")
+          obs.next(localStorage('tasks'))}
       })
     })
   }
@@ -72,8 +72,9 @@ export class TaskService {
     }
   }
 
-  delete(taskID:any){ console.warn("Deleting task " + taskID + "...");
+  delete(taskID:any){
     if(this.auth.loggedIn && !taskID.includes("guest_")){
+      console.warn("Deleting task " + taskID + "...");
       return this.http.delete(environment.baseurl + 'api/tasks/' + taskID)
     }
     else{
@@ -81,8 +82,6 @@ export class TaskService {
         let target = content[localStorage('tasks').findIndex((i)=>i._id==taskID)];
         content.splice(target, 1);
       });
-      console.log("delete completed")
-      console.log(localStorage('tasks'))
       return of(true);
     }
   }
