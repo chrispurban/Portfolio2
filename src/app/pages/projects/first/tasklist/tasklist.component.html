@@ -1,50 +1,48 @@
-<!--
-  <div fxLayout="row">
-    <i>DUE SOON</i>
-    <div *ngFor="let due of tasks">
-      <div *ngIf="due.deadline" class="small tile"><div (click)="taskDetail(due)">
-        <div>
-          {{due.deadline | timer}} {{(due.state.phase | workflow).icon}} {{due.subject}}
-        </div>
-      </div></div>
-    </div>
-  </div>
-
-  <hr>
--->
-
 <div fxFlex fxLayout="column" style="position:absolute; top:0px; bottom:0px; left:0px; right:0px;">
 
-  <div fxFlex="12%" fxLayout="row" style="width:100%; padding:4px;">
-        <div fxFlex *ngFor="let header of 'null' | workflow" style="background-color:black;">
-          <div fxFlex style="text-align:center;">
-              <br><span style="font-size:250%;">{{header.icon}}</span><br>
-              <span style="line-height:30px;">{{header.name | uppercase}}</span>
+  <div fxFlex fxLayout="row">
+      <div style="vertical-align:center;"><i>DUE SOON</i></div>
+      <div *ngFor="let due of tasks">
+        <div *ngIf="due.deadline" class="small tile"><div (click)="taskDetail(due)">
+          <div>
+            {{due.deadline | timer}} {{(due.state.phase | workflow).icon}} {{due.subject}}
+          </div>
+        </div></div>
+      </div>
+  </div>
+
+  <div fxFlex="grow" style="overflow-x:hidden; overflow-y:auto;">
+    <div fxFlex fxLayout.lt-sm="column" fxLayout.gt-xs="row">
+      <div fxFlex *ngFor="let group of 'null' | workflow">
+
+        <div style="width:100; text-align:center; position:sticky; top:0; z-index:10; background-color:black; padding-bottom:4px;">
+          <br><span style="font-size:250%;">{{group.icon}}</span><br>
+          <span style="line-height:30px;">{{group.name | uppercase}}</span>
+        </div>
+
+        <div style="padding:4px">
+          <div *ngFor="let task of tasks">
+            <div *ngIf="task.state.id == group.id" class="large tile"><div (click)="taskDetail(task)">
+
+              <div><div>
+                <span style="font-size:120%;">{{task.subject | uppercase}}</span>
+                <br><br>
+                <span style="font-size:90%;">{{task.issue}}</span>
+              </div></div>
+
+              <header *ngIf="task.deadline">
+                <i *ngIf="(UI_now | date:'yyyyMMdd') < (task.deadline | date:'yyyyMMdd')">DUE IN {{task.deadline | timer | uppercase}}</i>
+                <i *ngIf="(UI_now | date:'yyyyMMdd') >= (task.deadline | date:'yyyyMMdd')">OVERDUE!</i>
+              </header>
+
+            </div></div>
           </div>
         </div>
-  </div>
-  <div fxFlex="grow" fxLayout="row" style="overflow-x:hidden; overflow-y:scroll; padding:4px;">
-    <div fxFlex *ngFor="let group of 'null' | workflow">
 
-              <div *ngFor="let task of tasks">
-                <div *ngIf="task.state.id == group.id" class="large tile"><div (click)="taskDetail(task)">
-
-                  <div><div>
-                    <span style="font-size:120%;">{{task.subject | uppercase}}</span>
-                    <br><br>
-                    <span style="font-size:90%;">{{task.issue}}</span>
-                  </div></div>
-
-                  <header *ngIf="task.deadline">
-                    <i *ngIf="(UI_now | date:'yyyyMMdd') < (task.deadline | date:'yyyyMMdd')">DUE IN {{task.deadline | timer | uppercase}}</i>
-                    <i *ngIf="(UI_now | date:'yyyyMMdd') >= (task.deadline | date:'yyyyMMdd')">OVERDUE!</i>
-                  </header>
-
-                </div></div>
-              </div>
-
+      </div>
     </div>
   </div>
+
 </div>
 
     <!--
