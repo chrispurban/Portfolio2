@@ -57,6 +57,7 @@ export class TaskdetailComponent implements OnInit {
             this.task.history.push(changes['history']); // change what group it's in
             this.task = workflow(this.task);
           }
+          this.task.updatedAt = new Date().toISOString();
           this.popup.dismiss({value:this.task}); // pass back to main list
         });
     }

@@ -31,12 +31,12 @@
 
       <br>
 
-      {{('null' | workflow)[0].icon}} <i>Created on {{task.createdAt | date:'longDate'}}</i>
+      {{('null' | workflow)[0].icon}} <i>Created on {{task.history[0].time | date:'longDate'}}</i>
       <span *ngIf="task.state.time && task.state.phase"><br>
         {{(task.state.phase | workflow).icon}} <i>{{(task.state.phase | workflow).name}} as of {{task.state.time | date:'longDate'}} {{task.state.time | date:'shortTime'}}
       </i></span>
       <br>
-      <i>Modified on {{task.updatedAt | date:'longDate'}} {{task.updatedAt | date:'shortTime'}}</i>
+      <i>Last modified on {{task.updatedAt | date:'longDate'}} {{task.updatedAt | date:'shortTime'}}</i>
 
       <br><br>
 
@@ -48,6 +48,7 @@
         <button fxShow.lt-md fxHide.gt-sm fxFlex="50%" (click)="update()" mat-raised-button>
           Save
         </button>
+
         <div fxFlex.lt-md="100%" fxFlex.gt-sm="60%">
           <button fxFlex *ngIf="task.state.phase > 0" (click)="update(-1)" color="primary" mat-raised-button>
             Return to {{(task.state.phase - 1 | workflow).name}}
@@ -56,6 +57,7 @@
             Advance to {{(task.state.phase + 1 | workflow).name}}
           </button>
         </div>
+
         <button fxHide.lt-md fxShow.gt-sm fxFlex="20%" (click)="update()" mat-raised-button>
           Save
         </button>

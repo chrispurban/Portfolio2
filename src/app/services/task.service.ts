@@ -24,7 +24,9 @@ export class TaskService {
       return this.http.post<Task>(environment.baseurl + 'api/tasks', data);
     }
     else{
-      data._id = "guest_" + new Date().toISOString();
+      let now = new Date().toISOString();
+      data._id = "guest_" + now;
+      data.updatedAt = now;
       localStorage.add('tasks', data);
       return of(data);
     }
@@ -36,8 +38,8 @@ export class TaskService {
       obs.next([])
       this.auth.getUser$().toPromise().then((profile)=>{
         if(profile){ console.log("Signed in as: " + profile.nickname);
-          (async()=>{
-            await(async()=>{
+          (async()=>{ // wait for full upload before retrieving from server
+            await(async()=>{ // wait for individual upload before uploading next one
               if(localStorage('tasks').length > 0){ console.log("Local task detected, uploading...")
                 for (let task of localStorage('tasks')){
                   await this.create(task).toPromise().then(()=>{
@@ -61,12 +63,14 @@ export class TaskService {
       return this.http.put(environment.baseurl + 'api/tasks/' + taskID, data);
     }
     else{
-      localStorage.transact('tasks', (content) => {
-        let target = content[localStorage('tasks').findIndex((i)=>i._id==taskID)];
+      localStorage.transact('tasks', (content) => { // reach inside the list of tasks
+        let target = content[localStorage('tasks').findIndex((i)=>i._id==taskID)]; // task of interest
         for(let property in data){
-          if(data[property].constructor === Object){target[property].push(data[property]);}
-          else{target[property] = data[property];}
+          if(data[property].constructor === Object){target[property].push(data[property]);} // append, for history
+          else{target[property] = data[property];} // other properties are replaced
         }
+        target.updatedAt = new Date().toISOString();
+
       })
       return of(true);
     }
