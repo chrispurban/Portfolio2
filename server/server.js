@@ -2,7 +2,7 @@ const config = require('./config');
 const express = require('express');
 const path = require('path');
 const http = require('http');
-//const enforce = require('express-sslify');
+const enforce = require('express-sslify');
 
 const mongoose = require('mongoose');
 const app = express();
@@ -20,8 +20,8 @@ mongoose
     (err) => {console.log(err);}
   )
 ;
-
-/*app
+/*
+app
   .all('*', (req, res, next) => {
     if (req.secure){
       return next();
@@ -30,12 +30,12 @@ mongoose
       res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
     }
   })
-;*/
+;
+*/
 
 app
-  //.use(enforce.HTTPS({trustProtoHeader: true}));
+  .use(enforce.HTTPS({trustProtoHeader: true}))
   .use(express.static(path.join(__dirname, '../dist')))
-
   .use('/api/tasks', require('./routes/taskrouter'))
 ;
 
