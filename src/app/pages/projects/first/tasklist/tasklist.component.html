@@ -14,7 +14,7 @@
   <div fxFlex="grow" style="overflow-x:hidden; overflow-y:auto;">
     <div fxFlex fxLayout.lt-sm="column" fxLayout.gt-xs="row">
       <div fxFlex *ngFor="let group of 'null' | workflow">
-
+        <!-- height of the parent div limits how far the sticky header will go -->
         <div style="width:100; text-align:center; position:sticky; top:0; z-index:10; background-color:#111111; padding-bottom:4px;">
           <br><span style="font-size:250%;">{{group.icon}}</span><br>
           <span style="line-height:30px;">{{group.name | uppercase}}</span>
