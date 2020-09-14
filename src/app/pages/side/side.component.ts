@@ -11,10 +11,15 @@ import { Observable } from 'rxjs';
 export class SideComponent implements OnInit {
 
   tasks;
+  headroom = window.innerHeight + "px";
 
   constructor(public auth:AuthService){}
 
-  ngOnInit():void{}
+  ngOnInit():void{
+    window.addEventListener('resize', () => {
+      this.headroom = window.innerHeight + "px";
+    });
+  }
 
   @ViewChild('outlet') outlet;
   loaded(component){this.outlet = component;}
