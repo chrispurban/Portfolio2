@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
+import { ViewService } from '../../services/view.service';
 
 @Component({
   selector: 'app-side',
@@ -10,15 +11,10 @@ import { Observable } from 'rxjs';
 
 export class SideComponent implements OnInit {
 
-  tasks;
-  headroom = window.innerHeight + "px";
-
-  constructor(public auth:AuthService){}
+  constructor(public auth:AuthService, public view:ViewService){}
 
   ngOnInit():void{
-    window.addEventListener('resize', () => {
-      this.headroom = window.innerHeight + "px";
-    });
+    window.addEventListener('resize', ()=>{this.view.resize()});
   }
 
   @ViewChild('outlet') outlet;

@@ -1,70 +1,89 @@
-<div fxShow.lt-md fxHide.gt-sm class="splash">
+<div class="splash" fxLayout="column" style="overflow-x:hidden; overflow-y:auto; width:100%">
+  <section fxHide.gt-sm [ngStyle.lt-md]="{'min-height':((view.height-(32*4))) + 'px'}" style="margin:32px; margin-bottom:0px; overflow-x:hidden; overflow-y:auto;">
 
-  <div fxFlex="15%" style="outline: 3px dashed grey;">
-  </div>
+    <div fxLayout="column" style="height:100%; background-color:hsla(0, 0%, 0%, 0.5); padding:8px;">
 
-  <div fxFlex fxLayout="column">
+      <div fxFlex="50%" fxLayout="column">
+        <span fxFlex></span>
 
-    <div fxFlex="50%" fxLayout="column">
+        <div fxFlex>
+          <img id="chris" src="../../assets/chris.jpg" style="max-width:200px;">
+        </div>
 
-      <div fxFlex style="outline: 3px dashed gold;">
+        <span fxFlex></span>
       </div>
 
       <div fxFlex>
-        <img id="chris" src="../../assets/chris.jpg" style="max-width:75%;">
+        <div id="name">
+          Chris Urban
+        </div>
       </div>
 
-      <div fxFlex style="outline: 3px dashed gold;">
-      </div>
+      <div fxFlex="50%" fxLayout="column">
+        <span fxFlex></span>
 
-    </div>
+        <div fxFlex>
+          {{view.blurb}}
+        </div>
 
-    <div fxFlex>
-      <span id="name">
-        Chris Urban
-      </span>
-    </div>
-
-    <div fxFlex="50%" fxLayout="column">
-
-      <div fxFlex style="outline: 3px dashed teal;">
-      </div>
-
-      <div fxFlex>
-
-        blurb
-
-      </div>
-
-      <div fxFlex style="outline: 3px dashed teal;">
+        <span fxFlex></span>
       </div>
 
     </div>
-  </div>
 
-  <div fxFlex="15%" style="outline: 3px dashed grey;">
-  </div>
+  </section>
 
-</div>
+  <section>
+    <div *ngFor="let project of projects" [ngStyle.gt-sm]="{'height':((view.height-(32*3))/2) + 'px'}" style=" margin:32px;">
 
-<!------------------------------------------------------->
+      <div fxLayout.lt-md="column" fxLayout.gt-sm="row" style="max-height:100%; min-height:100%; background-color:hsla(0, 0%, 0%, 0.5);  overflow:auto;">
 
+        <div fxFlex fxLayout="column" style="padding:8px">
+          <span fxFlex></span>
 
-<div class="splash" style="width:100%; height:100%;" fxHide.lt-md fxShow.gt-sm>
+          <div fxFlex fxLayout.lt-md="row" fxLayout.gt-sm="column" dir="rtl">
+            <h1 fxFlex fxHide.lt-md>{{project.name}}</h1>
+            <div fxFlex class="tempImage">Preview Image</div>
+            <div fxFlex fxLayout.lt-md="column" fxLayout.gt-sm="row">
+              <h1 fxFlex fxHide.gt-sm>{{project.name}}</h1>
+              <span fxFlex><a routerLink='/projects/{{project._id}}/tasks'>Live Demo</a></span>
+              <span fxFlex><a href="https://github.com/chrispurban/Portfolio2/tree/master/src/app/pages/projects/{{project._id}}">Source Code</a></span>
+            </div>
+            {{project.notes}}
+          </div>
 
-  Hello and welcome!
+          <div fxFlex style="padding:20px;">
+            <h1>Technologies</h1>
+            <div fxLayout="row wrap" style="margin-left:10%; margin-right:10%;">
+              <div *ngFor="let i of project.technologies" fxFlex="50%">
+                • {{i}}
+              </div>
+            </div>
+          </div>
 
-  <div style="width:200px">
-    <img src="../../assets/chris.jpg" style="padding:0px; max-width:100%; max-height:100% object-fit:contain;">
-  </div>
+          <span fxFlex></span>
+        </div>
 
-  <hr>
+        <div fxFlex fxFlex.gt-sm="60%" fxLayout="column">
+          <span fxFlex></span>
 
-  TECHNICAL DEMONSTRATION
+          <div fxFlex fxLayout="column">
+            <div fxFlex style="padding:20px">
+              <h1>Purpose</h1>
+              {{project.purpose}}
+            </div>
+            <div fxFlex style="padding:20px">
+              <h1>Features</h1>
+              {{project.features}}
+            </div>
+          </div>
 
-  <div *ngFor="let project of projects">
-    {{project.name}}
-    <a mat-raised-button routerLink='/projects/{{project._id | lowercase}}/tasks'>Check it out</a>
-  </div>
+          <span fxFlex></span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
 
 </div>

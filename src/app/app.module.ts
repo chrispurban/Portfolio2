@@ -25,6 +25,7 @@ import { SideComponent } from './pages/side/side.component';
 //services
 import { TaskService } from './services/task.service';
 import { AuthService } from './services/auth.service';
+import { ViewService } from './services/view.service';
 import { InterceptService } from './services/intercept.service';
 
 //pipes
@@ -64,6 +65,7 @@ import { FocusDirective } from './directives/focus.directive';
   providers: [
     TaskService,
     AuthService,
+    ViewService,
     InterceptService
   ],
   entryComponents: [

@@ -20,7 +20,7 @@ export class TasklistComponent implements OnInit {
 
   constructor(
     private taskService:TaskService,
-    private bottomSheet:MatBottomSheet,
+    private bottomSheet:MatBottomSheet
   ) { }
 
   ngOnInit(): void {

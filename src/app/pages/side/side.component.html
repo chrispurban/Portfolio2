@@ -1,4 +1,4 @@
-<div [ngStyle]="{'height':headroom}" fxLayout.lt-md="column" fxLayout.gt-sm="row">
+<div [ngStyle]="{'height':view.height+'px'}" fxLayout.lt-md="column" fxLayout.gt-sm="row">
 
   <div fxHide fxShow.gt-sm="true" fxFlex="2%" style="background-color:#111111;"></div>
 
@@ -6,7 +6,7 @@
 
     <div fxHide fxShow.gt-sm="true" fxFlex="10%"></div>
 
-    <div fxFlex.lt-md="64px" fxFlex.gt-sm="32%">
+    <div fxHide fxShow.gt-sm fxFlex="32%">
 
       <img src="../../assets/chris.jpg" style="padding:0px; max-width:100%; max-height:100% object-fit:contain;">
 
@@ -22,19 +22,20 @@
     </div>
 
     <div fxHide fxShow.gt-sm="true" fxFlex>
+      {{view.blurb}}
     </div>
 
     <div fxFlex>
-      <a mat-raised-button routerLink='/home' routerLinkActive="active">Home</a>
       <a *ngIf="!auth.loggedIn" (click)="auth.login()" mat-raised-button>Log In</a>
       <a *ngIf="auth.loggedIn" (click)="auth.logout()" mat-raised-button>Log Out</a>
 
       <a *ngIf="outlet && outlet.taskEntry" (click)="outlet.taskEntry()" mat-raised-button color="accent">Create New Task</a>
     </div>
 
-    <div fxFlex.lt-md="120px" fxFlex.gt-sm="10%" style="white-space:nowrap;">
+    <div fxFlex.lt-md="50%" fxFlex.gt-sm="10%" style="white-space:nowrap;">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <ul class="icons">
+        <li><a routerLink='/home' class="fa fa-home fa-2x"></a></li>
         <li><a href="https://www.linkedin.com/in/christopher-urban-82807841/" target="_blank" class="fa fa-linkedin-square fa-2x"></a></li>
         <li><a href="mailto:chrispurban@gmail.com" class="fa fa-envelope fa-2x"></a></li>
         <li><a href="https://docs.google.com/document/d/1Dctt4vkE0D47R1SV478eTyQYgJjsg1XJiw3fYa-CE9w" download="Chris Urban Resume" class="fa fa-download fa-2x"></a></li>
@@ -51,7 +52,7 @@
 
   <!---------------------------------------------------------------------->
 
-  <div fxFlex="grow" style="color:white; position:relative;">
+  <div fxFlex="grow" style="color:white; position:relative; overflow-x:hidden; overflow-y:auto;">
     <router-outlet (activate)="loaded($event)"></router-outlet>
   </div>
 
