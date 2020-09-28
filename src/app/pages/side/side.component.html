@@ -1,59 +1,53 @@
-<div [ngStyle]="{'height':view.height+'px'}" fxLayout.lt-md="column" fxLayout.gt-sm="row">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <div fxHide fxShow.gt-sm="true" fxFlex="2%" style="background-color:#111111;"></div>
+<div [ngStyle]="{'height':view.height+'px'}" fxLayout.lt-sm="column" fxLayout.gt-xs="row">
 
-  <div fxLayout.lt-md="row wrap" fxLayout.gt-sm="column wrap" fxFlex.lt-md="64px" fxFlex.gt-sm="20%" style="background-color:#111111; color:white;">
+  <section fxFlex.lt-sm="{{(view.gap*2)}}px" fxLayout.lt-sm="row wrap" fxFlex.gt-xs="256px" fxLayout.gt-xs="column" style="background-color:#111111; color:white;" [ngStyle.gt-xs]="{'padding':view.gap+'px'}" >
 
-    <div fxHide fxShow.gt-sm="true" fxFlex="10%"></div>
+    <div fxHide fxShow.gt-xs fxLayout="column" fxFlex style="text-align:center;">
+      <div fxFlex="none" style="position:relative;">
 
-    <div fxHide fxShow.gt-sm fxFlex="32%">
-
-      <img src="../../assets/chris.jpg" style="padding:0px; max-width:100%; max-height:100% object-fit:contain;">
-
-<!--
-      <pre *ngIf="auth.userProfile$ | async as profile">
-        <img src="{{profile.picture}}" style="padding:0px; max-height:100%; max-width:100%;">
-      </pre>
--->
+        <img src="../../assets/chris.jpg" style="padding:0px; max-width:100%; max-height:100%; object-fit:contain;">
+        <!--
+        <pre *ngIf="auth.userProfile$ | async as profile">
+          <img src="{{profile.picture}}" style="padding:0px; max-height:100%; max-width:100%;">
+        </pre>
+        -->
+      </div>
+      <span id="name" style="margin:{{view.gap}}px 0px;">Chris Urban</span>
+      <span fxFlex>{{view.blurb}}</span>
     </div>
 
-    <div fxHide fxShow.gt-sm="true" id="name" style="text-align:center;">
-      Chris Urban
-    </div>
+      <div xFlex="10%" fxLayout="column" style="margin:{{view.gap}}px 0px">
+        <a *ngIf="!auth.loggedIn" (click)="auth.login()" mat-raised-button>Log In</a>
+        <a *ngIf="auth.loggedIn" (click)="auth.logout()" mat-raised-button>Log Out</a>
 
-    <div fxHide fxShow.gt-sm="true" fxFlex>
-      {{view.blurb}}
-    </div>
+        <a *ngIf="outlet && outlet.taskEntry" (click)="outlet.taskEntry()" mat-raised-button color="accent">Create New Task</a>
+      </div>
 
-    <div fxFlex>
-      <a *ngIf="!auth.loggedIn" (click)="auth.login()" mat-raised-button>Log In</a>
-      <a *ngIf="auth.loggedIn" (click)="auth.logout()" mat-raised-button>Log Out</a>
+      <div fxFlex.lt-sm="50%" fxFlex.gt-xs class="links">
+        <ul class="icons">
+          <li><a class="fa fa-home fa-2x" routerLink='/home'>
+            <span fxHide.lt-sm> Projects</span>
+          </a></li>
+          <li><a class="fa fa-linkedin-square fa-2x" href="https://www.linkedin.com/in/christopher-urban-82807841/" target="_blank" >
+            <span fxHide.lt-sm> LinkedIn</span>
+          </a></li>
+          <li><a class="fa fa-envelope fa-2x" href="mailto:chrispurban@gmail.com">
+            <span fxHide.lt-sm> Email</span>
+          </a></li>
+          <li><a class="fa fa-download fa-2x" href="https://drive.google.com/file/d/1g6EiiNQ9mkArkGvvDeQTTR-VLohdUZiM/view">
+            <span fxHide.lt-sm> Resume</span>
+          </a></li>
+        </ul>
+      </div>
 
-      <a *ngIf="outlet && outlet.taskEntry" (click)="outlet.taskEntry()" mat-raised-button color="accent">Create New Task</a>
-    </div>
-
-    <div fxFlex.lt-md="50%" fxFlex.gt-sm="10%" style="white-space:nowrap;">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <ul class="icons">
-        <li><a routerLink='/home' class="fa fa-home fa-2x"></a></li>
-        <li><a href="https://www.linkedin.com/in/christopher-urban-82807841/" target="_blank" class="fa fa-linkedin-square fa-2x"></a></li>
-        <li><a href="mailto:chrispurban@gmail.com" class="fa fa-envelope fa-2x"></a></li>
-        <li><a href="https://docs.google.com/document/d/1Dctt4vkE0D47R1SV478eTyQYgJjsg1XJiw3fYa-CE9w" download="Chris Urban Resume" class="fa fa-download fa-2x"></a></li>
-      </ul>
-    </div>
-
-    <div fxHide fxShow.gt-sm="true" fxFlex="10%">
-
-    </div>
-
-  </div>
-
-  <div fxHide fxShow.gt-sm="true" fxFlex="2%" style="background-color:#111111;"></div>
+  </section>
 
   <!---------------------------------------------------------------------->
 
-  <div fxFlex="grow" style="color:white; position:relative; overflow-x:hidden; overflow-y:auto;">
+  <section fxFlex="grow" style="color:white; position:relative; overflow-x:hidden; overflow-y:auto;">
     <router-outlet (activate)="loaded($event)"></router-outlet>
-  </div>
+  </section>
 
 </div>

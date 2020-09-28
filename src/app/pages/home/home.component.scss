@@ -1,7 +1,15 @@
-a{color:cyan; opacity:0.8; text-decoration:none;}
+a{
+  color:cyan; opacity:0.8;
+  text-decoration:none;
+}
 @media only screen and (hover) {
-  a{color:silver; transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;}
-  a:hover{color:cyan;}
+  a{
+    transition:
+      background-color 0.2s ease-in-out,
+      color 0.2s ease-in-out,
+      border-color 0.2s ease-in-out;
+  }
+  a:hover{color:silver;}
 }
 
 .splash{
@@ -18,3 +26,13 @@ a{color:cyan; opacity:0.8; text-decoration:none;}
 // gold eec593
 // darkblue 36425a
 // darkteal 1d5f73
+
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+h1 {
+  font-family:'Josefin Sans','Ubuntu',sans-serif;
+  margin-bottom:8px;
+}
+
+div{
+  outline:0px dashed grey;
+}

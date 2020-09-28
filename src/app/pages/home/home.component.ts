@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
     {
       _id:"first",
       name:"Worksplat",
-      notes:"",
       technologies:[
         "Angular",
         "MongoDB",
@@ -26,10 +25,12 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  constructor(public view:ViewService) {
+  constructor(public view:ViewService){}
 
+  ngOnInit():void {
+    for(let n of Array(2)){
+      this.projects.push(this.projects[0]);
+    }
   }
-
-  ngOnInit(): void { }
 
 }

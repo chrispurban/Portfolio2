@@ -7,12 +7,15 @@ import { Injectable } from '@angular/core';
 export class ViewService {
 
   height;
-  blurb:String = "hello!"
+  gap = 32;
 
-  constructor(){this.resize()}
+  blurb:String = "hello!";
+
+  constructor(){}
 
   resize(){
     this.height = window.innerHeight;
+    console.log(this.height)
   }
 
 }
