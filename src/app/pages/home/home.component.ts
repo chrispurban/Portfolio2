@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   constructor(public view:ViewService){}
 
   ngOnInit():void {
-    for(let n of Array(2)){
+    for(let n of Array(0)){
       this.projects.push(this.projects[0]);
     }
   }

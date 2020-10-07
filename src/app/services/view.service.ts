@@ -9,7 +9,7 @@ export class ViewService {
   height;
   gap = 32;
 
-  blurb:String = "hello!";
+  blurb:String = "Serving ever more flexible and meaningful systems";
 
   constructor(){}
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Task, workflow } from '../../../../classes/task';
 import { TaskService } from '../../../../services/task.service';
+import { AuthService } from '../../../../services/auth.service';
+import { ViewService } from '../../../../services/view.service';
 import { MatBottomSheetRef, MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 import { TaskentryComponent } from '../taskentry/taskentry.component';
@@ -20,7 +22,9 @@ export class TasklistComponent implements OnInit {
 
   constructor(
     private taskService:TaskService,
-    private bottomSheet:MatBottomSheet
+    private bottomSheet:MatBottomSheet,
+    public auth:AuthService,
+    public view:ViewService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +33,10 @@ export class TasklistComponent implements OnInit {
         value => {this.tasks = value.map(workflow)},
         error => this.errorMessage = <any>error
       );
+  }
+
+  zing(){
+    console.log(this.auth.userProfile$);
   }
 
   taskDetail(task){

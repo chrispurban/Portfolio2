@@ -1,4 +1,4 @@
-<div fxFlex fxLayout="column" style="position:absolute; top:0px; bottom:0px; left:0px; right:0px;">
+<div fxLayout="column" style="position:absolute; top:0px; bottom:0px; left:{{(view.gap*0)}}px; right:0px;">
 <!--
   <div fxFlex fxLayout="row">
       <div style="vertical-align:center;"><i>DUE SOON</i></div>
@@ -11,8 +11,18 @@
       </div>
   </div>
 -->
+  <i *ngIf="auth.userProfile$ | async as profile" style="text-align:center; background-color:#111111; width:100%;">Logged in as {{profile.name}}</i>
+  <i *ngIf="!auth.loggedIn" style="text-align:center; background-color:#111111; width:100%;">Tasks are stored locally until logged in</i>
+
+  <div style="padding:{{(view.gap/4)}}px; background-color:#111111;" fxLayoutGap="{{(view.gap/4)}}px" fxFlex fxFlex.lt-sm="{{(view.gap*2)}}px">
+    <button fxHide.gt-xs routerLink='/home' fxFlex mat-raised-button>Return Home</button>
+    <button *ngIf="!auth.loggedIn" (click)="auth.login('/projects/first/tasks')" color="primary" fxFlex mat-raised-button>Log In</button>
+    <button *ngIf="auth.loggedIn" (click)="auth.logout()" color="primary" fxFlex mat-raised-button>Log Out</button>
+    <button (click)="taskEntry()" color="accent" fxFlex mat-raised-button>Create Task</button>
+  </div>
+
   <div fxFlex="grow" style="overflow-x:hidden; overflow-y:auto;">
-    <div fxFlex fxLayout.lt-sm="column" fxLayout.gt-xs="row">
+    <div fxFlex fxLayout.lt-md="column" fxLayout.gt-sm="row">
       <div fxFlex *ngFor="let group of 'null' | workflow">
         <!-- height of the parent div limits how far the sticky header will go -->
         <div style="width:100; text-align:center; position:sticky; top:0; z-index:10; background-color:#111111; padding-bottom:4px;">

@@ -1,43 +1,47 @@
 <div class="splash" fxLayout="column" style="overflow-x:hidden; overflow-y:auto; width:100%">
 
-  <section fxHide.gt-xs [ngStyle.lt-sm]="{'min-height':view.height - (view.gap*4) + 'px', 'margin':view.gap + 'px', 'margin-bottom':'0px'}" style="overflow-x:hidden; ">
+  <section fxHide.gt-xs [ngStyle.lt-sm]="{'min-height':view.height - (view.gap*4) + 'px', 'margin':view.gap + 'px', 'margin-bottom':'0px'}" style="overflow-x:hidden;">
 
-    <div fxLayout="column" style="height:100%; background-color:hsla(0, 0%, 0%, 0.5); padding:18px;">
+    <div fxLayout="column" style="height:100%; background-color:hsla(0, 0%, 0%, 0.5); padding:{{view.gap}}px;">
 
 
-      <div fxFlex="50%" fxLayout="column">
-        <span fxFlex></span>
+      <div fxFlex style="outline:3px solid blue;">
+        <div style="height:256px; outline:2px dashed gold;">
+          <img src="../../assets/chris.jpg" style="width:100%; height:100%; object-fit:cover;">
 
-        <div fxFlex>
-          <img id="chris" src="../../assets/chris.jpg" style="max-width:200px;">
         </div>
-
-        <span fxFlex></span>
       </div>
 
-      <div fxFlex>
+
+<!--
+      <img class="photo" src="../../assets/chris.jpg" style="max-width:100%;">
+-->
+
+      <div fxFlex="30%" style="outline:1px solid cyan;">
         <div id="name">
           Chris Urban
         </div>
-      </div>
-
-      <div fxFlex="50%" fxLayout="column">
-        <span fxFlex></span>
-
-        <div fxFlex>
-          {{view.blurb}}
+        <div style="font-family:'Josefin Sans','Ubuntu',sans-serif;">
+          Serving ever more flexible<br>and meaningful systems
         </div>
+      </div>
+
+      <div fxFlex fxLayout="column">
+        <span fxFlex></span>
+
+        Scroll down to see some delightful code in action
 
         <span fxFlex></span>
       </div>
-    <!--
+
+      <!--
     -->
     </div>
 
   </section>
 
   <section>
-    <div *ngFor="let project of projects" style="position:relative; background-color:hsla(0, 0%, 0%, 0.5); margin:{{view.gap}}px; padding:{{view.gap}}px; min-height:{{( ((view.height-(view.gap*3))/2)-(view.gap*2) )}}px">
+    <div *ngFor="let project of projects" [ngStyle.lt-lg]="{'padding':view.gap + 'px'}" [ngStyle.gt-sm]="{'height':(((view.height-(view.gap*3))/2)) + 'px'}" style="margin:{{view.gap}}px; background-color:hsla(0, 0%, 0%, 0.5); position:relative;">
 
       <div [ngStyle.gt-md]="{'position':'absolute', 'left':view.gap + 'px', 'right':view.gap + 'px', 'top':view.gap + 'px', 'bottom':view.gap + 'px'}" fxLayout.lt-md="column" fxLayout.gt-sm="row" style="overflow-y:auto;">
 
@@ -77,14 +81,14 @@
 
           <span fxFlex="{{(view.gap)}}px"></span>
 
-          <div fxFlex fxFlex.gt-sm="66%" fxLayout="column">
-            <h1>Purpose</h1>
-            <div>
+          <div fxFlex fxFlex.gt-sm="66%" fxLayout.lt-md="column" fxLayout.gt-sm="row">
+            <div fxFlex fxFlex.gt-sm="66%">
+              <h1>Purpose</h1>
               {{project.purpose}}
             </div>
             <span fxFlex="{{(view.gap)}}px"></span>
-            <h1>Features</h1>
-            <div>
+            <div fxFlex>
+              <h1>Features</h1>
               {{project.features}}
             </div>
           </div>

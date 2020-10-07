@@ -2,45 +2,42 @@
 
 <div [ngStyle]="{'height':view.height+'px'}" fxLayout.lt-sm="column" fxLayout.gt-xs="row">
 
-  <section fxFlex.lt-sm="{{(view.gap*2)}}px" fxLayout.lt-sm="row wrap" fxFlex.gt-xs="256px" fxLayout.gt-xs="column" style="background-color:#111111; color:white;" [ngStyle.gt-xs]="{'padding':view.gap+'px'}" >
+  <section fxHide fxShow.gt-xs fxFlex.lt-sm="{{(view.gap*2)}}px" fxLayout.lt-sm="row wrap" fxFlex.gt-xs="256px" fxLayout.gt-xs="column" style="background-color:#111111; color:white; overflow:hidden;" [ngStyle.gt-xs]="{'padding':view.gap+'px'}">
 
-    <div fxHide fxShow.gt-xs fxLayout="column" fxFlex style="text-align:center;">
-      <div fxFlex="none" style="position:relative;">
+    <div fxLayout="column" style="text-align:center;" fxFlex fxHide fxShow.gt-xs style="outline:2px dashed gold;">
+      <div style="position:relative;" fxFlex="none">
 
-        <img src="../../assets/chris.jpg" style="padding:0px; max-width:100%; max-height:100%; object-fit:contain;">
+        <!--img src="../../assets/chris.jpg" style="padding:0px; max-width:100%; max-height:100%; object-fit:contain; box-sizing:border-box; border-radius:8px;"-->
         <!--
         <pre *ngIf="auth.userProfile$ | async as profile">
           <img src="{{profile.picture}}" style="padding:0px; max-height:100%; max-width:100%;">
         </pre>
         -->
+
       </div>
-      <span id="name" style="margin:{{view.gap}}px 0px;">Chris Urban</span>
-      <span fxFlex>{{view.blurb}}</span>
+      <span id="name" style="margin:0px 0px;">Chris Urban</span>
+      <span fxFlex="{{(view.gap/4)}}px"></span>
+      <span fxFlex>Serving ever more flexible <br> and meaningful systems</span>
     </div>
 
-      <div xFlex="10%" fxLayout="column" style="margin:{{view.gap}}px 0px">
-        <a *ngIf="!auth.loggedIn" (click)="auth.login()" mat-raised-button>Log In</a>
-        <a *ngIf="auth.loggedIn" (click)="auth.logout()" mat-raised-button>Log Out</a>
-
-        <a *ngIf="outlet && outlet.taskEntry" (click)="outlet.taskEntry()" mat-raised-button color="accent">Create New Task</a>
-      </div>
-
-      <div fxFlex.lt-sm="50%" fxFlex.gt-xs class="links">
-        <ul class="icons">
-          <li><a class="fa fa-home fa-2x" routerLink='/home'>
-            <span fxHide.lt-sm> Projects</span>
-          </a></li>
-          <li><a class="fa fa-linkedin-square fa-2x" href="https://www.linkedin.com/in/christopher-urban-82807841/" target="_blank" >
-            <span fxHide.lt-sm> LinkedIn</span>
-          </a></li>
-          <li><a class="fa fa-envelope fa-2x" href="mailto:chrispurban@gmail.com">
-            <span fxHide.lt-sm> Email</span>
-          </a></li>
-          <li><a class="fa fa-download fa-2x" href="https://drive.google.com/file/d/1g6EiiNQ9mkArkGvvDeQTTR-VLohdUZiM/view">
-            <span fxHide.lt-sm> Resume</span>
-          </a></li>
-        </ul>
-      </div>
+    <div fxFlex class="links">
+      <ul [ngStyle.lt-sm]="{'font-size':'250%'}" [ngStyle.gt-xs]="{'font-size':'200%'}" fxLayout.gt-xs="column" fxLayout.lt-sm="row" fxLayoutAlign="space-around center" style="height:100%; margin:0px;" class="icons">
+        <li fxFlex.gt-xs></li>
+        <li fxFlex.lt-sm>
+          <a class="fa fa-home" routerLink='/home'><span fxHide.lt-sm> Projects</span></a>
+        </li>
+        <li fxFlex.lt-sm>
+          <a class="fa fa-envelope" href="mailto:chrispurban@gmail.com"><span fxHide.lt-sm> Email</span></a>
+        </li>
+        <li fxFlex.lt-sm>
+          <a class="fa fa-file" href="https://drive.google.com/file/d/1g6EiiNQ9mkArkGvvDeQTTR-VLohdUZiM"><span fxHide.lt-sm> Resume</span></a>
+        </li>
+        <li fxFlex.lt-sm>
+          <a class="fa fa-linkedin-square" href="https://www.linkedin.com/in/christopher-urban-82807841/" target="_blank"><span fxHide.lt-sm> LinkedIn</span></a>
+        </li>
+        <li fxFlex.gt-xs></li>
+      </ul>
+    </div>
 
   </section>
 
@@ -49,5 +46,7 @@
   <section fxFlex="grow" style="color:white; position:relative; overflow-x:hidden; overflow-y:auto;">
     <router-outlet (activate)="loaded($event)"></router-outlet>
   </section>
+
+  <!-- a *ngIf="outlet && outlet.taskEntry" (click)="outlet.taskEntry()" mat-raised-button color="accent">Create Task</a -->
 
 </div>

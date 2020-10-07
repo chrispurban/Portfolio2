@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 import { ViewService } from '../../services/view.service';
 
 @Component({
