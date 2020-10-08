@@ -1,39 +1,45 @@
 <div class="splash" fxLayout="column" style="overflow-x:hidden; overflow-y:auto; width:100%">
 
-  <section fxHide.gt-xs [ngStyle.lt-sm]="{'min-height':view.height - (view.gap*4) + 'px', 'margin':view.gap + 'px', 'margin-bottom':'0px'}" style="overflow-x:hidden;">
+  <section fxHide.gt-xs [ngStyle.lt-sm]="{'min-height':view.height - (view.gap*2) + 'px', 'margin':view.gap + 'px', 'margin-bottom':'0px'}" style="overflow-x:hidden;">
 
     <div fxLayout="column" style="height:100%; background-color:hsla(0, 0%, 0%, 0.5); padding:{{view.gap}}px;">
 
-
-      <div fxFlex style="outline:3px solid blue;">
-        <div style="height:256px; outline:2px dashed gold;">
-          <img src="../../assets/chris.jpg" style="width:100%; height:100%; object-fit:cover;">
-
+      <div style="position:relative; height:{{(view.width-(view.gap*4))}}px;">
+        <div style="position:absolute; left:0; right:0; top:0; bottom:0;">
+          <img src="../../assets/chris.jpg" style="width:100%; height:100%; object-fit:contain;">
         </div>
       </div>
 
+      <span fxFlex></span>
 
-<!--
-      <img class="photo" src="../../assets/chris.jpg" style="max-width:100%;">
--->
-
-      <div fxFlex="30%" style="outline:1px solid cyan;">
-        <div id="name">
-          Chris Urban
-        </div>
-        <div style="font-family:'Josefin Sans','Ubuntu',sans-serif;">
-          Serving ever more flexible<br>and meaningful systems
-        </div>
+      <div fxFlex="15%" style="margin-top:{{view.gap}}px; margin-bottom:{{view.gap}}px;" fxLayout="column" fxLayoutAlign="space-around center">
+        <span id="name">Chris Urban</span>
+        <span>Serving ever more flexible<br>and meaningful systems</span>
       </div>
 
-      <div fxFlex fxLayout="column">
-        <span fxFlex></span>
+      <span fxFlex></span>
 
-        Scroll down to see some delightful code in action
-
-        <span fxFlex></span>
+      <div class="links">
+        <ul fxLayout="column" fxLayoutAlign="space-around center" style="font-size:150%; line-height:175%;">
+          <li>
+            <a class="fa fa-envelope" href="mailto:chrispurban@gmail.com"><span> Email</span></a>
+          </li>
+          <li>
+            <a class="fa fa-file" href="https://drive.google.com/file/d/1g6EiiNQ9mkArkGvvDeQTTR-VLohdUZiM"><span> Resume</span></a>
+          </li>
+          <li>
+            <a class="fa fa-linkedin-square" href="https://www.linkedin.com/in/christopher-urban-82807841/" target="_blank"><span> LinkedIn</span></a>
+          </li>
+        </ul>
       </div>
 
+      <span fxFlex></span>
+
+      <div fxFlex="5%" style="margin-top:{{view.gap}}px; font-size:200%;" fxLayout="row" fxLayoutAlign="space-around center">
+        <i class="fa fa-chevron-down"></i>
+        <span fxFlex style="font-size:50%;">Scroll down to see some<br>delightful code in action</span>
+        <i class="fa fa-chevron-down"></i>
+      </div>
       <!--
     -->
     </div>
@@ -65,7 +71,7 @@
 
             </div>
 
-            <span fxFlex.lt-md="{{(view.gap)}}px" fxFlex.gt-sm="{{(view.gap)}}px"></span>
+            <span fxFlex="{{view.gap}}px"></span>
 
             <div fxFlex>
               <h1>Technologies</h1>

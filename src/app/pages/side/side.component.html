@@ -2,40 +2,37 @@
 
 <div [ngStyle]="{'height':view.height+'px'}" fxLayout.lt-sm="column" fxLayout.gt-xs="row">
 
-  <section fxHide fxShow.gt-xs fxFlex.lt-sm="{{(view.gap*2)}}px" fxLayout.lt-sm="row wrap" fxFlex.gt-xs="256px" fxLayout.gt-xs="column" style="background-color:#111111; color:white; overflow:hidden;" [ngStyle.gt-xs]="{'padding':view.gap+'px'}">
+  <section fxHide fxShow.gt-xs fxFlex="256px" fxLayout="column" style="background-color:#111111; color:white; padding:{{view.gap}}px; overflow:hidden;">
 
-    <div fxLayout="column" style="text-align:center;" fxFlex fxHide fxShow.gt-xs style="outline:2px dashed gold;">
-      <div style="position:relative;" fxFlex="none">
-
-        <!--img src="../../assets/chris.jpg" style="padding:0px; max-width:100%; max-height:100%; object-fit:contain; box-sizing:border-box; border-radius:8px;"-->
-        <!--
-        <pre *ngIf="auth.userProfile$ | async as profile">
-          <img src="{{profile.picture}}" style="padding:0px; max-height:100%; max-width:100%;">
-        </pre>
-        -->
-
+    <div style="position:relative; height:{{(256-(view.gap*2))}}px;">
+      <div style="position:absolute; left:0; right:0; top:0; bottom:0;">
+        <img src="../../assets/chris.jpg" style="width:100%; height:100%; object-fit:contain;">
       </div>
-      <span id="name" style="margin:0px 0px;">Chris Urban</span>
-      <span fxFlex="{{(view.gap/4)}}px"></span>
-      <span fxFlex>Serving ever more flexible <br> and meaningful systems</span>
     </div>
 
-    <div fxFlex class="links">
-      <ul [ngStyle.lt-sm]="{'font-size':'250%'}" [ngStyle.gt-xs]="{'font-size':'200%'}" fxLayout.gt-xs="column" fxLayout.lt-sm="row" fxLayoutAlign="space-around center" style="height:100%; margin:0px;" class="icons">
-        <li fxFlex.gt-xs></li>
-        <li fxFlex.lt-sm>
-          <a class="fa fa-home" routerLink='/home'><span fxHide.lt-sm> Projects</span></a>
+    <span fxFlex></span>
+
+    <div fxFlex="15%" style="margin-top:{{view.gap}}px; margin-bottom:{{view.gap}}px; outline:1px dashed gold;" fxLayout="column" fxLayoutAlign="space-around center">
+      <span id="name">Chris Urban</span>
+      <span>Serving ever more flexible<br>and meaningful systems</span>
+    </div>
+
+    <span fxFlex></span>
+
+    <div class="links">
+      <ul fxLayout="column" fxLayoutAlign="space-around center" class="icons" style="font-size:200%; line-height:150%">
+        <li>
+          <a class="fa fa-home" routerLink='/home'><span> Projects</span></a>
         </li>
-        <li fxFlex.lt-sm>
-          <a class="fa fa-envelope" href="mailto:chrispurban@gmail.com"><span fxHide.lt-sm> Email</span></a>
+        <li>
+          <a class="fa fa-envelope" href="mailto:chrispurban@gmail.com"><span> Email</span></a>
         </li>
-        <li fxFlex.lt-sm>
-          <a class="fa fa-file" href="https://drive.google.com/file/d/1g6EiiNQ9mkArkGvvDeQTTR-VLohdUZiM"><span fxHide.lt-sm> Resume</span></a>
+        <li>
+          <a class="fa fa-file" href="https://drive.google.com/file/d/1g6EiiNQ9mkArkGvvDeQTTR-VLohdUZiM"><span> Resume</span></a>
         </li>
-        <li fxFlex.lt-sm>
-          <a class="fa fa-linkedin-square" href="https://www.linkedin.com/in/christopher-urban-82807841/" target="_blank"><span fxHide.lt-sm> LinkedIn</span></a>
+        <li>
+          <a class="fa fa-linkedin-square" href="https://www.linkedin.com/in/christopher-urban-82807841/" target="_blank"><span> LinkedIn</span></a>
         </li>
-        <li fxFlex.gt-xs></li>
       </ul>
     </div>
 

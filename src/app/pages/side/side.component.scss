@@ -5,8 +5,7 @@ ul.icons{
   text-align:center;
 	li{
 		display:inline-block;
-		margin-top:10px;
-		margin-bottom:10px;
+		outline:1px dashed gold;
 	}
   a{
 		text-decoration:none;
@@ -16,10 +15,4 @@ ul.icons{
 			color 0.2s ease-in-out,
 			border-color 0.2s ease-in-out;}
   a:hover{color:cyan;}
-}
-
-.links{
-	span{
-		font-family:'Josefin Sans','Ubuntu',sans-serif;
-	}
 }

@@ -28,6 +28,30 @@ a{
 // darkteal 1d5f73
 
 
+
+.links{
+  ul{
+  	height:100%; margin:0px; padding:0px;
+  	cursor:default;
+  	list-style:none;
+    text-align:center;
+  	li{
+
+  		display:inline-block;
+  	}
+    a{
+  		text-decoration:none;
+  		color:cyan; opacity: 0.8;
+    }
+  }
+	span{
+		font-family:'Josefin Sans','Ubuntu',sans-serif;
+	}
+}
+
+
+
+
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 h1 {
   font-family:'Josefin Sans','Ubuntu',sans-serif;

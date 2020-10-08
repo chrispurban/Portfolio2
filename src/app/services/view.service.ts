@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class ViewService {
 
   height;
+  width;
   gap = 32;
 
   blurb:String = "Serving ever more flexible and meaningful systems";
@@ -15,7 +16,8 @@ export class ViewService {
 
   resize(){
     this.height = window.innerHeight;
-    console.log(this.height)
+    this.width = window.innerWidth;
+    console.log(this.height + " x " + this.width)
   }
 
 }
