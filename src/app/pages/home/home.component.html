@@ -4,23 +4,21 @@
 
     <div fxLayout="column" style="height:100%; background-color:hsla(0, 0%, 0%, 0.5); padding:{{view.gap}}px;">
 
-      <div style="position:relative; height:{{(view.width-(view.gap*4))}}px;">
+      <div style="position:relative; height:{{(view.width-(view.gap*4))}}px; max-height:{{((view.height/2)-(view.gap*2.25))}}px;">
         <div style="position:absolute; left:0; right:0; top:0; bottom:0;">
           <img src="../../assets/chris.jpg" style="width:100%; height:100%; object-fit:contain;">
         </div>
       </div>
 
-      <span fxFlex></span>
-
-      <div fxFlex="15%" style="margin-top:{{view.gap}}px; margin-bottom:{{view.gap}}px;" fxLayout="column" fxLayoutAlign="space-around center">
-        <span id="name">Chris Urban</span>
-        <span>Serving ever more flexible<br>and meaningful systems</span>
+      <div fxFlex="nogrow" style="margin-top:{{(view.gap)}}px; margin-bottom:{{(view.gap)}}px;" fxLayout="column" fxLayoutAlign="space-around center">
+        <span style="font-size:{{((view.scale-(view.gap*4))/6)}}px; line-height:100%; text-shadow: 0px 0px 8px black; font-family:'Josefin Sans','Ubuntu',sans-serif;">Chris Urban</span>
+        <span style="font-size:{{((view.scale-(view.gap*4))/15)}}px; line-height:120%; margin-top:{{(view.gap/4)}}px">Serving ever more flexible<br>and meaningful systems</span>
       </div>
 
       <span fxFlex></span>
 
-      <div class="links">
-        <ul fxLayout="column" fxLayoutAlign="space-around center" style="font-size:150%; line-height:175%;">
+      <div fxflex="nogrow" class="links" style="font-size:{{((view.scale-(view.gap*4))/8)}}px; line-height:140%;">
+        <ul fxLayout="column" fxLayoutAlign="space-around center">
           <li>
             <a class="fa fa-envelope" href="mailto:chrispurban@gmail.com"><span> Email</span></a>
           </li>
@@ -33,11 +31,9 @@
         </ul>
       </div>
 
-      <span fxFlex></span>
-
-      <div fxFlex="5%" style="margin-top:{{view.gap}}px; font-size:200%;" fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxFlex="nogrow" style="margin-top:{{(view.gap)}}px; font-size:200%;" fxLayout="row" fxLayoutAlign="space-around center">
         <i class="fa fa-chevron-down"></i>
-        <span fxFlex style="font-size:50%;">Scroll down to see some<br>delightful code in action</span>
+        <span fxFlex style="font-size:{{((view.scale-(view.gap*4))/15)}}px; line-height:120%; margin-top:{{(view.gap/4)}}px; padding:0px {{(view.gap/2)}}px;">Scroll down to see some code in action</span>
         <i class="fa fa-chevron-down"></i>
       </div>
       <!--
@@ -46,7 +42,7 @@
 
   </section>
 
-  <section>
+  <section id="projects">
     <div *ngFor="let project of projects" [ngStyle.lt-lg]="{'padding':view.gap + 'px'}" [ngStyle.gt-sm]="{'height':(((view.height-(view.gap*3))/2)) + 'px'}" style="margin:{{view.gap}}px; background-color:hsla(0, 0%, 0%, 0.5); position:relative;">
 
       <div [ngStyle.gt-md]="{'position':'absolute', 'left':view.gap + 'px', 'right':view.gap + 'px', 'top':view.gap + 'px', 'bottom':view.gap + 'px'}" fxLayout.lt-md="column" fxLayout.gt-sm="row" style="overflow-y:auto;">
