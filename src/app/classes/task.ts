@@ -1,13 +1,28 @@
 export class Task {
     _id:string;
+    owner:string;
     subject:string;
     issue:string;
-    history:object;
-    owner:string;
     notes:string;
     deadline:string;
+    history:object;
     //messages:Message[];
 }
+
+export function example(){
+  return {
+    _id:"guest_0",
+    subject:"Welcome",
+    issue:"Click me to get started!",
+    notes:"- Use the buttons at the bottom to ferry items between workflow states.\n- Web addresses left here such as chrispurban.com are converted to links.",
+    deadline:"",
+    history:[{id:workflow(0).id, time:new Date().toISOString()}],
+    updatedAt:new Date().toISOString()
+  }
+}
+
+// task = {subject:'', issue:'', notes:'', deadline:'', history:[]};
+// this.task.history.push( {id:workflow(0).id, time:new Date().toISOString() });
 
 export function workflow(x?){
   if(typeof x == "object"){

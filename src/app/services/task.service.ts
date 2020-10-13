@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError, tap} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Task } from '../classes/task';
+import { Task, example } from '../classes/task';
 import { environment } from '../../environments/environment';
 
 import { AuthService } from './auth.service';
@@ -33,7 +33,7 @@ export class TaskService {
   }
 
   read():Observable<any>{ console.warn("Reading tasks...");
-    if(!localStorage('tasks')){localStorage('tasks', [])}
+    if(!localStorage('tasks')){localStorage('tasks', [example()])}
     return new Observable((obs)=>{
       obs.next([])
       this.auth.getUser$().toPromise().then((profile)=>{
@@ -53,7 +53,8 @@ export class TaskService {
           })()
         }
         else{ console.log("You are not signed in!")
-          obs.next(localStorage('tasks'))}
+          obs.next(localStorage('tasks'));
+        }
       })
     })
   }

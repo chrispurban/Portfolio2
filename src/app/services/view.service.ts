@@ -22,7 +22,6 @@ export class ViewService {
 
     if(this.width >= this.height/2){this.scale = this.height/2;}
     else{this.scale = this.width;};
-    //console.warn(this.scale);
-  }
 
+  }
 }

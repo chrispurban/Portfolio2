@@ -50,10 +50,10 @@
         </button>
 
         <div fxFlex.lt-md="100%" fxFlex.gt-sm="60%">
-          <button fxFlex *ngIf="task.state.phase > 0" (click)="update(-1)" color="primary" mat-raised-button>
+          <button fxFlex *ngIf="task.state.phase > 0" (click)="update(-1)" color="accent" mat-raised-button>
             Return to {{(task.state.phase - 1 | workflow).name}}
           </button>
-          <button fxFlex *ngIf="task.state.phase + 1 | workflow" (click)="update(+1)" color="accent" mat-raised-button>
+          <button fxFlex *ngIf="task.state.phase + 1 | workflow" (click)="update(+1)" color="primary" mat-raised-button>
             Advance to {{(task.state.phase + 1 | workflow).name}}
           </button>
         </div>
