@@ -41,7 +41,7 @@ const model = [
   {id:"A",name:"Draft",icon:"💡"},
   {id:"B",name:"Queued",icon:"🛎️️"},
   {id:"C",name:"Building",icon:"🏗️"},
-  {id:"D",name:"Refactoring",icon:"🧹"},
+  {id:"D",name:"Refining",icon:"🧹"},
   {id:"E",name:"Complete",icon:"🎉"}
 ]
 
