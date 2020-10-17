@@ -12,7 +12,7 @@
 
       <div fxFlex="nogrow" style="margin-top:{{(view.gap)}}px; margin-bottom:{{(view.gap)}}px;" fxLayout="column" fxLayoutAlign="space-around center">
         <span style="font-size:{{((view.scale-(view.gap*4))/6)}}px; line-height:100%; text-shadow: 0px 0px 8px black; font-family:'Josefin Sans','Ubuntu',sans-serif;">Chris Urban</span>
-        <span style="font-size:{{((view.scale-(view.gap*4))/15)}}px; line-height:120%; margin-top:{{(view.gap/4)}}px">Serving ever more flexible<br>and meaningful systems</span>
+        <span style="font-size:{{((view.scale-(view.gap*4))/15)}}px; line-height:120%; margin-top:{{(view.gap/4)}}px">Let's make something great!</span>
       </div>
 
       <span fxFlex></span>
@@ -42,10 +42,11 @@
 
   </section>
 
-  <section id="projects">
-    <div *ngFor="let project of projects" [ngStyle.lt-lg]="{'padding':view.gap + 'px'}" [ngStyle.gt-sm]="{'height':(((view.height-(view.gap*3))/2)) + 'px'}" style="margin:{{view.gap}}px; background-color:hsla(0, 0%, 0%, 0.5); position:relative;">
+  <section id="projects" fxLayout="column" fxLayoutAlign="start center">
+    <span style="height:{{view.gap}}px"></span>
+    <div *ngFor="let project of projects" style="margin:{{view.gap}}px; margin-top:0px; padding:{{view.gap}}px; background-color:hsla(0, 0%, 0%, 0.5);" [ngStyle.gt-sm]="{'max-width':view.height+'px'}">
 
-      <div [ngStyle.gt-md]="{'position':'absolute', 'left':view.gap + 'px', 'right':view.gap + 'px', 'top':view.gap + 'px', 'bottom':view.gap + 'px'}" fxLayout.lt-md="column" fxLayout.gt-sm="row" style="overflow-y:auto;">
+      <div fxLayout.lt-md="column" fxLayout.gt-sm="row" style="overflow-y:auto;" fxLayoutAlign="center center">
 
           <div fxFlex fxLayout="column">
 
@@ -53,7 +54,7 @@
 
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="center center" style="background-color:hsla(0, 0%, 50%, 0.5); font-size:120%; line-height:105%; padding:4px;">
 
-              <a fxFlex="50%" style="text-align:left; display:flex; align-items:center;" href="https://github.com/chrispurban/Portfolio2/tree/master/src/app/pages/projects/{{project._id}}">
+              <a fxFlex="50%" style="text-align:left; display:flex; align-items:center;" href="https://github.com/chrispurban/Portfolio2">
                   <span class="fa fa-github fa-2x" style="margin:{{(view.gap/4)}}px;"></span>
                   <span fxFlex>Source<br>Code</span>
               </a>
@@ -72,7 +73,7 @@
             <div fxFlex>
               <h1>Technologies</h1>
               <div fxLayout="row wrap" fxLayoutAlign="center center">
-                <div *ngFor="let i of project.technologies" style="white-space:nowrap;">
+                <div *ngFor="let i of project.tech" style="white-space:nowrap;">
                   <span style="margin:8px;">⬥</span>{{i}}
                 </div>
               </div>
@@ -84,14 +85,9 @@
           <span fxFlex="{{(view.gap)}}px"></span>
 
           <div fxFlex fxFlex.gt-sm="66%" fxLayout.lt-md="column" fxLayout.gt-sm="row">
-            <div fxFlex fxFlex.gt-sm="66%">
-              <h1>Purpose</h1>
-              {{project.purpose}}
-            </div>
-            <span fxFlex="{{(view.gap)}}px"></span>
-            <div fxFlex>
-              <h1>Features</h1>
-              {{project.features}}
+            <div fxFlex fxFlex.gt-sm="100%">
+              <h1>Purpose & Features</h1>
+              <span style="white-space:pre-line;">{{project.desc}}</span>
             </div>
           </div>
 
