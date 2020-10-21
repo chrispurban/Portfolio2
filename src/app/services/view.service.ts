@@ -11,8 +11,6 @@ export class ViewService {
   scale;
   gap = 32;
 
-  blurb:String = "Serving ever more flexible and meaningful systems";
-
   constructor(){}
 
   resize(){

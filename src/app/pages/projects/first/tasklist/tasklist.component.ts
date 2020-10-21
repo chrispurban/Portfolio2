@@ -4,9 +4,12 @@ import { TaskService } from '../../../../services/task.service';
 import { AuthService } from '../../../../services/auth.service';
 import { ViewService } from '../../../../services/view.service';
 import { MatBottomSheetRef, MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { TaskentryComponent } from '../taskentry/taskentry.component';
 import { TaskdetailComponent } from '../taskdetail/taskdetail.component';
+import { PolicyComponent } from '../../../policy/policy.component';
+
 
 @Component({
   selector: 'app-tasklist',
@@ -23,6 +26,7 @@ export class TasklistComponent implements OnInit {
   constructor(
     private taskService:TaskService,
     private bottomSheet:MatBottomSheet,
+    private popup:MatDialog,
     public auth:AuthService,
     public view:ViewService
   ) { }
@@ -35,8 +39,12 @@ export class TasklistComponent implements OnInit {
       );
   }
 
-  zing(){
-    console.log(this.auth.userProfile$);
+  showPolicy(){
+    let dialogueConfig = new MatDialogConfig();
+    dialogueConfig.disableClose = false;
+    dialogueConfig.autoFocus = true;
+    this.popup.open(PolicyComponent, dialogueConfig);
+
   }
 
   taskDetail(task){

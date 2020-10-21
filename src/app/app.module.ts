@@ -13,15 +13,6 @@ import { AutosizeModule } from 'ngx-autosize';
 //import { NgPipesModule } from 'ngx-pipes';
 // import { LinkifiyModule } from 'linkifyjs'
 
-//components
-import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import { SideComponent } from './pages/side/side.component';
-
-  import { TasklistComponent } from './pages/projects/first/tasklist/tasklist.component';
-  import { TaskdetailComponent } from './pages/projects/first/taskdetail/taskdetail.component';
-  import { TaskentryComponent } from './pages/projects/first/taskentry/taskentry.component';
-
 //services
 import { TaskService } from './services/task.service';
 import { AuthService } from './services/auth.service';
@@ -36,6 +27,17 @@ import { TimerPipe } from './pipes/timer.pipe';
 //directives
 import { FocusDirective } from './directives/focus.directive';
 
+//components
+import { AppComponent } from './app.component';
+import { PolicyComponent } from './pages/policy/policy.component';
+import { HomeComponent } from './pages/home/home.component';
+import { SideComponent } from './pages/side/side.component';
+
+  import { TasklistComponent } from './pages/projects/first/tasklist/tasklist.component';
+  import { TaskdetailComponent } from './pages/projects/first/taskdetail/taskdetail.component';
+  import { TaskentryComponent } from './pages/projects/first/taskentry/taskentry.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,8 @@ import { FocusDirective } from './directives/focus.directive';
     WorkflowPipe,
     LinkifyPipe,
     FocusDirective,
-    TimerPipe
+    TimerPipe,
+    PolicyComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +61,8 @@ import { FocusDirective } from './directives/focus.directive';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-//    NgPipesModule,
     AutosizeModule
+//    NgPipesModule,
 //    LinkifiyModule
   ],
   providers: [
@@ -69,7 +72,8 @@ import { FocusDirective } from './directives/focus.directive';
     InterceptService
   ],
   entryComponents: [
-    TaskentryComponent
+    TaskentryComponent,
+    PolicyComponent
   ],
   bootstrap: [AppComponent]
 })

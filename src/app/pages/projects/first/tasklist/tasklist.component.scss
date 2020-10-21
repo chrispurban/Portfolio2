@@ -1,3 +1,18 @@
+a{
+  color:cyan; opacity:0.8;
+  text-decoration:none;
+  cursor:pointer;
+}
+@media only screen and (hover) {
+  a{
+    transition:
+      background-color 0.2s ease-in-out,
+      color 0.2s ease-in-out,
+      border-color 0.2s ease-in-out;
+  }
+  a:hover{color:silver;}
+}
+
 /*
 .column{
   width:100%;

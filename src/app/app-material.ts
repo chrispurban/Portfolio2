@@ -25,7 +25,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatDialogModule,
     MatBottomSheetModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }
