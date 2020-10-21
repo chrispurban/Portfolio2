@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Project } from '../classes/project';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +14,9 @@ export class ViewService {
   scale;
   gap = 32;
 
-  constructor(){}
+  constructor(
+    private http:HttpClient
+  ){}
 
   resize(){
     this.height = window.innerHeight;

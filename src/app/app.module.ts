@@ -30,7 +30,7 @@ import { FocusDirective } from './directives/focus.directive';
 //components
 import { AppComponent } from './app.component';
 import { PolicyComponent } from './pages/policy/policy.component';
-import { HomeComponent } from './pages/home/home.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
 import { SideComponent } from './pages/side/side.component';
 
   import { TasklistComponent } from './pages/projects/first/tasklist/tasklist.component';
@@ -42,7 +42,7 @@ import { SideComponent } from './pages/side/side.component';
   declarations: [
     AppComponent,
     SideComponent,
-    HomeComponent,
+    ProjectsComponent,
     TasklistComponent,
     TaskdetailComponent,
     TaskentryComponent,
