@@ -41,9 +41,10 @@
       <br><br>
 
       <div fxLayout="row wrap">
+
         <button fxFlex.lt-md="50%" fxFlex.gt-sm="20%" (click)="delete()" mat-raised-button>
           <span *ngIf="UI_deletionProtection">Delete</span>
-          <span *ngIf="!UI_deletionProtection" color="accent">Are you sure?</span>
+          <span *ngIf="!UI_deletionProtection">Are you sure?</span>
         </button>
         <button fxShow.lt-md fxHide.gt-sm fxFlex="50%" (click)="update()" mat-raised-button>
           Save
@@ -61,6 +62,7 @@
         <button fxHide.lt-md fxShow.gt-sm fxFlex="20%" (click)="update()" mat-raised-button>
           Save
         </button>
+
       </div>
 
   </div>

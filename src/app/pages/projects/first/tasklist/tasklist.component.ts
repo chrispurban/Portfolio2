@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Task, workflow } from '../../../../classes/task';
-import { TaskService } from '../../../../services/task.service';
-import { AuthService } from '../../../../services/auth.service';
-import { ViewService } from '../../../../services/view.service';
-import { MatBottomSheetRef, MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-
 import { TaskentryComponent } from '../taskentry/taskentry.component';
 import { TaskdetailComponent } from '../taskdetail/taskdetail.component';
 import { PolicyComponent } from '../../../policy/policy.component';
 
+import { Task, workflow } from '../../../../classes/task';
+
+import { MatBottomSheetRef, MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
+import { TaskService } from '../../../../services/task.service';
+import { AuthService } from '../../../../services/auth.service';
+import { ViewService } from '../../../../services/view.service';
 
 @Component({
   selector: 'app-tasklist',

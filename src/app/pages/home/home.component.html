@@ -73,8 +73,8 @@
             <div fxFlex>
               <h1>Technologies</h1>
               <div fxLayout="row wrap" fxLayoutAlign="center center">
-                <div *ngFor="let i of project.tech" style="white-space:nowrap;">
-                  <span style="margin:8px;">⬥</span>{{i}}
+                <div *ngFor="let tech of project.tech" style="white-space:nowrap;">
+                  <span style="margin:8px;">⬥</span>{{tech}}
                 </div>
               </div>
             </div>
@@ -87,7 +87,9 @@
           <div fxFlex fxFlex.gt-sm="66%" fxLayout.lt-md="column" fxLayout.gt-sm="row">
             <div fxFlex fxFlex.gt-sm="100%">
               <h1>Purpose & Features</h1>
-              <span style="white-space:pre-line;">{{project.desc}}</span>
+              <div fxLayout="column" fxLayoutGap="20px">
+                <div *ngFor="let desc of project.desc">{{desc}}</div>
+              </div>
             </div>
           </div>
 

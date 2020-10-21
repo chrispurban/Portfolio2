@@ -1,4 +1,4 @@
-<div [ngStyle.gt-sm]="{'height':view.gap + 'px'}" [ngStyle.lt-md]="{'height':view.gap*2 + 'px'}" style="background-color:#111111; width:100%; text-align:center; font-style:italic;" fxLayoutAlign="center center" fxLayout.lt-md="column" fxLayout.gt-sm="row">
+<div [ngStyle.gt-sm]="{'height':view.gap + 'px'}" [ngStyle.lt-md]="{'height':view.gap + 'px'}" style="background-color:#111111; width:100%; text-align:center; font-style:italic;" fxLayoutAlign="center center" fxLayout.lt-md="column" fxLayout.gt-sm="row">
   <span>
     <span *ngIf="auth.userProfile$ | async as profile">Logged in as {{profile.name}}</span>
     <span *ngIf="!auth.loggedIn">Tasks are stored locally until logged in.</span>
@@ -6,7 +6,7 @@
   <!--span style="white-space:pre;"><a (click)="showPolicy()"> Click here</a> to see this site's privacy policy. </span-->
 </div>
 
-<div [ngStyle.gt-sm]="{'top':view.gap + 'px'}" [ngStyle.lt-md]="{'top':view.gap*2 + 'px'}" style="position:absolute; bottom:0px; left:{{(view.gap*0)}}px; right:0px;" fxLayout="column">
+<div [ngStyle.gt-sm]="{'top':view.gap + 'px'}" [ngStyle.lt-md]="{'top':view.gap + 'px'}" style="position:absolute; bottom:0px; left:{{(view.gap*0)}}px; right:0px;" fxLayout="column">
 
   <div style="padding:{{(view.gap/4)}}px; padding-top:0px; background-color:#111111;" fxLayoutGap="{{(view.gap/4)}}px" fxFlex fxFlex.lt-sm="{{(view.gap*2)}}px">
     <button fxHide.gt-xs routerLink='/home' color="accent" fxFlex mat-raised-button>Return Home</button>
@@ -20,14 +20,14 @@
       <div fxFlex *ngFor="let group of 'null' | workflow">
         <!-- height of the parent div limits how far the sticky header will go -->
         <div style="width:100; text-align:center; position:sticky; top:0; z-index:10; background-color:#111111; padding-bottom:4px;" fxLayoutAlign="center center">
-          <span style="font-size:250%; line-height:150%;">{{group.icon}}</span>
+          <span style="font-size:250%; line-height:150%; margin-right:6px;">{{group.icon}}</span>
           <span style="line-height:30px;">{{group.name | uppercase}}</span>
         </div>
 
         <div *ngFor="let task of tasks">
-          <div *ngIf="task.state.id == group.id" class="large tile"><div (click)="taskDetail(task)">
+          <div *ngIf="task.state.id == group.id" class="large tile"><div (click)="taskDetail(task)"  [ngStyle.gt-sm]="{'padding-top':'138px'}" [ngStyle.lt-md]="{'padding-top':'106px'}">
 
-            <div><div>
+            <div><div [ngStyle.gt-sm]="{'-webkit-line-clamp':'6'}" [ngStyle.lt-md]="{'-webkit-line-clamp':'4'}">
               <span style="font-size:120%;">{{task.subject | uppercase}}</span>
               <br><br>
               <span style="font-size:90%;">{{task.issue}}</span>
