@@ -16,12 +16,12 @@ export class TaskService {
 
   constructor(
     public auth:AuthService,
-    private http:HttpClient
+    private client:HttpClient
   ){}
 
   create(data:any):Observable<any> { console.warn("Creating task...");
     if(this.auth.loggedIn){
-      return this.http.post<Task>(environment.baseurl + 'api/tasks', data);
+      return this.client.post<Task>(environment.baseurl + 'api/tasks', data);
     }
     else{
       let now = new Date().toISOString();
@@ -48,7 +48,7 @@ export class TaskService {
                 }
               }
             })()
-            this.http.get(environment.baseurl + 'api/tasks/')
+            this.client.get(environment.baseurl + 'api/tasks/')
             .toPromise().then((result)=>{obs.next(result)})
           })()
         }
@@ -61,7 +61,7 @@ export class TaskService {
 
   update(taskID:any, data:any){ console.warn("Updating task " + taskID + "...");
     if(this.auth.loggedIn){
-      return this.http.put(environment.baseurl + 'api/tasks/' + taskID, data);
+      return this.client.put(environment.baseurl + 'api/tasks/' + taskID, data);
     }
     else{
       localStorage.transact('tasks', (content) => { // reach inside the list of tasks
@@ -80,7 +80,7 @@ export class TaskService {
   delete(taskID:any){
     if(this.auth.loggedIn && !taskID.includes("guest_")){
       console.warn("Deleting task " + taskID + "...");
-      return this.http.delete(environment.baseurl + 'api/tasks/' + taskID)
+      return this.client.delete(environment.baseurl + 'api/tasks/' + taskID)
     }
     else{
       localStorage.transact('tasks', (content) => {

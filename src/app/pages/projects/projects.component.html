@@ -44,6 +44,12 @@
 
   <section id="projects" fxLayout="column" fxLayoutAlign="start center">
     <span style="height:{{view.gap}}px"></span>
+
+    <div fxFlex *ngIf="errorMessage" style="text-align:center">
+      <h2>Error</h2>
+      <h4>{{errorMessage}}</h4>
+    </div>
+
     <div *ngFor="let project of projects" style="margin:{{view.gap}}px; margin-top:0px; padding:{{view.gap}}px; background-color:hsla(0, 0%, 0%, 0.5);" [ngStyle.gt-sm]="{'max-width':view.height+'px'}">
 
       <div fxLayout.lt-md="column" fxLayout.gt-sm="row" style="overflow-y:auto;" fxLayoutAlign="center center">
@@ -61,7 +67,7 @@
 
               <span fxFlex="{{(view.gap/4)}}px"></span>
 
-              <a fxFlex="50%" style="text-align:right; display:flex; align-items:center;" routerLink='/projects/{{project._id}}/tasks'>
+              <a fxFlex="50%" style="text-align:right; display:flex; align-items:center;" routerLink='/projects/{{project.address}}/tasks'>
                 <span fxFlex>Live<br>Demo</span>
                 <span class="fa fa-paper-plane fa-2x" style="margin:{{(view.gap/4)}}px;"></span>
               </a>
