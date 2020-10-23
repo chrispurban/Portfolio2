@@ -11,18 +11,23 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'projects'},
   {path: 'projects', component: ProjectsComponent},
+  {path: 'projects/first', redirectTo: 'projects/first/tasks'},
   {path: 'projects/first/tasks', component: TasklistComponent}, // canActivate: [AuthGuard]}
-  {path: "**", redirectTo: 'home'},
+  {path: "**", redirectTo: 'projects'},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: InterceptService,
-    multi: true
-  }]
+  providers: [
+    /*
+    */
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptService,
+      multi: true
+    }
+  ]
 })
 
 export class AppRoutingModule { }

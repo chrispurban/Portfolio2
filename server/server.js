@@ -24,6 +24,7 @@ mongoose
 app
   .use(enforce.HTTPS({trustProtoHeader: true}))
   .use(express.static(path.join(__dirname, '../dist')))
+  .use('/api/projects', require('./routes/projectrouter'))
   .use('/api/tasks', require('./routes/taskrouter'))
 ;
 
