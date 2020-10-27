@@ -17,6 +17,9 @@ export class InterceptService implements HttpInterceptor {
     req:HttpRequest<any>,
     next:HttpHandler
   ):Observable<HttpEvent<any>> {
+    console.warn('request is: ' + req.url);
+    console.warn('environment is: ' + environment.baseurl + 'api/projects')
+    console.error(req.url == environment.baseurl + 'api/projects');
 
     if(req.url == environment.baseurl + '/api/projects'){
       return next.handle(req.clone());
