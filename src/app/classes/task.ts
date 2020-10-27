@@ -14,7 +14,11 @@ export function example(){
     _id:"guest_0",
     subject:"Welcome",
     issue:"Click me to get started!",
-    notes:"- Use the buttons at the bottom to ferry items between workflow states.\n- Web addresses left here such as chrispurban.com are converted to links.",
+    notes:[
+        "Use the buttons at the bottom to ferry items between workflow states.",
+        "Web addresses left here such as chrispurban.com are converted to links.",
+        "Login sessions are handled entirely via auth0.com, with options to either validate against Google or email a code to you."
+      ].map((x)=>"- "+x).join("\n"),
     deadline:"",
     history:[{id:workflow(0).id, time:new Date().toISOString()}],
     updatedAt:new Date().toISOString()
