@@ -1,3 +1,5 @@
+ <script src="/config.js"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div [ngStyle]="{'height':view.height+'px'}" fxLayout.lt-sm="column" fxLayout.gt-xs="row">
@@ -20,16 +22,27 @@
     <div class="links">
       <ul fxLayout="column" fxLayoutAlign="space-around center" class="icons" style="font-size:200%; line-height:150%">
         <li>
-          <a class="fa fa-home" routerLink='/projects'><span> Home</span></a>
+          <a routerLink='/projects'>
+            <i class="fa fa-home"></i>
+            <span> Home</span>
+          </a>
         </li>
         <li>
-          <a class="fa fa-envelope" href="mailto:chrispurban@gmail.com"><span> Email</span></a>
+          <a href="mailto:chrispurban@gmail.com">
+            <i class="fa fa-envelope"></i>
+            <span> Email</span>
+          </a>
         </li>
         <li>
-          <a class="fa fa-file" href="https://drive.google.com/file/d/1MwDVuUkU7Z9uFsqpEFlmHigw1HaT18y9"><span> Resume</span></a>
+          <a href="https://drive.google.com/file/d/1Uua_fbLAoGDQj34Z0U0WfYCIewNqSrqw94OsFSJfs98">
+            <i class="fa fa-file"></i>
+            <span> Resume</span>
+          </a>
         </li>
         <li>
-          <a class="fa fa-linkedin-square" href="https://www.linkedin.com/in/christopher-urban-82807841/" target="_blank"><span> LinkedIn</span></a>
+          <a href="https://www.linkedin.com/in/christopher-urban-82807841/" target="_blank">
+            <i class="fa fa-linkedin-square"></i>
+            <span> LinkedIn</span></a>
         </li>
       </ul>
     </div>

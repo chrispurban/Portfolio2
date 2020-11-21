@@ -11,7 +11,10 @@ import { ViewService } from '../../services/view.service';
 
 export class SideComponent implements OnInit {
 
-  constructor(public auth:AuthService, public view:ViewService){}
+  constructor(
+    public auth:AuthService,
+    public view:ViewService
+  ){}
 
   ngOnInit():void{
     this.view.resize();

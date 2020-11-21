@@ -36,5 +36,4 @@ export class ViewService {
     return this.client.get<Project[]>(environment.baseurl + 'api/projects');
   }
 
-
 }
