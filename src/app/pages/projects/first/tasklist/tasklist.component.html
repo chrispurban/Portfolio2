@@ -32,9 +32,8 @@
           <div *ngIf="task.state.id == group.id" class="large tile"><div (click)="taskDetail(task)"  [ngStyle.gt-sm]="{'padding-top':'138px'}" [ngStyle.lt-md]="{'padding-top':'106px'}">
 
             <div><div [ngStyle.gt-sm]="{'-webkit-line-clamp':'6'}" [ngStyle.lt-md]="{'-webkit-line-clamp':'4'}">
-              <span style="font-size:120%;">{{task.subject | uppercase}}</span>
-              <br><br>
-              <span style="font-size:90%;">{{task.issue}}</span>
+              <div style="padding-bottom:6px;">{{task.subject | uppercase}}</div>
+              <span>{{task.issue}}</span>
             </div></div>
 
             <header *ngIf="task.deadline">
