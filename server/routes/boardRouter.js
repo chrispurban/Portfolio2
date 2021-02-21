@@ -2,19 +2,46 @@ const config = require('../config');
 const router = require('express').Router();
 const cors = require('cors');
 const auth = require('../auth');
-
-const TaskModel = require('../models/task');
+const BoardModel = require('../models/board');
 
 router
   .use(require('body-parser').json())
 ;
 
 router
-  .route('/') // this is to get all tasks
+  .route('/')
   .options(cors(config.whitelist), (req,res,next)=>{res.sendStatus(200);})
   .get(cors(), auth.user, (req,res,next) => {
-    TaskModel
-      .find({owner:req.user.sub}) // user.sub is appended by authenticator
+    console.log(">>> " + req.user.sub)
+    BoardModel
+      .find({owner:req.user.sub})
+//      .populate('tasks')
+      .then(
+        (board) => {
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.json(board);
+        },
+        (err) => next(err)
+      )
+      .catch((err) => next(err));
+      /*
+    */
+  })
+;
+
+/*
+
+router
+  .route('/:boardId')
+;
+
+router
+  .route('/:boardId/tasks') // this is to get all tasks
+  .options(cors(config.whitelist), (req,res,next)=>{res.sendStatus(200);})
+  .get(cors(), auth.user, (req,res,next) => {
+    BoardModel
+      .find({owner:req.user.sub})
       .then(
         (task) => {
           res.statusCode = 200;
@@ -28,7 +55,7 @@ router
   .post(cors(config.whitelist), auth.user, (req, res, next) => {
     req.body.owner = req.user.sub;
     if(req.body._id){delete req.body._id;} // purge any local ID it may have had
-    TaskModel
+    BoardModel
       .create(req.body)
       .then(
         (task) => {
@@ -42,7 +69,7 @@ router
       .catch((err) => next(err));
   })
   .delete(cors(config.whitelist), auth.user, (req, res, next) => {
-    TaskModel
+    BoardModel
       .remove({owner:req.user.sub})
       .then(
         (task) => {
@@ -61,10 +88,10 @@ router
 ;
 
 router
-  .route('/:taskId')
+  .route('/:boardId/tasks/:taskId')
   .options(cors(config.whitelist), auth.user, (req,res,next)=>{res.sendStatus(200);})
   .get(cors(), (req,res,next) => {
-    TaskModel
+    BoardModel
     .findById(req.params.taskId)
     .then(
       (task) => {
@@ -82,7 +109,7 @@ router
       delete req.body.history;
       console.log(req.body);
     }
-    TaskModel
+    BoardModel
       .updateOne({"_id":req.params.taskId}, req.body)
       .then(
         (task) => {
@@ -96,7 +123,7 @@ router
       .catch((err) => next(err));
   })
   .delete(cors(config.whitelist), auth.user, (req, res, next) => {
-    TaskModel
+    BoardModel
       .findByIdAndRemove(req.params.taskId)
       .then(
         (task) => {
@@ -113,5 +140,7 @@ router
       res.redirect('./');
   })
 ;
+
+*/
 
 module.exports = router;

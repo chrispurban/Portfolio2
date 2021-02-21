@@ -33,9 +33,10 @@ import { PolicyComponent } from './pages/policy/policy.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { SideComponent } from './pages/side/side.component';
 
-  import { TasklistComponent } from './pages/projects/first/tasklist/tasklist.component';
-  import { TaskdetailComponent } from './pages/projects/first/taskdetail/taskdetail.component';
-  import { TaskentryComponent } from './pages/projects/first/taskentry/taskentry.component';
+import { TasklistComponent } from './pages/projects/first/tasklist/tasklist.component';
+import { TaskdetailComponent } from './pages/projects/first/taskdetail/taskdetail.component';
+import { TaskentryComponent } from './pages/projects/first/taskentry/taskentry.component';
+import { TaskboardComponent } from './pages/projects/first/taskboard/taskboard.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { SideComponent } from './pages/side/side.component';
     LinkifyPipe,
     FocusDirective,
     TimerPipe,
-    PolicyComponent
+    PolicyComponent,
+    TaskboardComponent
   ],
   imports: [
     BrowserModule,

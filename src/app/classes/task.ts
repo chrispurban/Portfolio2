@@ -1,3 +1,9 @@
+export class Board {
+    _id:string;
+    owner:string;
+    name:string;
+}
+
 export class Task {
     _id:string;
     owner:string;
@@ -6,6 +12,7 @@ export class Task {
     notes:string;
     deadline:string;
     history:object;
+    board:Board;
     //messages:Message[];
 }
 

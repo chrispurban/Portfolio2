@@ -37,6 +37,10 @@ export class TaskdetailComponent implements OnInit {
   ngOnInit():void{
     this.task = Object.assign([], workflow(this.input));
     if(!this.task.notes){this.UI_editingNotes = true};
+    // you're acquiring the list of boards
+    // this is then available as a dropdown
+    // the dropdown selection selects the board object
+    // this board's ID is then saved
   }
 
 // database mechanisms /////////////////////////////////////////////////////////////////////

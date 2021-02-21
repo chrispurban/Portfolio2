@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskentryComponent } from '../taskentry/taskentry.component';
 import { TaskdetailComponent } from '../taskdetail/taskdetail.component';
+import { TaskboardComponent } from '../taskboard/taskboard.component';
 import { PolicyComponent } from '../../../policy/policy.component';
 
-import { Task, workflow } from '../../../../classes/task';
+import { Board, Task, workflow } from '../../../../classes/task';
 
 import { MatBottomSheetRef, MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -21,8 +22,10 @@ import { ViewService } from '../../../../services/view.service';
 export class TasklistComponent implements OnInit {
 
     UI_now = new Date().toISOString();
+    boards:Board[];
     tasks:Task[];
     errorMessage: string;
+    board:Board;
 
   constructor(
     private taskService:TaskService,
@@ -38,7 +41,19 @@ export class TasklistComponent implements OnInit {
         value => {this.tasks = value.map(workflow)},
         error => this.errorMessage = <any>error
       );
+    this.taskService
+      .getBoards().subscribe(
+        value => {this.boards = value},
+        error => this.errorMessage = <any>error
+      );
   }
+
+  /*
+you get the boards based on user account
+what to do about no board?
+take the first board selected and then do the second query
+
+  */
 
   showPolicy(){
     let dialogueConfig = new MatDialogConfig();
@@ -65,6 +80,20 @@ export class TasklistComponent implements OnInit {
       .open(TaskentryComponent) // open in popup
       .afterDismissed().subscribe((result)=>{
         if(result){this.tasks.push(workflow(result))}; // add to current list
+      });
+  }
+
+  taskBoard(){
+    this.bottomSheet
+      .open(TaskboardComponent, {data:this.boards}) // open in popup
+      .afterDismissed().subscribe((result)=>{
+        if(result){
+          console.log(result);
+          this.board = result;
+          // apply the result towards acquiring all tasks associated
+          // find all where their listed board is that one
+          // before doing this, check that the owner of the board matches the ones submitting the request
+        };
       });
   }
 

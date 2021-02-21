@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError, tap} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Task, example } from '../classes/task';
+import { Board, Task, example } from '../classes/task';
 import { environment } from '../../environments/environment';
 
 import { AuthService } from './auth.service';
@@ -19,7 +19,69 @@ export class TaskService {
     private client:HttpClient
   ){}
 
-  create(data:any):Observable<any> { console.warn("Creating task...");
+  read():Observable<any>{
+    console.warn("Reading tasks...");
+    if(!localStorage('tasks')){localStorage('tasks', [example()])}
+    return new Observable((obs)=>{
+      obs.next([])
+      this.auth
+        .getUser$().toPromise()
+        .then((profile)=>{
+          if(profile){
+            console.log("Signed in as: " + profile.nickname);
+            (async()=>{ // wait for full upload before retrieving from server
+              await(async()=>{ // wait for individual upload before uploading next one
+                if(localStorage('tasks').length > 0){
+                  console.log("Local task detected, uploading...")
+                  for(let task of localStorage('tasks')){
+                    await this.create(task).toPromise()
+                      .then(()=>{this.delete(task._id).toPromise();})
+                  }
+                }
+              })()
+              this.client.get(environment.baseurl + 'api/tasks/')
+              .toPromise().then((result)=>{obs.next(result)})
+            })()
+          }
+          else{
+            console.log("You are not signed in!");
+            obs.next(localStorage('tasks'));
+          }
+        })
+    })
+  }
+
+  readable(boardID):Observable<any>{
+    return this.client.get(environment.baseurl + 'api/boards/' + boardID);
+  }
+
+  seek(type, id=''):Observable<any>{ // global usage for any type or quantity
+    return this.client.get(`${environment.baseurl}api/${type}/${id}`)
+  }
+
+  getBoards():Observable<any>{
+    return this.client.get<Board>(environment.baseurl + 'api/boards/');
+    /*
+    this.auth
+      .getUser$().toPromise()
+      .then((profile)=>{
+        if(profile){
+          console.log("you got user")
+          this.client
+            .get(environment.baseurl + 'api/boards/')
+            .toPromise()
+            .then((result)=>{console.error(result)})
+        }
+        */
+      /*
+      else{console.log("No boards obtained.")
+        return;
+      })
+      */
+  }
+
+  create(data:any):Observable<any> {
+    console.warn("Creating task...");
     if(this.auth.loggedIn){
       return this.client.post<Task>(environment.baseurl + 'api/tasks', data);
     }
@@ -32,34 +94,8 @@ export class TaskService {
     }
   }
 
-  read():Observable<any>{ console.warn("Reading tasks...");
-    if(!localStorage('tasks')){localStorage('tasks', [example()])}
-    return new Observable((obs)=>{
-      obs.next([])
-      this.auth.getUser$().toPromise().then((profile)=>{
-        if(profile){ console.log("Signed in as: " + profile.nickname);
-          (async()=>{ // wait for full upload before retrieving from server
-            await(async()=>{ // wait for individual upload before uploading next one
-              if(localStorage('tasks').length > 0){ console.log("Local task detected, uploading...")
-                for (let task of localStorage('tasks')){
-                  await this.create(task).toPromise().then(()=>{
-                    this.delete(task._id).toPromise();
-                  })
-                }
-              }
-            })()
-            this.client.get(environment.baseurl + 'api/tasks/')
-            .toPromise().then((result)=>{obs.next(result)})
-          })()
-        }
-        else{ console.log("You are not signed in!")
-          obs.next(localStorage('tasks'));
-        }
-      })
-    })
-  }
-
-  update(taskID:any, data:any){ console.warn("Updating task " + taskID + "...");
+  update(taskID:any, data:any){
+    console.warn("Updating task " + taskID + "...");
     if(this.auth.loggedIn){
       return this.client.put(environment.baseurl + 'api/tasks/' + taskID, data);
     }

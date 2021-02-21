@@ -8,17 +8,27 @@
 
 <div [ngStyle.gt-sm]="{'top':view.gap + 'px'}" [ngStyle.lt-md]="{'top':view.gap + 'px'}" style="position:absolute; bottom:0px; left:{{(view.gap*0)}}px; right:0px;" fxLayout="column">
 
-  <div style="padding:{{(view.gap/4)}}px; padding-top:0px; background-color:#111111;" fxLayoutGap="{{(view.gap/4)}}px" fxFlex.lt-sm="{{(view.gap*2)}}px" fxFlex.gt-xs="{{(view.gap*1.5)}}px">
+  <div style="padding:{{(view.gap/4)}}px; padding-top:0px; background-color:#111111;" fxLayoutGap="{{(view.gap/4)}}px" fxFlex.lt-sm="{{(view.gap*(auth.loggedIn ? 3 : 2))}}px" fxFlex.gt-xs="{{(view.gap*1.5)}}px">
     <button fxHide.gt-xs routerLink='/home' color="accent" fxFlex mat-raised-button>
       Return Home
     </button>
-    <button (click)="taskEntry()" fxFlex mat-raised-button>
-      Create Task
+    <div fxFlex="50%" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="{{(view.gap/4)}}px">
+      <button *ngIf="auth.loggedIn" (click)="taskBoard(board)" mat-raised-button>
+        Current Board: {{(board ? board.name : "Uncategorized")}}
+      </button>
+      <button (click)="taskEntry()" mat-raised-button>
+        Create Task
+      </button>
+    </div>
+    <button color="primary" fxFlex mat-raised-button>
+      <span *ngIf="!auth.loggedIn" (click)="auth.login('/projects/first/tasks')">
+        Log In
+      </span>
+      <span *ngIf="auth.loggedIn" (click)="auth.logout()">
+        Log Out
+      </span>
     </button>
-    <button *ngIf="!auth.loggedIn" (click)="auth.login('/projects/first/tasks')" color="primary" fxFlex mat-raised-button>
-      Log In
-    </button>
-    <button *ngIf="auth.loggedIn" (click)="auth.logout()" color="primary" fxFlex mat-raised-button>Log Out</button>
+
   </div>
 
   <div fxFlex="grow" style="overflow-x:hidden; overflow-y:auto;">

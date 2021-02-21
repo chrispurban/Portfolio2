@@ -24,8 +24,9 @@ mongoose
 app
   .use(enforce.HTTPS({trustProtoHeader: true}))
   .use(express.static(path.join(__dirname, '../dist')))
-  .use('/api/projects', require('./routes/projectrouter'))
-  .use('/api/tasks', require('./routes/taskrouter'))
+  .use('/api/projects', require('./routes/projectRouter'))
+  .use('/api/tasks', require('./routes/taskRouter'))
+  .use('/api/boards', require('./routes/boardRouter'))
 ;
 
 app.get('*', (req, res) => {

@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'projects'},
   {path: 'projects', component: ProjectsComponent},
   {path: 'projects/first', redirectTo: 'projects/first/tasks'},
+  // first >> taktile
   {path: 'projects/first/tasks', component: TasklistComponent}, // canActivate: [AuthGuard]}
   {path: "**", redirectTo: 'projects'},
 ];
