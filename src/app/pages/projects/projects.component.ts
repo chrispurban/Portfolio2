@@ -21,7 +21,10 @@ export class ProjectsComponent implements OnInit {
       .readProjects()
       .subscribe(
         value => this.projects = value,
-        error => this.errorMessage = <any>error
+        error => {
+          this.errorMessage = <any>error;
+          console.log(this.errorMessage);
+        }
       );
     // for(let n of Array(0)){  this.projects.push(this.projects[0]);}
   }

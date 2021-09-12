@@ -47,7 +47,7 @@
 
     <div fxFlex *ngIf="errorMessage" style="text-align:center">
       <h2>Error</h2>
-      <h4>{{errorMessage}}</h4>
+      <h4>{{errorMessage.message}}</h4>
     </div>
 
     <div *ngFor="let project of projects" style="margin:{{view.gap}}px; margin-top:0px; padding:{{view.gap}}px; background-color:hsla(0, 0%, 0%, 0.5);" [ngStyle.gt-sm]="{'max-width':view.height+'px'}">
