@@ -1,13 +1,12 @@
-<div [ngStyle.gt-sm]="{'height':view.gap + 'px'}" [ngStyle.lt-md]="{'height':view.gap + 'px'}" style="background-color:#111111; width:100%; text-align:center; font-style:italic;" fxLayoutAlign="center center" fxLayout.lt-md="column" fxLayout.gt-sm="row">
+<section style="background-color:#111111; width:100%; height:{{view.gap}}px; text-align:center; font-style:italic;" fxLayoutAlign="center center" fxLayout.lt-md="column" fxLayout.gt-sm="row">
   <span>
     <span *ngIf="auth.userProfile$ | async as profile">Logged in as {{profile.name}}</span>
     <span *ngIf="!auth.loggedIn">Tasks are stored locally until logged in.</span>
   </span>
-  <!--span style="white-space:pre;"><a (click)="showPolicy()"> Click here</a> to see this site's privacy policy. </span-->
-</div>
+</section>
 
-<div [ngStyle.gt-sm]="{'top':view.gap + 'px'}" [ngStyle.lt-md]="{'top':view.gap + 'px'}" style="position:absolute; bottom:0px; left:{{(view.gap*0)}}px; right:0px;" fxLayout="column">
 
+<section  style="width:100%; overflow-x:hidden;" fxLayout="column">
   <div style="padding:{{(view.gap/4)}}px; padding-top:0px; background-color:#111111;" fxLayoutGap="{{(view.gap/4)}}px" fxFlex.lt-sm="{{(view.gap*2)}}px" fxFlex.gt-xs="{{(view.gap*1.5)}}px">
     <button fxHide.gt-xs routerLink='/home' color="accent" fxFlex mat-raised-button>
       Return Home
@@ -18,13 +17,19 @@
     <button *ngIf="!auth.loggedIn" (click)="auth.login('/projects/first/tasks')" color="primary" fxFlex mat-raised-button>
       Log In
     </button>
-    <button *ngIf="auth.loggedIn" (click)="auth.logout()" color="primary" fxFlex mat-raised-button>Log Out</button>
+    <button *ngIf="auth.loggedIn" (click)="auth.logout()" color="primary" fxFlex mat-raised-button>
+      Log Out
+    </button>
   </div>
+</section>
+
+
+<section style="overflow-y:auto;" [ngStyle.gt-xs]="{'height':view.height-(view.gap*2.5)+'px'}" [ngStyle.lt-sm]="{'height':view.height-(view.gap*3)+'px'}">
 
   <div fxFlex="grow" style="overflow-x:hidden; overflow-y:auto;">
     <div fxFlex fxLayout.lt-md="column" fxLayout.gt-sm="row">
       <div fxFlex *ngFor="let group of 'null' | workflow">
-        <!-- height of the parent div limits how far the sticky header will go -->
+
         <div style="width:100%; text-align:center; position:sticky; top:0; z-index:10; background-color:#111111; padding:4px 0px;" fxLayout.lt-md="row" fxLayout.gt-sm="column" fxLayoutAlign="center center">
           <span fxHide.lt-md style="font-size:250%; line-height:100%; margin-top:8px;">{{group.icon}}</span>
           <span fxHide.gt-sm style="font-size:200%; line-height:150%; margin:0px 8px;">{{group.icon}}</span>
@@ -54,16 +59,16 @@
     </div>
   </div>
 
-</div>
+</section>
 
-    <!--
-    <div fxFlex *ngIf="!(tasks || errorMessage)" style="text-align:center">
-        <br><mat-spinner style="margin:0 auto" color="accent"></mat-spinner>
-        <br><h4>Loading . . . Please Wait</h4>
-    </div>
 
-    <div fxFlex *ngIf="errorMessage" style="text-align:center">
-      <h2>Error</h2>
-      <h4>{{errorMessage}}</h4>
-    </div>
-    -->
+<section fxFlex *ngIf="!(tasks || errorMessage)" style="text-align:center">
+  <br><mat-spinner style="margin:0 auto" color="accent"></mat-spinner>
+  <br><h4>Loading . . . Please Wait</h4>
+</section>
+
+
+<section fxFlex *ngIf="errorMessage" style="text-align:center">
+  <h2>Error</h2>
+  <h4>{{errorMessage}}</h4>
+</section>
