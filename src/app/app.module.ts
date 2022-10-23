@@ -36,6 +36,8 @@ import { SideComponent } from './pages/side/side.component';
   import { TasklistComponent } from './pages/projects/first/tasklist/tasklist.component';
   import { TaskdetailComponent } from './pages/projects/first/taskdetail/taskdetail.component';
   import { TaskentryComponent } from './pages/projects/first/taskentry/taskentry.component';
+import { TasktileComponent } from './pages/projects/first/tasktile/tasktile.component';
+import { MatchPipe } from './pipes/match.pipe';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { SideComponent } from './pages/side/side.component';
     LinkifyPipe,
     FocusDirective,
     TimerPipe,
-    PolicyComponent
+    PolicyComponent,
+    TasktileComponent,
+    MatchPipe
   ],
   imports: [
     BrowserModule,

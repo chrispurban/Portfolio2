@@ -7,9 +7,18 @@ const enforce = require('express-sslify');
 const mongoose = require('mongoose');
 const app = express();
 
-console.log(
-  '╔═══════════════════╗\n║ HELLO we are LIVE ║ ' + new Date().toLocaleTimeString() + '\n╚═══════════════════╝'
-);
+require("dotenv").config({ path: __dirname + `/../.env` });
+/* Author: CU
+  dotenv problem:
+  - unproductive to run in production, but the recommended flag of process.env.NODE_ENV is missing when running locally
+*/
+
+function box(content){
+  let length = content.length + 2;
+  return '╔' + '═'.repeat(length) + '╗\n║ ' + content + ' ║ ' + new Date().toLocaleTimeString() + '\n╚' + '═'.repeat(length) + '╝'
+}
+
+console.log(box('Database connecting'))
 
 mongoose
   .set('useNewUrlParser', true)
@@ -22,6 +31,9 @@ mongoose
 ;
 
 app
+/* Author: CU
+  enforcement of HTTPS needs to be set to run only when it detects production; creation of local SSL proxies did not seem worth the time
+*/
   .use(enforce.HTTPS({trustProtoHeader: true}))
   .use(express.static(path.join(__dirname, '../dist')))
   .use('/api/projects', require('./routes/projectrouter'))
@@ -37,3 +49,5 @@ app.get('*', (req, res) => {
 app.listen(
   process.env.PORT || 8080 // Heroku default
 );
+
+console.log(box('HELLO we are LIVE'));

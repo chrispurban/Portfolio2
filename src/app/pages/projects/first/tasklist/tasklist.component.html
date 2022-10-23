@@ -39,8 +39,11 @@
           <span fxHide.gt-sm style="font-size:200%; line-height:150%; margin:0px 8px;">{{group.icon}}</span>
         </div>
 
-        <div *ngFor="let task of tasks">
-          <div *ngIf="task.state.id == group.id" class="large tile"><div (click)="taskDetail(task)"  [ngStyle.gt-sm]="{'padding-top':'138px'}" [ngStyle.lt-md]="{'padding-top':'106px'}">
+        <div *ngFor="let task of tasks | match:group.id">
+
+          <!-- app-tasktile [tasque]="task"></app-tasktile -->
+
+          <div class="large tile"><div (click)="taskDetail(task)"  [ngStyle.gt-sm]="{'padding-top':'138px'}" [ngStyle.lt-md]="{'padding-top':'106px'}">
 
             <div><div [ngStyle.gt-sm]="{'-webkit-line-clamp':'6'}" [ngStyle.lt-md]="{'-webkit-line-clamp':'4'}">
               <div style="padding-bottom:6px;">{{task.subject | uppercase}}</div>
@@ -53,6 +56,7 @@
             </header>
 
           </div></div>
+
         </div>
 
       </div>
