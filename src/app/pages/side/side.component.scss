@@ -1,23 +1,17 @@
-ul {
+ul.icons{
 	height:100%; margin:0px; padding:0px;
 	cursor:default;
 	list-style:none;
-	text-align:center;
-	li {display:inline-block;}
-	a {text-decoration:none; opacity:0.8;}
-	@media only screen and (hover) {
-		a {transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;}
+  text-align:center;
+	li{
+		display:inline-block;
 	}
+  a{
+		text-decoration:none;
+		color:grey; opacity: 0.8;
+		transition:
+			background-color 0.2s ease-in-out,
+			color 0.2s ease-in-out,
+			border-color 0.2s ease-in-out;}
+  a:hover{color:cyan;}
 }
-
-.expanded {
-  a {color:grey;}
-	@media only screen and (hover) {a:hover{color:cyan;}}
-}
-
-.compressed {
-	a {color:cyan;}
-	@media only screen and (hover) {a:hover{color:silver;}}
-}
-
-//span{font-family:'Josefin Sans','Ubuntu',sans-serif;}

@@ -8,8 +8,6 @@ import { environment } from '../../environments/environment';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError, tap} from 'rxjs/operators';
 
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
-
 @Injectable({
   providedIn: 'root'
 })
