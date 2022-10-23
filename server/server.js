@@ -7,7 +7,7 @@ const enforce = require('express-sslify');
 const mongoose = require('mongoose');
 const app = express();
 
-require("dotenv").config({ path: __dirname + `/../.env` });
+//require("dotenv").config({ path: __dirname + `/../.env` });
 /* Author: CU
   dotenv problem:
   - unproductive to run in production, but the recommended flag of process.env.NODE_ENV is missing when running locally
